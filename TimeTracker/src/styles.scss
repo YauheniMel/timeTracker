@@ -18,3 +18,13 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+
+.warning {
+  color: $warn;
+  background-color: $white;
+}
+
+.succes {
+  color: $primary;
+  background-color: $white;
+}
