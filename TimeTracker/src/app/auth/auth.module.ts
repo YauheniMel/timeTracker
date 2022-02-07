@@ -10,6 +10,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [RegisterPageComponent],
@@ -25,5 +26,6 @@ import { AuthRoutingModule } from './auth-routing.module';
     FormsModule,
     ReactiveFormsModule,
   ],
+  providers: [AuthService],
 })
 export class AuthModule {}
