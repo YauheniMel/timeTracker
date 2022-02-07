@@ -20,7 +20,7 @@
     "module": "es2020",
     "lib": ["es2020", "dom"],
     "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

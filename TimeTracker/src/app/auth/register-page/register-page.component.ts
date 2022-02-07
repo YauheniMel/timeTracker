@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  FormBuilder, FormGroup, ValidationErrors, Validators,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../auth.service';
@@ -16,7 +19,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -24,13 +27,16 @@ export class RegisterPageComponent implements OnInit {
   }
 
   createForm() {
-    this.registerForm = this.fb.group({
-      firstName: [null, [Validators.required, Validators.minLength(3)]],
-      lastName: [null, [Validators.required, Validators.minLength(3)]],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
-      confirmPassword: [null, Validators.required],
-    }, { validator: this.compairValidator('password', 'confirmPassword') });
+    this.registerForm = this.fb.group(
+      {
+        firstName: [null, [Validators.required, Validators.minLength(3)]],
+        lastName: [null, [Validators.required, Validators.minLength(3)]],
+        email: [null, [Validators.required, Validators.email]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
+        confirmPassword: [null, Validators.required],
+      },
+      { validator: this.compairValidator('password', 'confirmPassword') }
+    );
   }
 
   onSubmit(): void {
@@ -45,13 +51,14 @@ export class RegisterPageComponent implements OnInit {
     this.authService.registration(this.registerForm.value);
   }
 
-  compairValidator(controlName: string, confirmControlName: string): ValidationErrors {
+  compairValidator(
+    controlName: string,
+    confirmControlName: string
+  ): ValidationErrors {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const confirmControl = formGroup.controls[confirmControlName];
-      if (
-        confirmControl.errors
-      ) {
+      if (confirmControl.errors) {
         return;
       }
       if (control.value !== confirmControl.value) {

@@ -8,12 +8,14 @@ interface LoginData {
 }
 @Injectable()
 export class AuthService {
-  constructor(private snackBar: MatSnackBar, private angularFireAuth: AngularFireAuth) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private angularFireAuth: AngularFireAuth
+  ) {}
 
-  registration({
-    email, password,
-  }: LoginData): void {
-    this.angularFireAuth.createUserWithEmailAndPassword(email, password)
+  registration({ email, password }: LoginData): void {
+    this.angularFireAuth
+      .createUserWithEmailAndPassword(email, password)
       .then(() => {
         this.snackBar.open('Registration successful', 'Close', {
           duration: 1000,
