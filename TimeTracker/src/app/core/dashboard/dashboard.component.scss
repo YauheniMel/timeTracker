@@ -1,0 +1,11 @@
+@import '../../../styles/colors';
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $secondary;
+
+  button {
+    padding: 0 .5rem;
+  }
+}
