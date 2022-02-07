@@ -1,0 +1,55 @@
+@import '../../../styles/colors';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  .info,
+  .form-wrap {
+    flex-basis: 50%;
+    height: inherit;
+  }
+
+  .info {
+    background-color: $primary;
+    color: $white;
+
+    h1 {
+      padding: 2rem;
+      font-size: 2rem;
+    }
+  }
+
+  .form-wrap {
+    background-color: $white;
+  }
+
+  form {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 60%;
+    margin: auto;
+
+    button {
+      width: 40%;
+    }
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+
+  legend {
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
+    text-align: right;
+  }
+
+  button {
+    margin-top: 1rem;
+    color: $white;
+  }
+}
