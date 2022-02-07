@@ -11,9 +11,10 @@ import { MatCardModule } from '@angular/material/card';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthService } from './auth.service';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 @NgModule({
-  declarations: [RegisterPageComponent],
+  declarations: [RegisterPageComponent, LoginPageComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,

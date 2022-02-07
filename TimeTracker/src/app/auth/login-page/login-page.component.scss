@@ -7,6 +7,7 @@
   .info,
   .form-wrap {
     flex-basis: 50%;
+    align-self: center;
     height: inherit;
   }
 
@@ -30,6 +31,7 @@
     max-width: 60%;
     margin: auto;
     transform: translateY(-50%);
+
 
     button {
       width: 40%;
