@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,22 +13,28 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
     this.authForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
     });
   }
 
   onSubmit(): void {
     if (this.authForm.invalid) {
-      alert('Form is not valid!');
+      this.snackBar.open('Form is not valid!', 'Close', {
+        duration: 1000,
+        panelClass: ['warning'],
+        verticalPosition: 'top',
+      });
 
       return;
     }
 
-    alert('Form submited!');
+    this.authService.login(this.authForm.value);
   }
 }
