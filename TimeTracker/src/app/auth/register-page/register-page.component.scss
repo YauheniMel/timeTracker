@@ -48,8 +48,14 @@
     text-align: right;
   }
 
-  button {
-    margin-top: 1rem;
-    color: $white;
+  .action {
+    display: flex;
+    justify-content: space-between;
+
+    padding-top: 1rem;
+
+    :first-child {
+      color: $white;
+    }
   }
 }
