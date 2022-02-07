@@ -1,12 +1,17 @@
 @import './theme.scss';
 @import './styles/colors';
 
-html, body, .container { height: 100%; }
+html,
+body,
+.container {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: $primary;
   background-color: $gray;
+  color: $primary;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {

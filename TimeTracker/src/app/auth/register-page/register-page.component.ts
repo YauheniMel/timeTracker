@@ -11,9 +11,7 @@ export class RegisterPageComponent implements OnInit {
 
   durationInSeconds = 5;
 
-  constructor(
-    private fb: FormBuilder,
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.createForm();

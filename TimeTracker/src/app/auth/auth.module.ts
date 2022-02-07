@@ -12,9 +12,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
-  declarations: [
-    RegisterPageComponent,
-  ],
+  declarations: [RegisterPageComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
