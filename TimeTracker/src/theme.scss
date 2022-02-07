@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$TimeTracker-primary: mat.define-palette(mat.$blue-grey-palette, 800);
+$TimeTracker-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
+$TimeTracker-warn: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+$TimeTracker-theme: mat.define-light-theme((
+  color: (
+    primary: $TimeTracker-primary,
+    accent: $TimeTracker-accent,
+    warn: $TimeTracker-warn
+  )
+));
+
+@include mat.all-component-themes($TimeTracker-theme);
