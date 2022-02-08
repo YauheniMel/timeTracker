@@ -1,0 +1,10 @@
+<header>
+  <h2>TimeTracker</h2>
+  <button mat-flat-button (click)="logout()">Logout</button>
+</header>
+<main>
+  <div class="container" *ngIf="user">
+    <h3>{{ user.firstName }}</h3>
+    <h3>{{ user.lastName }}</h3>
+  </div>
+</main>

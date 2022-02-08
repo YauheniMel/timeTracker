@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="info">
+    <h1>Welcome to TimeTracker!</h1>
+  </div>
+  <div class="form-wrap">
+    <form
+      autocomplete="off"
+      class="example-form"
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+      <fieldset>
+        <legend>Registration</legend>
+        <mat-form-field class="example-full-width">
+          <mat-label>First name</mat-label>
+          <input
+            autofocus
+            type="text"
+            name="firstName"
+            matInput
+            formControlName="firstName"
+            placeholder="Ivan"
+          />
+          <mat-error
+            *ngIf="
+              registerForm.controls['firstName'].invalid &&
+              registerForm.controls['firstName'].dirty
+            "
+          >
+            Please enter a valid first name
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['firstName'].pristine">
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Last name</mat-label>
+          <input
+            autofocus
+            type="text"
+            name="lastName"
+            matInput
+            formControlName="lastName"
+            placeholder="Ivanov"
+          />
+          <mat-error
+            *ngIf="
+              registerForm.controls['lastName'].invalid &&
+              registerForm.controls['lastName'].dirty
+            "
+          >
+            Please enter a valid last name
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['lastName'].pristine">
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input
+            autofocus
+            type="email"
+            matInput
+            formControlName="email"
+            name="email"
+            placeholder="example@gmail.com"
+          />
+          <mat-error
+            *ngIf="
+              registerForm.controls['email'].invalid &&
+              registerForm.controls['email'].dirty
+            "
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['email'].pristine">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Password</mat-label>
+          <input
+            type="password"
+            matInput
+            name="password"
+            formControlName="password"
+            placeholder="Example_123"
+          />
+          <mat-error
+            *ngIf="
+              registerForm.controls['password'].invalid &&
+              registerForm.controls['password'].dirty
+            "
+          >
+            Please enter a valid password
+          </mat-error>
+          <mat-error *ngIf="registerForm.controls['password'].pristine">
+            Password is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field
+          class="example-full-width"
+          *ngIf="
+            registerForm.controls['password'].valid &&
+            registerForm.controls['password'].dirty
+          "
+        >
+          <mat-label>Confirm password</mat-label>
+          <input
+            type="password"
+            matInput
+            name="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="Example_123"
+          />
+          <mat-error *ngIf="registerForm.controls['confirmPassword'].pristine">
+            Confirm password is <strong>required</strong>
+          </mat-error>
+          <mat-error
+            *ngIf="
+              registerForm.controls['confirmPassword'].dirty &&
+              registerForm.controls['confirmPassword'].invalid
+            "
+          >
+            Password doesn't match
+          </mat-error>
+        </mat-form-field>
+        <div class="action">
+          <button type="submit" mat-flat-button color="primary">Sign Up</button>
+          <button mat-button routerLink="">Login</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>

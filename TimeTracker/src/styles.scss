@@ -1,9 +1,36 @@
 @import './theme.scss';
 @import './styles/colors';
 
-html, body { height: 100%; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+.container {
+  height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: $gray;
+  color: $primary;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.warning {
+  background-color: $white;
+  color: $warn;
+}
+
+.succes {
+  background-color: $white;
   color: $primary;
 }
