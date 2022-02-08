@@ -7,6 +7,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -24,6 +25,7 @@ import { environment } from '../environments/environment';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     MatSnackBarModule,
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
