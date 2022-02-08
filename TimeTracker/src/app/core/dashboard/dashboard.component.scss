@@ -1,8 +1,41 @@
-@import '../../../styles/colors';
+@import "../../../styles/colors";
 
-header {
+.wrapper {
   display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mat-toolbar {
   justify-content: space-between;
-  padding: 0.5rem;
-  background-color: $secondary;
+  color: $white;
+
+  h1 {
+    display: inline-block;
+    padding-left: 0.5rem;
+    vertical-align: middle;
+  }
+}
+
+.logout-wrap {
+  display: flex;
+  gap: 1rem;
+}
+
+mat-sidenav {
+  width: 18%;
+
+  mat-nav-list {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      padding: 0.5rem 0.7rem;
+    }
+  }
+}
+
+mat-sidenav-container {
+  flex-grow: 1;
+  background-color: $white;
 }

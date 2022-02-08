@@ -13,7 +13,11 @@ interface User {
 export class DashboardComponent implements OnInit {
   user!: User;
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+  ) {}
+
+  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   ngOnInit(): void {
     this.dashboardService.getUserData().subscribe((response) => {
