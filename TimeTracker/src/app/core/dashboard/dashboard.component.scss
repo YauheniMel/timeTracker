@@ -20,6 +20,14 @@
 .logout-wrap {
   display: flex;
   gap: 1rem;
+
+  button {
+    background-color: $secondary;
+
+    &:focus-visible {
+      outline: 2px solid $white;
+    }
+  }
 }
 
 mat-sidenav {
