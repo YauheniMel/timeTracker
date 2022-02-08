@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 interface LoginData {
   email: string;
@@ -11,6 +12,7 @@ export class AuthService {
   constructor(
     private snackBar: MatSnackBar,
     private angularFireAuth: AngularFireAuth,
+    private router: Router,
   ) {}
 
   registration({ email, password }: LoginData): void {
@@ -22,6 +24,8 @@ export class AuthService {
           panelClass: ['succes'],
           verticalPosition: 'top',
         });
+
+        this.router.navigate(['']);
       })
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
@@ -39,6 +43,8 @@ export class AuthService {
           panelClass: ['succes'],
           verticalPosition: 'top',
         });
+
+        this.router.navigate(['timetracker']);
       })
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
