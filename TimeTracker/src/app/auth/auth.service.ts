@@ -22,12 +22,10 @@ export class AuthService {
     private snackBar: MatSnackBar,
     private angularFireAuth: AngularFireAuth,
     private router: Router,
-    private db: AngularFirestore,
+    private db: AngularFirestore
   ) {}
 
-  registration({
-    email, password, firstName, lastName,
-  }: RegisterData): void {
+  registration({ email, password, firstName, lastName }: RegisterData): void {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -49,7 +47,8 @@ export class AuthService {
   }
 
   login({ email, password }: LoginData) {
-    this.angularFireAuth.signInWithEmailAndPassword(email, password)
+    this.angularFireAuth
+      .signInWithEmailAndPassword(email, password)
       .then(() => {
         this.snackBar.open('Authorisation was successful!', 'Close', {
           duration: 1000,

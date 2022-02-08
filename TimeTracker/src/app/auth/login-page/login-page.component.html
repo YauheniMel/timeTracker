@@ -3,15 +3,31 @@
     <h1>Welcome to TimeTracker!</h1>
   </div>
   <div class="form-wrap">
-    <form autocomplete="off" class="example-form" [formGroup]="authForm" (ngSubmit)="onSubmit()" novalidate>
+    <form
+      autocomplete="off"
+      class="example-form"
+      [formGroup]="authForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
       <fieldset>
         <legend>Login check</legend>
         <mat-form-field class="example-full-width">
           <mat-label>Email</mat-label>
-          <input autofocus type="email" matInput formControlName="email"
-          name="email"
-            placeholder="example@mail.com">
-          <mat-error *ngIf="authForm.controls['email'].invalid && authForm.controls['email'].dirty">
+          <input
+            autofocus
+            type="email"
+            matInput
+            formControlName="email"
+            name="email"
+            placeholder="example@mail.com"
+          />
+          <mat-error
+            *ngIf="
+              authForm.controls['email'].invalid &&
+              authForm.controls['email'].dirty
+            "
+          >
             Please enter a valid email address
           </mat-error>
           <mat-error *ngIf="authForm.controls['email'].pristine">
@@ -20,8 +36,19 @@
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <mat-label>Password</mat-label>
-          <input type="password" matInput name="password" formControlName="password" placeholder="Example_123">
-          <mat-error *ngIf="authForm.controls['password'].invalid && authForm.controls['password'].dirty">
+          <input
+            type="password"
+            matInput
+            name="password"
+            formControlName="password"
+            placeholder="Example_123"
+          />
+          <mat-error
+            *ngIf="
+              authForm.controls['password'].invalid &&
+              authForm.controls['password'].dirty
+            "
+          >
             Please enter a valid password
           </mat-error>
           <mat-error *ngIf="authForm.controls['password'].pristine">

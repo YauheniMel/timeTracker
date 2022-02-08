@@ -6,13 +6,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-  ],
-  imports: [
-    CommonModule,
-    CoreRoutingModule,
-    MatButtonModule,
-  ],
+  declarations: [DashboardComponent],
+  imports: [CommonModule, CoreRoutingModule, MatButtonModule],
 })
-export class CoreModule { }
+export class CoreModule {}

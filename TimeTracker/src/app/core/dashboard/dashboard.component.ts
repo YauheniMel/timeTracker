@@ -13,7 +13,7 @@ interface User {
 export class DashboardComponent implements OnInit {
   user!: User;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.dashboardService.getUserData().subscribe((response) => {
