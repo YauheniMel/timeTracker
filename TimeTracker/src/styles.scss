@@ -1,5 +1,5 @@
-@import './theme.scss';
-@import './styles/colors';
+@import "./theme.scss";
+@import "./styles/colors";
 
 * {
   box-sizing: border-box;
@@ -11,13 +11,13 @@ html,
 body,
 .container {
   height: 100%;
+  color: $primary;
 }
 
 body {
   margin: 0;
   background-color: $gray;
-  color: $primary;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .container {
@@ -32,5 +32,10 @@ body {
 
 .succes {
   background-color: $white;
+  color: $primary;
+}
+
+.mat-flat-button {
+  background-color: $secondary;
   color: $primary;
 }
