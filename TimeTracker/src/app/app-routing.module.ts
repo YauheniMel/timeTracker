@@ -19,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'timetracker',
-    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    loadChildren: () => import('./feature/feature.module').then((m) => m.FeatureModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
