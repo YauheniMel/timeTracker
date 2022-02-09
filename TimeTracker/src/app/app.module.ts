@@ -11,6 +11,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore/';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
+import { FeatureModule } from './feature/feature.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { environment } from '../environments/environment';
     provideStorage(() => getStorage()),
     MatSnackBarModule,
     AngularFirestoreModule,
+    FeatureModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,19 @@
+@import '../../../../styles/colors';
+
+.mat-expansion-panel {
+  max-width: 160px;
+  transition-delay: 225ms;
+  transition-duration: 1s;
+  transition-property: max-width;
+
+  &.mat-expanded {
+    transition-delay: 225ms;
+    transition-duration: 1s;
+    transition-property: max-width;
+    max-width: 300px;
+  }
+}
+
+.even {
+  background-color: $white;
+}
