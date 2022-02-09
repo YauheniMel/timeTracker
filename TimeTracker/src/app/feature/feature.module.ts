@@ -10,9 +10,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { FeatureRoutingModule } from './feature-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, CalendarComponent],
   imports: [
     CommonModule,
     MatButtonModule,

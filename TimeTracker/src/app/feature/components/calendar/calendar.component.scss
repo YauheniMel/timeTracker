@@ -1,0 +1,10 @@
+@import '../../../../styles/colors';
+
+ul {
+  position: absolute;
+  top: 0;
+  right: 0;
+  list-style: none;
+  height: 100%;
+  overflow-y: scroll;
+}
