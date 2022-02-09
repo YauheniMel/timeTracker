@@ -6,11 +6,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { CoreRoutingModule } from './core-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DayComponent } from './day/day.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, DayComponent],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -19,6 +21,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
+    MatExpansionModule,
   ],
 })
 export class CoreModule {}

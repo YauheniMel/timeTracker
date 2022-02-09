@@ -13,6 +13,8 @@ interface User {
 export class DashboardComponent implements OnInit {
   user!: User;
 
+  time!: Date;
+
   constructor(
     private dashboardService: DashboardService,
   ) {}
@@ -20,6 +22,7 @@ export class DashboardComponent implements OnInit {
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   ngOnInit(): void {
+    this.setTime();
     this.dashboardService.getUserData().subscribe((response) => {
       this.user = response.data();
     });
@@ -27,5 +30,11 @@ export class DashboardComponent implements OnInit {
 
   logout(): void {
     this.dashboardService.logout();
+  }
+
+  setTime() {
+    setInterval(() => {
+      this.time = new Date();
+    }, 1000);
   }
 }
