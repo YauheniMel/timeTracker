@@ -20,7 +20,8 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="container">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, possimus. lorem1000</p>
+        <time>{{ time | date : 'dd MMMM yyyy HH:mm:ss' }}</time>
+        <app-day></app-day>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
