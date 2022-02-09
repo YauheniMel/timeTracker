@@ -1,9 +1,9 @@
 <mat-accordion>
-  <mat-expansion-panel class="even" (opened)="panelOpenState = true"
+  <mat-expansion-panel [ngClass]="dayOfMonth%2 ? '': 'even'" (opened)="panelOpenState = true"
                        (closed)="panelOpenState = false">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        1 February
+        {{ dayOfMonth }} {{ dateToday | date: 'MMMM' }}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <p>I'm visible because I am open</p>

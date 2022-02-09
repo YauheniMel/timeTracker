@@ -2,18 +2,35 @@
 
 .mat-expansion-panel {
   max-width: 160px;
-  transition-delay: 225ms;
   transition-duration: 1s;
   transition-property: max-width;
+  width: 300px;
 
   &.mat-expanded {
-    transition-delay: 225ms;
     transition-duration: 1s;
     transition-property: max-width;
     max-width: 300px;
   }
 }
 
+mat-expansion-panel-header {
+  height: 35px;
+  padding: 0rem 1rem;
+}
+
 .even {
   background-color: $white;
 }
+
+.mat-accordion {
+  .mat-expansion-panel:last-of-type {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .mat-expansion-panel:last-of-type {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
