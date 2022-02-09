@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { FeatureModule } from './feature/feature.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { FeatureModule } from './feature/feature.module';
     MatSnackBarModule,
     AngularFirestoreModule,
     FeatureModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

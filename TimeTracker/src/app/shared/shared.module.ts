@@ -7,12 +7,10 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { FeatureRoutingModule } from './feature-routing.module';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SharedModule } from '../shared/shared.module';
+import { DayComponent } from './components/day/day.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DayComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -21,8 +19,7 @@ import { SharedModule } from '../shared/shared.module';
     MatToolbarModule,
     MatIconModule,
     MatExpansionModule,
-    FeatureRoutingModule,
-    SharedModule,
   ],
+  exports: [DayComponent],
 })
-export class FeatureModule { }
+export class SharedModule { }
