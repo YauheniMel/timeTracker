@@ -12,8 +12,7 @@ export class DayComponent implements OnInit {
 
   @Input() dateToday!: Date;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

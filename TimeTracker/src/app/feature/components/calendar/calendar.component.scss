@@ -4,28 +4,26 @@
   max-width: 840px;
   margin: 1rem auto;
 
-
   .head {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: space-around;
 
     li {
-      padding: 1rem 0;
       flex: 1;
+      padding: 1rem 0;
       text-align: center;
     }
   }
-
 }
 
 .body {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  row-gap: 1rem;
   padding: 1rem 0;
-  box-shadow: 0 0 7px 1px $gray;
   border: 1px solid $gray;
+  box-shadow: 0 0 7px 1px $gray;
+  row-gap: 1rem;
 }
 
 ul {
@@ -39,8 +37,8 @@ ul {
 
 .pagination {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   width: 300px;
 
   button {

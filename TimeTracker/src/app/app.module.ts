@@ -9,8 +9,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { FeatureModule } from './feature/feature.module';
-import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +23,7 @@ import { SharedModule } from './shared/shared.module';
     AngularFireDatabaseModule,
     MatSnackBarModule,
     AngularFirestoreModule,
-    FeatureModule,
-    SharedModule,
+    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -3,16 +3,14 @@ import { getAuth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import {
-  catchError, Observable, of, tap,
-} from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class DashboardService {
   constructor(
     private angularFireAuth: AngularFireAuth,
     private router: Router,
-    private db: AngularFirestore,
+    private db: AngularFirestore
   ) {}
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -31,7 +29,7 @@ export class DashboardService {
       .get()
       .pipe(
         tap((snapshot) => snapshot.data()),
-        catchError(this.handleError<any>('Get User')),
+        catchError(this.handleError<any>('Get User'))
       );
   }
 

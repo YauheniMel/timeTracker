@@ -1,9 +1,13 @@
 <div class="wrap">
   <div class="pagination-wrap">
     <div class="pagination">
-      <button mat-button color="accent" (click)="changeMonth('minus')" ><mat-icon>arrow_back_ios</mat-icon></button>
-      {{ date | date : 'MMMM/YYYY' }}
-      <button mat-button color="accent" (click)="changeMonth('plus')"><mat-icon>arrow_forward_ios</mat-icon></button>
+      <button mat-button color="accent" (click)="changeMonth('minus')">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      {{ date | date: 'MMMM/YYYY' }}
+      <button mat-button color="accent" (click)="changeMonth('plus')">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
     </div>
   </div>
   <ul class="head">
@@ -16,7 +20,10 @@
     <li>Saturday</li>
   </ul>
   <ul class="body">
-    <li *ngFor="let day of daysInMonth; let i = index" [ngStyle]="{'grid-column': i ? '' : firstDayOfWeek }">
+    <li
+      *ngFor="let day of daysInMonth; let i = index"
+      [ngStyle]="{ 'grid-column': i ? '' : firstDayOfWeek }"
+    >
       <app-day [dayOfMonth]="day" [dateToday]="date"></app-day>
     </li>
   </ul>
