@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { DatabaseService } from '../core/database.service';
 
 interface LoginData {
   email: string;
@@ -23,6 +24,7 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFirestore,
+    private databaseService: DatabaseService,
   ) {}
 
   registration({
@@ -37,7 +39,14 @@ export class AuthService {
           verticalPosition: 'top',
         });
 
-        this.addNewUser(firstName, lastName);
+        this.databaseService.setUser(firstName, lastName)
+          .catch((err) => {
+            this.snackBar.open(err.message, 'Close', {
+              duration: 1000,
+              panelClass: ['warning'],
+              verticalPosition: 'top',
+            });
+          }); // need check only errors
       })
       .then(() => this.router.navigate(['']))
       .catch((err) => {
