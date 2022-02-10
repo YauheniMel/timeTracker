@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { CoreModule } from './core/core.module';
     MatSnackBarModule,
     AngularFirestoreModule,
     CoreModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
