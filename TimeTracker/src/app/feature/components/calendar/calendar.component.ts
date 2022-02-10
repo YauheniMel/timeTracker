@@ -15,7 +15,7 @@ export class CalendarComponent implements OnInit {
 
   date!: Date;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.date = new Date();
@@ -26,12 +26,15 @@ export class CalendarComponent implements OnInit {
 
   setDaysInMonth(): void {
     const countDays = this.targetMonth.daysInMonth;
-    this.daysInMonth = Array(countDays).fill(0).map((x, i) => i + 1);
+    this.daysInMonth = Array(countDays)
+      .fill(0)
+      .map((x, i) => i + 1);
   }
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek =
+      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {

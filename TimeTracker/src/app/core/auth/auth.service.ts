@@ -24,12 +24,10 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFirestore,
-    private databaseService: DatabaseService,
+    private databaseService: DatabaseService
   ) {}
 
-  registration({
-    email, password, firstName, lastName,
-  }: RegisterData): void {
+  registration({ email, password, firstName, lastName }: RegisterData): void {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -39,14 +37,13 @@ export class AuthService {
           verticalPosition: 'top',
         });
 
-        this.databaseService.setUser(firstName, lastName)
-          .catch((err) => {
-            this.snackBar.open(err.message, 'Close', {
-              duration: 1000,
-              panelClass: ['warning'],
-              verticalPosition: 'top',
-            });
-          }); // need check only errors
+        this.databaseService.setUser(firstName, lastName).catch((err) => {
+          this.snackBar.open(err.message, 'Close', {
+            duration: 1000,
+            panelClass: ['warning'],
+            verticalPosition: 'top',
+          });
+        }); // need check only errors
       })
       .then(() => this.router.navigate(['']))
       .catch((err) => {

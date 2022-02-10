@@ -1,5 +1,5 @@
-@import "./theme.scss";
-@import "./styles/colors";
+@import './theme.scss';
+@import './styles/colors';
 
 * {
   box-sizing: border-box;
@@ -17,7 +17,7 @@ body,
 body {
   margin: 0;
   background-color: $gray;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {
@@ -36,15 +36,15 @@ body {
 }
 
 ::-webkit-scrollbar {
-	background-color: $gray;
-	height: 6px;
-	width: 6px;
+  width: 6px;
+  height: 6px;
+  background-color: $gray;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: $primary;
+  background-color: $primary;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background-color: $secondary;
+  background-color: $secondary;
 }

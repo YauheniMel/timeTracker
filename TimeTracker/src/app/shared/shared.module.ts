@@ -22,4 +22,4 @@ import { DayComponent } from './components/day/day.component';
   ],
   exports: [DayComponent],
 })
-export class SharedModule { }
+export class SharedModule {}

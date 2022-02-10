@@ -20,10 +20,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { DashboardService } from './components/services/dashboard.service';
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    CalendarComponent,
-  ],
+  declarations: [DashboardComponent, CalendarComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -43,4 +40,4 @@ import { DashboardService } from './components/services/dashboard.service';
   ],
   providers: [DashboardService],
 })
-export class FeatureModule { }
+export class FeatureModule {}

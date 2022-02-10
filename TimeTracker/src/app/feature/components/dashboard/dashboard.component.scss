@@ -1,4 +1,4 @@
-@import "../../../../styles/colors";
+@import '../../../../styles/colors';
 
 .wrapper {
   display: flex;
@@ -50,7 +50,7 @@ mat-sidenav-container {
 
 time {
   display: block;
-  text-align: right;
   padding: 1rem 3rem;
   font-size: 2rem;
+  text-align: right;
 }
