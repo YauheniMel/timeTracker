@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/core/database.service';
 import { DashboardService } from './dashboard.service';
 
 interface User {
@@ -17,14 +18,16 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
+    private db: DatabaseService,
   ) {}
-
-  fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   ngOnInit(): void {
     this.setTime();
-    this.dashboardService.getUserData().subscribe((response) => {
-      this.user = response.data();
+    this.db.getData().subscribe((response) => {
+      this.user = {
+        firstName: response[0],
+        lastName: response[1],
+      };
     });
   }
 
