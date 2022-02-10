@@ -11,6 +11,7 @@ import { FeatureRoutingModule } from './feature-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [DashboardComponent, CalendarComponent],
@@ -24,6 +25,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
     MatExpansionModule,
     FeatureRoutingModule,
     SharedModule,
+    CoreModule,
   ],
 })
 export class FeatureModule { }
