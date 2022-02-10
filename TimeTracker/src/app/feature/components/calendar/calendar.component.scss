@@ -32,6 +32,18 @@ ul {
   list-style: none;
 }
 
-// .body li:first-child {
-//   grid-column: 3;
-// }
+.pagination-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 300px;
+
+  button {
+    border-radius: 0;
+  }
+}
