@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -19,7 +19,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class RegisterPageComponent implements OnInit {
         password: [null, [Validators.required, Validators.minLength(6)]],
         confirmPassword: [null, Validators.required],
       },
-      { validator: this.compairValidator('password', 'confirmPassword') }
+      { validator: this.compairValidator('password', 'confirmPassword') },
     );
   }
 
@@ -55,7 +55,7 @@ export class RegisterPageComponent implements OnInit {
 
   compairValidator(
     controlName: string,
-    confirmControlName: string
+    confirmControlName: string,
   ): ValidationErrors {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];

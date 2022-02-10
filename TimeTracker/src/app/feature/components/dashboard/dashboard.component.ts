@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
-import { DashboardService } from './dashboard.service';
+import { DashboardService } from '../services/dashboard.service';
 
 interface User {
   firstName: string;
