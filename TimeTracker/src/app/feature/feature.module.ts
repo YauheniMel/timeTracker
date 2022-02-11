@@ -18,9 +18,10 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DashboardService } from './components/services/dashboard.service';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent],
+  declarations: [DashboardComponent, CalendarComponent, ModalWindowComponent],
   imports: [
     CommonModule,
     MatButtonModule,
