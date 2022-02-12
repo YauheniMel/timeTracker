@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
+import { StoreService } from 'src/app/core/store/store.service';
 import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Component({
@@ -17,13 +18,18 @@ export class CalendarComponent implements OnInit {
 
   date!: Date;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    public dialog: MatDialog,
+    private storeService: StoreService,
+  ) {}
 
   ngOnInit(): void {
     this.date = new Date();
 
     this.setDaysInMonth();
     this.setFirstDay();
+
+    this.storeService.getDetailsMonth();
   }
 
   setDaysInMonth(): void {
@@ -35,8 +41,7 @@ export class CalendarComponent implements OnInit {
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek =
-      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {
@@ -56,9 +61,10 @@ export class CalendarComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ModalWindowComponent);
-    // this.dialog.ngOnDestroy();
 
     dialogRef.afterClosed().subscribe(() => {
+      this.dialog.ngOnDestroy();
+
       console.log('The dialog was closed');
     });
   }
