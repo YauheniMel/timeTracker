@@ -10,14 +10,16 @@ export interface Store {
       listOfDays: {
         day: number;
         freeTime: number[];
-        toDos: {
-          from: number;
-          to: number;
-          discription: string;
-        }[] | null
-      }[],
-    }[],
-  }[],
+        toDos:
+          | {
+              from: number;
+              to: number;
+              discription: string;
+            }[]
+          | null;
+      }[];
+    }[];
+  }[];
 }
 
 export const StoreApp: Store = {
@@ -35,14 +37,16 @@ export const StoreApp: Store = {
             {
               day: 1,
               freeTime: [
-                0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                18, 19, 20, 21, 22, 23,
               ],
               toDos: null,
             },
             {
               day: 2,
               freeTime: [
-                0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                0, 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23,
               ],
               toDos: [
                 {
@@ -55,7 +59,8 @@ export const StoreApp: Store = {
             {
               day: 3,
               freeTime: [
-                0, 2, 3, 4, 5, 6, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                0, 1, 2, 3, 4, 5, 6, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23,
               ],
               toDos: [
                 {
@@ -67,9 +72,7 @@ export const StoreApp: Store = {
             },
             {
               day: 4,
-              freeTime: [
-                0, 2, 3, 4, 5, 6, 7, 18, 19, 20, 21, 22, 23,
-              ],
+              freeTime: [0, 1, 2, 3, 4, 5, 6, 7, 18, 19, 20, 21, 22, 23],
               toDos: [
                 {
                   from: 8,
@@ -81,7 +84,8 @@ export const StoreApp: Store = {
             {
               day: 5,
               freeTime: [
-                0, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23,
+                0, 1, 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23,
               ],
               toDos: [
                 {

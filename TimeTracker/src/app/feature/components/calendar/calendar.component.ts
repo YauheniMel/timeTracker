@@ -1,8 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { StoreService } from 'src/app/core/store/store.service';
+import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 import { ModalWindowComponent } from '../modal-window/modal-window.component';
+import { InfoMonth } from './info-month.interface';
 
 @Component({
   selector: 'app-calendar',
@@ -16,12 +18,11 @@ export class CalendarComponent implements OnInit {
 
   targetMonth: DateTime = DateTime.now();
 
+  infoMonth?: InfoMonth;
+
   date!: Date;
 
-  constructor(
-    public dialog: MatDialog,
-    private storeService: StoreService,
-  ) {}
+  constructor(public dialog: MatDialog, private storeService: StoreService) {}
 
   ngOnInit(): void {
     this.date = new Date();
@@ -29,7 +30,7 @@ export class CalendarComponent implements OnInit {
     this.setDaysInMonth();
     this.setFirstDay();
 
-    this.storeService.getDetailsMonth();
+    this.infoMonth = this.storeService.getDetailsMonth(this.targetMonth);
   }
 
   setDaysInMonth(): void {
@@ -67,5 +68,9 @@ export class CalendarComponent implements OnInit {
 
       console.log('The dialog was closed');
     });
+  }
+
+  getInfoDay(day: number): InfoDay | undefined {
+    return this.infoMonth?.listOfDays.filter((e) => e.day === day)[0];
   }
 }

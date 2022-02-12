@@ -24,10 +24,12 @@
       *ngFor="let day of daysInMonth; let i = index"
       [ngStyle]="{ 'grid-column': i ? '' : firstDayOfWeek }"
     >
+      <!-- Too many pass parameters -->
       <app-day
         [openDialog]="openDialog.bind(this)"
         [dayOfMonth]="day"
         [dateToday]="date"
+        [infoDay]="getInfoDay(day)"
       ></app-day>
     </li>
   </ul>
