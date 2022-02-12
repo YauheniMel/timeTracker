@@ -2,36 +2,34 @@
 
 $count: 23;
 
-
-
-.wrapper{
-  position: relative;
+.wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  width:50px;
+  width: 50px;
 
   mat-icon {
-    transform: scale(3,1.5);
     margin-left: 1px;
+    transform: scale(3, 1.5);
   }
 
   span {
     position: absolute;
     top: 19px;
     width: 58px;
-    height: 48px;
-    box-shadow: inset 0px 0px 5px 0px $white;
+    height: 49px;
     opacity: 0;
+    box-shadow: inset 0 0 5px 0 $gray;
   }
 
   select {
     width: 50px;
     height: 2.4rem;
-    font-size: 2rem;
     border: none;
     border-radius: 0;
     outline: unset;
+    font-size: 2rem;
   }
 
   ::-webkit-scrollbar {
@@ -48,7 +46,7 @@ $count: 23;
 
 .wrapper:hover span {
   transition-property: opacity;
-  transition-duration: .5s;
+  transition-duration: 0.5s;
   opacity: 1;
 }
 
@@ -64,11 +62,12 @@ select > option:checked {
     position: relative;
     top: -4px;
     left: 0;
-    font-size: 20px;
     width: 50px;
-    padding-bottom: 20px;
     padding-top: 10px;
-    background-color: $gray;
+    padding-bottom: 20px;
+    background-color: white;
+    color: $primary;
+    font-size: 20px;
   }
 }
 
@@ -78,10 +77,15 @@ select > option:checked {
     position: relative;
     top: -4px;
     left: -8px;
-    font-size: 20px;
     padding: 20px 22px;
-    padding-bottom: 20px;
     padding-top: 10px;
-    background-color: $gray;
+    padding-bottom: 20px;
+    background-color: white;
+    color: $primary;
+    font-size: 20px;
   }
+}
+
+option.selected::after {
+  color: $secondary;
 }

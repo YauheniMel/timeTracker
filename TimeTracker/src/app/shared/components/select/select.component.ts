@@ -1,6 +1,4 @@
-import {
-  Component, ElementRef, Input, OnInit, ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -8,20 +6,20 @@ import {
   styleUrls: ['./select.component.scss'],
 })
 export class SelectComponent implements OnInit {
-  @Input() value = 0;
-
-  freeTime!: number[];
+  @Input() freeTime!: number[];
 
   choice = 1;
 
-  lastScrollPosition:any;
+  lastScrollPosition: any;
 
-  @ViewChild('select') select!:ElementRef;
+  @ViewChild('select') select!: ElementRef;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.freeTime = Array(24).fill(0).map((x, i) => ++i);
+    this.freeTime = Array(23)
+      .fill(0)
+      .map((x, i) => ++i);
   }
 
   scr(value: string) {

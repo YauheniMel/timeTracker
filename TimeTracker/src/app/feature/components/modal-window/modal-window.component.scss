@@ -1,0 +1,23 @@
+@import '../../../../styles/colors';
+
+.discription {
+  display: flex;
+  flex-direction: column;
+
+  mat-slider {
+    width: 100%;
+  }
+}
+
+.time-select {
+  display: flex;
+  justify-content: space-between;
+
+  label {
+    padding-bottom: 2rem;
+  }
+}
+
+.action {
+  align-self: flex-end;
+}
