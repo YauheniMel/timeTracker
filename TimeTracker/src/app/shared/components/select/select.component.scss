@@ -1,0 +1,87 @@
+@import '../../../../styles/colors';
+
+$count: 23;
+
+
+
+.wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:50px;
+
+  mat-icon {
+    transform: scale(3,1.5);
+    margin-left: 1px;
+  }
+
+  span {
+    position: absolute;
+    top: 19px;
+    width: 58px;
+    height: 48px;
+    box-shadow: inset 0px 0px 5px 0px $white;
+    opacity: 0;
+  }
+
+  select {
+    width: 50px;
+    height: 2.4rem;
+    font-size: 2rem;
+    border: none;
+    border-radius: 0;
+    outline: unset;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  option {
+    width: 50px;
+    height: 100%;
+    text-align: center;
+  }
+}
+
+.wrapper:hover span {
+  transition-property: opacity;
+  transition-duration: .5s;
+  opacity: 1;
+}
+
+select > option:checked {
+  background-color: transparent;
+  color: $secondary;
+}
+
+@for $index from 0 through 9 {
+  option:nth-child(#{$index})::after {
+    content: '#{$index}';
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    left: 0;
+    font-size: 20px;
+    width: 50px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    background-color: $gray;
+  }
+}
+
+@for $index from 10 through $count {
+  option:nth-child(#{$index})::after {
+    content: '#{$index}';
+    position: relative;
+    top: -4px;
+    left: -8px;
+    font-size: 20px;
+    padding: 20px 22px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    background-color: $gray;
+  }
+}
