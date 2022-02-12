@@ -1,0 +1,41 @@
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{ !isLinear ? 'Enable linear mode' : 'Disable linear mode' }}
+</button>
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form class="discription" [formGroup]="firstFormGroup" autocomplete="off">
+      <ng-template matStepLabel>Task description</ng-template>
+      <mat-form-field appearance="legacy">
+        <input matInput />
+        <mat-icon matSuffix>work</mat-icon>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+    <form class="time-select" [formGroup]="secondFormGroup">
+      <div>
+        <label for="">From</label>
+        <app-select></app-select>
+      </div>
+      <div>
+        <label for="">to</label>
+        <app-select></app-select>
+      </div>
+      <div class="action">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>

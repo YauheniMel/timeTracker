@@ -1,0 +1,19 @@
+<div class="wrapper">
+  <mat-icon>keyboard_arrow_up</mat-icon>
+  <span></span>
+  <select
+    (change)="scr(select.value)"
+    id="example"
+    class="appearance"
+    #select
+    size="2"
+  >
+    <option
+      [ngClass]="choice === time ? 'selected' : ''"
+      *ngFor="let time of freeTime"
+      [selected]="choice === time"
+      [value]="time"
+    ></option>
+  </select>
+  <mat-icon>keyboard_arrow_down</mat-icon>
+</div>

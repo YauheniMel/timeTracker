@@ -20,6 +20,10 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
+*::after {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -47,4 +51,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: $secondary;
+}
+
+select option::selection {
+  background-color: green;
+  color: red;
+  font-weight: bold;
 }

@@ -11,16 +11,25 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 import { FeatureRoutingModule } from './feature-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DashboardService } from './components/services/dashboard.service';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { SelectComponent } from '../shared/components/select/select.component';
 
 @NgModule({
-  declarations: [DashboardComponent, CalendarComponent],
+  declarations: [
+    DashboardComponent,
+    CalendarComponent,
+    ModalWindowComponent,
+    SelectComponent,
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -37,6 +46,10 @@ import { DashboardService } from './components/services/dashboard.service';
     FeatureRoutingModule,
     SharedModule,
     FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatSliderModule,
   ],
   providers: [DashboardService],
 })

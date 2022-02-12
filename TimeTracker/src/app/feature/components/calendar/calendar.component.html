@@ -24,7 +24,11 @@
       *ngFor="let day of daysInMonth; let i = index"
       [ngStyle]="{ 'grid-column': i ? '' : firstDayOfWeek }"
     >
-      <app-day [dayOfMonth]="day" [dateToday]="date"></app-day>
+      <app-day
+        [openDialog]="openDialog.bind(this)"
+        [dayOfMonth]="day"
+        [dateToday]="date"
+      ></app-day>
     </li>
   </ul>
 </div>

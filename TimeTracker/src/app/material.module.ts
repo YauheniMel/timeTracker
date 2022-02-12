@@ -70,7 +70,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-
   ],
   exports: [
     CommonModule,
@@ -108,9 +107,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSortModule,
     MatPaginatorModule,
   ],
-  providers: [
-    MatDatepickerModule,
-  ],
+  providers: [MatDatepickerModule],
 })
-
 export class MaterialModule {}

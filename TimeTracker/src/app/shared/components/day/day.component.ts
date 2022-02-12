@@ -12,7 +12,13 @@ export class DayComponent implements OnInit {
 
   @Input() dateToday!: Date;
 
+  @Input() openDialog!: () => void;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick() {
+    this.openDialog();
+  }
 }

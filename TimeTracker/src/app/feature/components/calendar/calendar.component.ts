@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
+import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Component({
   selector: 'app-calendar',
@@ -15,7 +17,7 @@ export class CalendarComponent implements OnInit {
 
   date!: Date;
 
-  constructor() {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.date = new Date();
@@ -50,5 +52,14 @@ export class CalendarComponent implements OnInit {
 
     this.setDaysInMonth();
     this.setFirstDay();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ModalWindowComponent);
+    // this.dialog.ngOnDestroy();
+
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 }
