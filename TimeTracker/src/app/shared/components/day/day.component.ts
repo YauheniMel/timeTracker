@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { InfoDay } from './info-day.interface';
 
 @Component({
   selector: 'app-day',
@@ -11,6 +12,8 @@ export class DayComponent implements OnInit {
   @Input() dayOfMonth!: number;
 
   @Input() dateToday!: Date;
+
+  @Input() infoDay!: InfoDay | undefined;
 
   @Input() openDialog!: () => void;
 
