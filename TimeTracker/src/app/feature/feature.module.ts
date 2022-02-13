@@ -22,6 +22,7 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { DashboardService } from './components/services/dashboard.service';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { SelectComponent } from '../shared/components/select/select.component';
+import { CalendarService } from './components/services/calendar.service';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,6 @@ import { SelectComponent } from '../shared/components/select/select.component';
     MatStepperModule,
     MatSliderModule,
   ],
-  providers: [DashboardService],
+  providers: [DashboardService, CalendarService],
 })
 export class FeatureModule {}
