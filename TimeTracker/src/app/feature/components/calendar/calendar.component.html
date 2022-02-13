@@ -4,7 +4,7 @@
       <button mat-button color="accent" (click)="changeMonth('minus')">
         <mat-icon>arrow_back_ios</mat-icon>
       </button>
-      {{ date | date: 'MMMM/YYYY' }}
+      {{ calendarService.date | date: 'MMMM/YYYY' }}
       <button mat-button color="accent" (click)="changeMonth('plus')">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
@@ -21,15 +21,14 @@
   </ul>
   <ul class="body">
     <li
-      *ngFor="let day of daysInMonth; let i = index"
-      [ngStyle]="{ 'grid-column': i ? '' : firstDayOfWeek }"
+      *ngFor="let day of calendarService.daysInMonth; let i = index"
+      [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
     >
       <!-- Too many pass parameters -->
       <app-day
         [openDialog]="openDialog.bind(this)"
         [dayOfMonth]="day"
-        [dateToday]="date"
-        [infoDay]="getInfoDay(day)"
+        [dateToday]="calendarService.date"
       ></app-day>
     </li>
   </ul>
