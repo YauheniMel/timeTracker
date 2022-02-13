@@ -15,14 +15,21 @@ export class ModalWindowComponent implements OnInit {
 
   secondFormGroup!: FormGroup;
 
+  dayInfo: InfoDay | undefined;
+
   constructor(
     public dialogRef: MatDialogRef<ModalWindowComponent>,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: InfoDay | undefined
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public data: InfoDay | undefined,
+  ) {
+  }
 
   ngOnInit() {
-    console.log(this.data);
+    if (this.data) {
+      const [, data] = Object.entries(this.data)[0]; // make it easier
+
+      this.dayInfo = data;
+    }
 
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required],

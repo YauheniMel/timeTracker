@@ -14,6 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 import { FeatureRoutingModule } from './feature-routing.module';
 import { SharedModule } from '../shared/shared.module';
 
@@ -51,6 +52,7 @@ import { CalendarService } from './components/services/calendar.service';
     ReactiveFormsModule,
     MatStepperModule,
     MatSliderModule,
+    MatTabsModule,
   ],
   providers: [DashboardService, CalendarService],
 })
