@@ -17,15 +17,15 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+        <mat-step [stepControl]="secondFormGroup" label="Select the time">
           <form class="time-select" [formGroup]="secondFormGroup">
             <div>
               <label for="">From</label>
-              <app-select></app-select>
+              <app-select  [freeTime]="dayInfo?.freeTime"></app-select>
             </div>
             <div>
               <label for="">to</label>
-              <app-select></app-select>
+              <app-select [freeTime]="dayInfo?.freeTime"></app-select>
             </div>
             <div class="action">
               <button mat-button matStepperPrevious>Back</button>
@@ -55,6 +55,6 @@
     </p>
   </mat-tab>
 </mat-tab-group>
-<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
   {{ !isLinear ? 'Enable linear mode' : 'Disable linear mode' }}
-</button> -->
+</button>

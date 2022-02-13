@@ -53,8 +53,6 @@ body {
   background-color: $secondary;
 }
 
-select option::selection {
-  background-color: green;
-  color: red;
-  font-weight: bold;
+mat-dialog-container { // try to find another way
+  padding: 0 !important;
 }
