@@ -4,11 +4,11 @@ export interface InfoMonth {
     day: number;
     freeTime: number[];
     toDos:
-    | {
-      from: number;
-      to: number;
-      discription: string;
-    }[]
-    | null;
+      | {
+          from: number;
+          to: number;
+          discription: string;
+        }[]
+      | null;
   }[];
 }

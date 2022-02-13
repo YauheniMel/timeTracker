@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
+import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Injectable()
 export class CalendarService {
@@ -11,7 +14,7 @@ export class CalendarService {
 
   date: Date = new Date();
 
-  constructor() { }
+  constructor(public dialog: MatDialog) {}
 
   setDaysInMonth(): void {
     const countDays = this.targetMonth.daysInMonth;
@@ -22,7 +25,8 @@ export class CalendarService {
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek =
+      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {
@@ -38,5 +42,17 @@ export class CalendarService {
 
     this.setDaysInMonth();
     this.setFirstDay();
+  }
+
+  openDialog(data: InfoDay | undefined): void {
+    const dialogRef = this.dialog.open(ModalWindowComponent, {
+      data: { data },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.dialog.ngOnDestroy();
+
+      console.log('The dialog was closed');
+    });
   }
 }

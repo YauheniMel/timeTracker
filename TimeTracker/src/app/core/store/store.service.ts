@@ -15,12 +15,12 @@ export class StoreService {
 
     if (listOfYears) {
       const [targetYear] = listOfYears.filter(
-        (elem) => elem.year === targetMonth.year,
+        (elem) => elem.year === targetMonth.year
       );
 
       if (targetYear.listOfMonths) {
         const [month] = targetYear.listOfMonths.filter(
-          (elem) => elem.month === targetMonth.month,
+          (elem) => elem.month === targetMonth.month
         );
 
         return month;

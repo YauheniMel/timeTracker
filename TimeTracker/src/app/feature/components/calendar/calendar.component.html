@@ -24,12 +24,7 @@
       *ngFor="let day of calendarService.daysInMonth; let i = index"
       [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
     >
-      <!-- Too many pass parameters -->
-      <app-day
-        [openDialog]="openDialog.bind(this)"
-        [dayOfMonth]="day"
-        [dateToday]="calendarService.date"
-      ></app-day>
+      <app-day [dayOfMonth]="day" (getDay)="getDayInfo($event)"></app-day>
     </li>
   </ul>
 </div>

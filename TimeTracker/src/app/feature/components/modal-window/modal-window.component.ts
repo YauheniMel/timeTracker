@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 
 @Component({
   selector: 'app-modal-window',
@@ -13,9 +15,15 @@ export class ModalWindowComponent implements OnInit {
 
   secondFormGroup!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    public dialogRef: MatDialogRef<ModalWindowComponent>,
+    private formBuilder: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) public data: InfoDay | undefined
+  ) {}
 
   ngOnInit() {
+    console.log(this.data);
+
     this.firstFormGroup = this.formBuilder.group({
       firstCtrl: ['', Validators.required],
     });
