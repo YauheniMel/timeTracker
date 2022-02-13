@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InfoDay } from './info-day.interface';
 
 @Component({
@@ -7,21 +7,17 @@ import { InfoDay } from './info-day.interface';
   styleUrls: ['./day.component.scss'],
 })
 export class DayComponent implements OnInit {
-  panelOpenState = false;
-
   @Input() dayOfMonth!: number;
-
-  @Input() dateToday!: Date;
 
   @Input() infoDay!: InfoDay | undefined;
 
-  @Input() openDialog!: () => void;
+  @Output() getDay: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   onClick() {
-    this.openDialog();
+    this.getDay.emit(this.dayOfMonth);
   }
 }

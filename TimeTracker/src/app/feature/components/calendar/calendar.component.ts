@@ -15,32 +15,36 @@ export class CalendarComponent implements OnInit {
   infoMonth?: InfoMonth;
 
   constructor(
-    public dialog: MatDialog,
     private storeService: StoreService,
-    public calendarService: CalendarService,
+    public calendarService: CalendarService
   ) {}
 
   ngOnInit(): void {
     this.calendarService.setDaysInMonth();
     this.calendarService.setFirstDay();
 
-    this.infoMonth = this.storeService.getDetailsMonth(this.calendarService.targetMonth);
+    this.infoMonth = this.storeService.getDetailsMonth(
+      this.calendarService.targetMonth
+    );
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalWindowComponent);
-
-    dialogRef.afterClosed().subscribe(() => {
-      this.dialog.ngOnDestroy();
-
-      console.log('The dialog was closed');
-    });
-  }
-
-  changeMonth(action:string): void {
+  changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
   }
 
-  // getInfoDay(day: number) {
-  // }
+  getDayInfo(day: number) {
+    let dayInfo;
+    if (this.infoMonth) {
+      [dayInfo] = this.infoMonth.listOfDays.filter((elem) => {
+        if (elem.day === day) {
+          return elem;
+        }
+        return false;
+      });
+    } else {
+      dayInfo = undefined;
+    }
+
+    this.calendarService.openDialog(dayInfo);
+  }
 }
