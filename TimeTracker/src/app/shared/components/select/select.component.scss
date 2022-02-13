@@ -1,6 +1,6 @@
 @import '../../../../styles/colors';
 
-$count: 23;
+$count: 24;
 
 .wrapper {
   display: flex;
@@ -55,9 +55,9 @@ select > option:checked {
   color: $secondary;
 }
 
-@for $index from 0 through 9 {
+@for $index from 1 through 10 {
   option:nth-child(#{$index})::after {
-    content: '#{$index}';
+    content: '#{$index - 1}';
     display: inline-block;
     position: relative;
     top: -4px;
@@ -71,9 +71,9 @@ select > option:checked {
   }
 }
 
-@for $index from 10 through $count {
+@for $index from 11 through $count {
   option:nth-child(#{$index})::after {
-    content: '#{$index}';
+    content: '#{$index - 1}';
     position: relative;
     top: -4px;
     left: -8px;
@@ -88,4 +88,8 @@ select > option:checked {
 
 option.selected::after {
   color: $secondary;
+}
+
+.d-none {
+  display: none;
 }
