@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DateTime } from 'luxon';
 import { InfoMonth } from 'src/app/feature/components/calendar/info-month.interface';
+
 import { StoreApp } from './store.interface';
 
 @Injectable({
@@ -13,15 +14,17 @@ export class StoreService {
     const { listOfYears } = StoreApp;
 
     if (listOfYears) {
-      const targetYear = listOfYears.filter(
-        (elem) => elem.year === targetMonth.year
+      const [targetYear] = listOfYears.filter(
+        (elem) => elem.year === targetMonth.year,
       );
 
-      const month = targetYear[0].listOfMonths.filter(
-        (elem) => elem.month === targetMonth.month
-      );
-      debugger;
-      return month[0];
+      if (targetYear.listOfMonths) {
+        const [month] = targetYear.listOfMonths.filter(
+          (elem) => elem.month === targetMonth.month,
+        );
+
+        return month;
+      }
     }
 
     return undefined;

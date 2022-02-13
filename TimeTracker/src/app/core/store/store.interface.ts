@@ -5,18 +5,18 @@ export interface Store {
   };
   listOfYears?: {
     year: number;
-    listOfMonths: {
+    listOfMonths?: {
       month: number;
       listOfDays: {
         day: number;
-        freeTime: number[];
+        freeTime: number[] | [];
         toDos:
-          | {
-              from: number;
-              to: number;
-              discription: string;
-            }[]
-          | null;
+        | {
+          from: number;
+          to: number;
+          discription: string;
+        }[]
+        | null;
       }[];
     }[];
   }[];
