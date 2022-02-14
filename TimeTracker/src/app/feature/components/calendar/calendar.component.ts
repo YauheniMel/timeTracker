@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-// import { DateTime } from 'luxon';
-import { StoreService } from 'src/app/core/store/store.service';
-import { ModalWindowComponent } from '../modal-window/modal-window.component';
+import { debugErrorMap } from 'firebase/auth';
+import { DatabaseService } from 'src/app/core/database.service';
+
+import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+
 import { CalendarService } from '../services/calendar.service';
 import { InfoMonth } from './info-month.interface';
 
@@ -12,10 +13,12 @@ import { InfoMonth } from './info-month.interface';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  infoMonth?: InfoMonth;
+  infoMonth!: InfoMonth | { month: number; year: number; listOfDays: null };
+
+  dayInfo!: InfoDay;
 
   constructor(
-    private storeService: StoreService,
+    private database: DatabaseService,
     public calendarService: CalendarService
   ) {}
 
@@ -23,28 +26,60 @@ export class CalendarComponent implements OnInit {
     this.calendarService.setDaysInMonth();
     this.calendarService.setFirstDay();
 
-    this.infoMonth = this.storeService.getDetailsMonth(
-      this.calendarService.targetMonth
-    );
+    this.database
+      .getDbByParameter(
+        this.calendarService.targetMonth.year,
+        this.calendarService.targetMonth.month
+      )
+      .subscribe((res) => {
+        [this.infoMonth] = res;
+      });
   }
 
   changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
+
+    this.database
+      .getDbByParameter(
+        this.calendarService.targetMonth.year,
+        this.calendarService.targetMonth.month
+      )
+      .subscribe((res) => {
+        this.infoMonth = res;
+      });
   }
 
-  getDayInfo(day: number) {
-    let dayInfo;
-    if (this.infoMonth) {
-      [dayInfo] = this.infoMonth.listOfDays.filter((elem) => {
-        if (elem.day === day) {
-          return elem;
+  getDayInfo(day: number): void {
+    this.database
+      .getDbByParameter(
+        this.calendarService.targetMonth.year,
+        this.calendarService.targetMonth.month,
+        day
+      )
+      .subscribe((res) => {
+        if (!res.length) {
+          this.dayInfo = this.getInitDayInfo(day);
+        } else {
+          this.dayInfo = {
+            day: res[0],
+            freeTime: res[1],
+            month: res[2],
+            year: res[4],
+            toDos: res[3],
+          };
         }
-        return false;
-      });
-    } else {
-      dayInfo = undefined;
-    }
 
-    this.calendarService.openDialog(dayInfo);
+        this.calendarService.openDialog(this.dayInfo);
+      });
+  }
+
+  getInitDayInfo(day: number) {
+    return {
+      day,
+      freeTime: Array.from(Array(24).keys()),
+      month: this.infoMonth.month,
+      year: this.infoMonth.year,
+      toDos: null,
+    };
   }
 }

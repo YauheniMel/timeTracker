@@ -9,7 +9,8 @@ import { InfoDay } from './info-day.interface';
 export class DayComponent implements OnInit {
   @Input() dayOfMonth!: number;
 
-  @Input() infoDay!: InfoDay | undefined;
+  // @Input() infoDay!: InfoDay | undefined;
+  @Input() infoDay!: any | undefined;
 
   @Output() getDay: EventEmitter<number> = new EventEmitter();
 

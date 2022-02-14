@@ -44,9 +44,13 @@ export class CalendarService {
     this.setFirstDay();
   }
 
-  openDialog(data: InfoDay | undefined): void {
+  openDialog(infoDay: InfoDay): void {
+    const data = {
+      ...infoDay,
+    };
+
     const dialogRef = this.dialog.open(ModalWindowComponent, {
-      data: { data },
+      data,
     });
 
     dialogRef.afterClosed().subscribe(() => {

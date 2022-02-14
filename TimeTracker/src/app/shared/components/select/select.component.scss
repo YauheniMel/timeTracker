@@ -93,3 +93,7 @@ option.selected::after {
 .d-none {
   display: none;
 }
+
+option:last-child::after {
+  padding-bottom: 10px;
+}

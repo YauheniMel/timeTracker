@@ -1,6 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DatabaseService } from 'src/app/core/database.service';
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 
 @Component({
@@ -11,31 +18,43 @@ import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 export class ModalWindowComponent implements OnInit {
   isLinear = false;
 
-  firstFormGroup!: FormGroup;
+  formGroup!: FormGroup;
 
-  secondFormGroup!: FormGroup;
+  day!: InfoDay;
 
-  dayInfo: InfoDay | undefined;
+  get formArray(): AbstractControl | null {
+    return this.formGroup.get('formArray');
+  }
 
   constructor(
     public dialogRef: MatDialogRef<ModalWindowComponent>,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: InfoDay | undefined,
-  ) {
-  }
+    @Inject(MAT_DIALOG_DATA) public data: InfoDay,
+    private database: DatabaseService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
-    if (this.data) {
-      const [, data] = Object.entries(this.data)[0]; // make it easier
+    this.day = this.data;
 
-      this.dayInfo = data;
+    this.formGroup = this.formBuilder.group({
+      discriptionCtrl: ['', Validators.minLength(3)],
+      fromTimeCtrl: ['', Validators.required],
+      toTimeCtrl: ['', Validators.required],
+    });
+  }
+
+  submit(): void {
+    if (this.formGroup.invalid) {
+      this.snackBar.open('Form is not valid!', 'Close', {
+        duration: 1000,
+        panelClass: ['warning'],
+        verticalPosition: 'top',
+      });
+
+      return;
     }
 
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
+    this.database.setTask(this.formGroup.value, this.day);
   }
 }
