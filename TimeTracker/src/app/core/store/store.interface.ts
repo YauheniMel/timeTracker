@@ -1,22 +1,23 @@
 export interface Store {
   profile: {
-    firstname: string;
+    firstName: string;
     lastName: string;
   };
   listOfYears?: {
     year: number;
     listOfMonths?: {
       month: number;
+      year: number;
       listOfDays: {
         day: number;
         freeTime: number[] | [];
         toDos:
-          | {
-              from: number;
-              to: number;
-              discription: string;
-            }[]
-          | null;
+        | {
+          from: number;
+          to: number;
+          discription: string;
+        }[]
+        | null;
       }[];
     }[];
   }[];
@@ -24,7 +25,7 @@ export interface Store {
 
 export const StoreApp: Store = {
   profile: {
-    firstname: 'Yauheni',
+    firstName: 'Yauheni',
     lastName: 'Melnik',
   },
   listOfYears: [
@@ -33,15 +34,8 @@ export const StoreApp: Store = {
       listOfMonths: [
         {
           month: 2,
+          year: 2022,
           listOfDays: [
-            {
-              day: 1,
-              freeTime: [
-                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-                18, 19, 20, 21, 22, 23,
-              ],
-              toDos: null,
-            },
             {
               day: 2,
               freeTime: [
