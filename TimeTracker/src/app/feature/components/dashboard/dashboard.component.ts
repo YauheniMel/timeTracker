@@ -18,12 +18,12 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private db: DatabaseService
+    private db: DatabaseService,
   ) {}
 
   ngOnInit(): void {
     this.setTime();
-    this.db.getData().subscribe((response) => {
+    this.db.getDbByParameter().subscribe((response) => {
       this.user = {
         firstName: response[0],
         lastName: response[1],

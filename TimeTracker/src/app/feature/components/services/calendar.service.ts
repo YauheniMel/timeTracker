@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
-import { InfoMonth } from '../calendar/info-month.interface';
 import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Injectable()
@@ -44,13 +43,9 @@ export class CalendarService {
     this.setFirstDay();
   }
 
-  openDialog(
-    infoDay: InfoDay,
-    infoMonth: InfoMonth | { month: number; year: number; listOfDays: null },
-  ): void {
+  openDialog(infoDay: InfoDay): void {
     const data = {
-      infoDay,
-      infoMonth,
+      ...infoDay,
     };
 
     const dialogRef = this.dialog.open(ModalWindowComponent, {

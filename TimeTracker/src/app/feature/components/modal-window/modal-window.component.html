@@ -35,7 +35,7 @@
               <label for="">From</label>
               <app-select
                 formControlName="fromTimeCtrl"
-                [freeTime]="day.infoDay?.freeTime"
+                [freeTime]="day.freeTime"
               ></app-select>
               <mat-error>
                 <strong>Required</strong>
@@ -45,7 +45,7 @@
               <label for="">to</label>
               <app-select
                 formControlName="toTimeCtrl"
-                [freeTime]="day.infoDay?.freeTime"
+                [freeTime]="day.freeTime"
               ></app-select>
               <mat-error>
                 <strong>Required</strong>
@@ -68,9 +68,9 @@
       </form>
     </div>
   </mat-tab>
-  <mat-tab label="Schedule" *ngIf="day && day.infoDay">
+  <mat-tab label="Schedule" *ngIf="day.toDos">
     <mat-selection-list #todo>
-      <mat-list-option *ngFor="let todo of day.infoDay.toDos">
+      <mat-list-option *ngFor="let todo of day.toDos">
         {{ todo.from }} - {{ todo.to }} {{ todo.discription }}
       </mat-list-option>
     </mat-selection-list>

@@ -20,7 +20,7 @@ export class ModalWindowComponent implements OnInit {
 
   formGroup!: FormGroup;
 
-  day: any;
+  day!: InfoDay;
 
   get formArray(): AbstractControl | null {
     return this.formGroup.get('formArray');
@@ -29,14 +29,14 @@ export class ModalWindowComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ModalWindowComponent>,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: InfoDay | undefined,
+    @Inject(MAT_DIALOG_DATA) public data: InfoDay,
     private database: DatabaseService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
     this.day = this.data;
-    debugger;
+
     this.formGroup = this.formBuilder.group({
       discriptionCtrl: ['', Validators.minLength(3)],
       fromTimeCtrl: ['', Validators.required],
@@ -55,6 +55,6 @@ export class ModalWindowComponent implements OnInit {
       return;
     }
 
-    this.database.setTask(this.formGroup.value);
+    this.database.setTask(this.formGroup.value, this.day);
   }
 }
