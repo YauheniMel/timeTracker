@@ -26,8 +26,7 @@ export class CalendarService {
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek =
-      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {
@@ -46,8 +45,8 @@ export class CalendarService {
   }
 
   openDialog(
-    infoDay: InfoDay | undefined,
-    infoMonth: InfoMonth | { month: number; year: number; listOfDays: null }
+    infoDay: InfoDay,
+    infoMonth: InfoMonth | { month: number; year: number; listOfDays: null },
   ): void {
     const data = {
       infoDay,

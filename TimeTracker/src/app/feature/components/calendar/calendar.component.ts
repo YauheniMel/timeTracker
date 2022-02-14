@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { StoreService } from 'src/app/core/store/store.service';
+import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 
 import { CalendarService } from '../services/calendar.service';
 import { InfoMonth } from './info-month.interface';
@@ -15,7 +16,7 @@ export class CalendarComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    public calendarService: CalendarService
+    public calendarService: CalendarService,
   ) {}
 
   ngOnInit(): void {
@@ -23,7 +24,7 @@ export class CalendarComponent implements OnInit {
     this.calendarService.setFirstDay();
 
     this.infoMonth = this.storeService.getDetailsMonth(
-      this.calendarService.targetMonth
+      this.calendarService.targetMonth,
     );
   }
 
@@ -31,7 +32,7 @@ export class CalendarComponent implements OnInit {
     this.calendarService.changeMonth(action);
 
     this.infoMonth = this.storeService.getDetailsMonth(
-      this.calendarService.targetMonth
+      this.calendarService.targetMonth,
     );
   }
 
@@ -45,10 +46,20 @@ export class CalendarComponent implements OnInit {
         }
         return false;
       });
-    } else {
-      dayInfo = undefined;
+    }
+
+    if (!dayInfo) {
+      dayInfo = this.getInitDayInfo(day);
     }
 
     this.calendarService.openDialog(dayInfo, this.infoMonth);
+  }
+
+  getInitDayInfo(day: number): InfoDay {
+    return {
+      day,
+      freeTime: Array.from(Array(24).keys()),
+      toDos: null,
+    };
   }
 }
