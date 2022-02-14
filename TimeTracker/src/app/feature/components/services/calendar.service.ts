@@ -25,7 +25,8 @@ export class CalendarService {
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek =
+      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {

@@ -1,5 +1,5 @@
 export interface YearInfo {
-  year: number,
+  year: number;
   listOfMonths: {
     month: number;
     year: number;
@@ -7,12 +7,12 @@ export interface YearInfo {
       day: number;
       freeTime: number[] | [];
       toDos:
-      | {
-        from: number;
-        to: number;
-        discription: string;
-      }[]
-      | null;
+        | {
+            from: number;
+            to: number;
+            discription: string;
+          }[]
+        | null;
     }[];
-  }[]
+  }[];
 }

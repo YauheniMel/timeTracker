@@ -31,7 +31,7 @@ export class ModalWindowComponent implements OnInit {
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InfoDay,
     private database: DatabaseService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {

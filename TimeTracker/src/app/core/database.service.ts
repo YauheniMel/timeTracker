@@ -28,7 +28,7 @@ export class DatabaseService {
   setTask(formData: any, info: any): void {
     info.infoDay.freeTime.splice(
       formData.fromTimeCtrl,
-      ++formData.toTimeCtrl - formData.fromTimeCtrl,
+      ++formData.toTimeCtrl - formData.fromTimeCtrl
     );
 
     const initData = createInitData(
@@ -38,7 +38,7 @@ export class DatabaseService {
       info.infoDay.freeTime,
       formData.fromTimeCtrl,
       formData.toTimeCtrl,
-      formData.discriptionCtrl,
+      formData.discriptionCtrl
     );
 
     const user = getAuth().currentUser;
@@ -48,14 +48,22 @@ export class DatabaseService {
       .valueChanges()
       .subscribe((res) => {
         if (!res.length) {
-          this.db.list('users').set(`${user!.uid}/listOfYears/${info.infoMonth.year}/${info.infoMonth.month}`, initData);
+          this.db
+            .list('users')
+            .set(
+              `${user!.uid}/listOfYears/${info.infoMonth.year}/${
+                info.infoMonth.month
+              }`,
+              initData
+            );
         } else {
           debugger;
         }
       });
   }
 
-  getInfoYears(): Observable<any> { // need rename
+  getInfoYears(): Observable<any> {
+    // need rename
     const user = getAuth().currentUser;
 
     return this.db // need pipe
@@ -66,7 +74,7 @@ export class DatabaseService {
   getDbByParameter(
     year: number | null = null,
     month: number | null = null,
-    day: number | null = null,
+    day: number | null = null
   ): Observable<any> {
     const user = getAuth().currentUser;
 
@@ -99,7 +107,7 @@ function createInitData(
   freeTime: number[],
   from: number,
   to: number,
-  discription: string,
+  discription: string
 ) {
   const init = {
     month,

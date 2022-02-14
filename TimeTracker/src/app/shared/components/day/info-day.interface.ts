@@ -3,10 +3,11 @@ export interface InfoDay {
   month: number;
   year: number;
   freeTime: number[] | null;
-  toDos: {
-    from: number;
-    to: number;
-    discription: string;
-  }[]
-  | null;
+  toDos:
+    | {
+        from: number;
+        to: number;
+        discription: string;
+      }[]
+    | null;
 }
