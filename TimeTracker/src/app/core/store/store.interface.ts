@@ -12,12 +12,12 @@ export interface Store {
         day: number;
         freeTime: number[] | [];
         toDos:
-        | {
-          from: number;
-          to: number;
-          discription: string;
-        }[]
-        | null;
+          | {
+              from: number;
+              to: number;
+              discription: string;
+            }[]
+          | null;
       }[];
     }[];
   }[];
