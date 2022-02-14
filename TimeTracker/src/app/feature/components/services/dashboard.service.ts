@@ -5,7 +5,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { catchError, Observable, of, tap } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class DashboardService {
   constructor(
     private angularFireAuth: AngularFireAuth,

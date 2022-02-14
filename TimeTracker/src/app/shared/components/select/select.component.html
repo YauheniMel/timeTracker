@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <mat-icon>keyboard_arrow_up</mat-icon>
+  <span></span>
+  <select
+    (change)="makeChoice(+select.value)"
+    id="example"
+    class="appearance"
+    #select
+    size="2"
+    required
+  >
+    <option
+      [ngClass]="choice === time ? 'selected' : ''"
+      *ngFor="let time of allTime"
+      [selected]="choice === time"
+      [value]="time"
+      [class.d-none]="!freeTime?.includes(time)"
+    ></option>
+  </select>
+  <mat-icon>keyboard_arrow_down</mat-icon>
+</div>

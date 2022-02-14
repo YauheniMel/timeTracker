@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { MatButtonModule } from '@angular/material/button';
-import { CoreRoutingModule } from './core-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthService } from './auth/auth.service';
+import { DatabaseService } from './database.service';
 
 @NgModule({
-  declarations: [DashboardComponent],
-  imports: [CommonModule, CoreRoutingModule, MatButtonModule],
+  declarations: [],
+  imports: [],
+  providers: [DatabaseService, AuthService],
 })
 export class CoreModule {}

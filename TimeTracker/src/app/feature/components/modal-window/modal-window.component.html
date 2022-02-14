@@ -1,0 +1,82 @@
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Add task">
+    <div class="example-small-box mat-elevation-z4">
+      <form
+        class="discription"
+        (ngSubmit)="submit()"
+        [formGroup]="formGroup"
+        autocomplete="off"
+        novalidate
+      >
+        <mat-stepper #stepper>
+          <mat-step
+            [stepControl]="formGroup.controls['discriptionCtrl']"
+            label="Task description"
+          >
+            <mat-form-field appearance="legacy">
+              <input formControlName="discriptionCtrl" matInput required />
+              <mat-icon matSuffix>work</mat-icon>
+              <mat-error>
+                <strong>Required</strong>
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button type="button" mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step
+            [stepControl]="
+              formGroup.controls['fromTimeCtrl'] &&
+              formGroup.controls['toTimeCtrl']
+            "
+            label="Select the time"
+          >
+            <div>
+              <label for="">From</label>
+              <app-select
+                formControlName="fromTimeCtrl"
+                [freeTime]="day.freeTime"
+              ></app-select>
+              <mat-error>
+                <strong>Required</strong>
+              </mat-error>
+            </div>
+            <div>
+              <label for="">to</label>
+              <app-select
+                formControlName="toTimeCtrl"
+                [freeTime]="day.freeTime"
+              ></app-select>
+              <mat-error>
+                <strong>Required</strong>
+              </mat-error>
+            </div>
+            <div class="action">
+              <button type="button" mat-button matStepperPrevious>Back</button>
+              <button type="button" mat-button matStepperNext>Next</button>
+            </div>
+          </mat-step>
+          <mat-step label="Confirm">
+            <p>You are now done.</p>
+            <div>
+              <button type="button" mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button type="submit" mat-button>Add</button>
+            </div>
+          </mat-step>
+        </mat-stepper>
+      </form>
+    </div>
+  </mat-tab>
+  <mat-tab label="Schedule" *ngIf="day.toDos">
+    <mat-selection-list #todo>
+      <mat-list-option *ngFor="let todo of day.toDos">
+        {{ todo.from }} - {{ todo.to }} {{ todo.discription }}
+      </mat-list-option>
+    </mat-selection-list>
+    <p>Options selected: {{ todo.selectedOptions.selected.length }}</p>
+  </mat-tab>
+</mat-tab-group>
+<!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{ !isLinear ? 'Enable linear mode' : 'Disable linear mode' }}
+</button> -->

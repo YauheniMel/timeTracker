@@ -1,4 +1,4 @@
-@import '../../../styles/colors';
+@import '../../../../styles/colors';
 
 .container {
   display: flex;
@@ -56,6 +56,10 @@
 
     :first-child {
       color: $white;
+    }
+
+    button:focus-visible {
+      outline: 2px solid $secondary;
     }
   }
 }

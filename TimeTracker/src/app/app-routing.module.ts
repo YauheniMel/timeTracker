@@ -13,13 +13,15 @@ const redirectLoggedInToHome = () => redirectLoggedInTo(['timetracker']);
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () =>
+      import('./core/auth/auth.module').then((m) => m.AuthModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome },
   },
   {
     path: 'timetracker',
-    loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+    loadChildren: () =>
+      import('./feature/feature.module').then((m) => m.FeatureModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

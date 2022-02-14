@@ -1,0 +1,30 @@
+<div class="wrapper">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <div>
+      <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h1 class="example-app-name">TimeTracker</h1>
+    </div>
+    <div class="logout-wrap">
+      <h3 *ngIf="user">{{ user.firstName }} {{ user.lastName }}</h3>
+      <button mat-flat-button (click)="logout()">Logout</button>
+    </div>
+  </mat-toolbar>
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav>
+      <mat-nav-list>
+        <a href="">Page 1</a>
+        <a href="">Page 2</a>
+        <a href="">Page 3</a>
+        <a href="">Page 4</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container">
+        <time>{{ time | date: 'dd MMMM yyyy HH:mm:ss' }}</time>
+        <app-calendar></app-calendar>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

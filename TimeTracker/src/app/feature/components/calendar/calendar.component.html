@@ -1,0 +1,30 @@
+<div class="wrap">
+  <div class="pagination-wrap">
+    <div class="pagination">
+      <button mat-button color="accent" (click)="changeMonth('minus')">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      {{ calendarService.date | date: 'MMMM/YYYY' }}
+      <button mat-button color="accent" (click)="changeMonth('plus')">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+  </div>
+  <ul class="head">
+    <li>Sunday</li>
+    <li>Monday</li>
+    <li>Tuesday</li>
+    <li>Wednesday</li>
+    <li>Thursday</li>
+    <li>Friday</li>
+    <li>Saturday</li>
+  </ul>
+  <ul class="body">
+    <li
+      *ngFor="let day of calendarService.daysInMonth; let i = index"
+      [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
+    >
+      <app-day [dayOfMonth]="day" (getDay)="getDayInfo($event)"></app-day>
+    </li>
+  </ul>
+</div>
