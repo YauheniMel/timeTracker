@@ -1,5 +1,6 @@
 export interface InfoMonth {
   month: number;
+  year: number;
   listOfDays: {
     day: number;
     freeTime: number[];

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-// import { DateTime } from 'luxon';
+
 import { StoreService } from 'src/app/core/store/store.service';
-import { ModalWindowComponent } from '../modal-window/modal-window.component';
+
 import { CalendarService } from '../services/calendar.service';
 import { InfoMonth } from './info-month.interface';
 
@@ -12,7 +11,7 @@ import { InfoMonth } from './info-month.interface';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  infoMonth?: InfoMonth;
+  infoMonth!: InfoMonth | { month: number; year: number; listOfDays: null };
 
   constructor(
     private storeService: StoreService,
@@ -30,11 +29,16 @@ export class CalendarComponent implements OnInit {
 
   changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
+
+    this.infoMonth = this.storeService.getDetailsMonth(
+      this.calendarService.targetMonth
+    );
   }
 
   getDayInfo(day: number) {
     let dayInfo;
-    if (this.infoMonth) {
+
+    if (this.infoMonth.listOfDays) {
       [dayInfo] = this.infoMonth.listOfDays.filter((elem) => {
         if (elem.day === day) {
           return elem;
@@ -45,6 +49,6 @@ export class CalendarComponent implements OnInit {
       dayInfo = undefined;
     }
 
-    this.calendarService.openDialog(dayInfo);
+    this.calendarService.openDialog(dayInfo, this.infoMonth);
   }
 }
