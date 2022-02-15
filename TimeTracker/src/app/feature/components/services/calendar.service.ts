@@ -21,10 +21,7 @@ export class CalendarService {
 
   infoMonth!: InfoMonth | { month: number; year: number; listOfDays: null };
 
-  constructor(
-    public dialog: MatDialog,
-    private database: DatabaseService,
-  ) {}
+  constructor(public dialog: MatDialog, private database: DatabaseService) {}
 
   setDaysInMonth(): void {
     const countDays = this.targetMonth.daysInMonth;
@@ -35,7 +32,8 @@ export class CalendarService {
 
   setFirstDay() {
     const { month } = this.targetMonth;
-    this.firstDayOfWeek = new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+    this.firstDayOfWeek =
+      new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
   }
 
   changeMonth(action: string) {
@@ -53,10 +51,7 @@ export class CalendarService {
     this.setFirstDay();
 
     this.database
-      .getDbByParameter(
-        this.targetMonth.year,
-        this.targetMonth.month,
-      )
+      .getDbByParameter(this.targetMonth.year, this.targetMonth.month)
       .subscribe((res) => {
         [this.infoMonth] = res; // need use
       });
@@ -64,11 +59,7 @@ export class CalendarService {
 
   getDayInfo(day: number): void {
     this.database
-      .getDbByParameter(
-        this.targetMonth.year,
-        this.targetMonth.month,
-        day,
-      )
+      .getDbByParameter(this.targetMonth.year, this.targetMonth.month, day)
       .pipe(take(1))
       .subscribe((res) => {
         if (!res.length) {

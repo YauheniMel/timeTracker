@@ -1,5 +1,13 @@
 <mat-tab-group dynamicHeight>
-  <mat-tab label="Add task">
+  <mat-tab label="Schedule" *ngIf="day.toDos">
+    <mat-selection-list #todo>
+      <mat-list-option *ngFor="let todo of day.toDos">
+        {{ todo.from }} - {{ todo.to }} {{ todo.discription }}
+      </mat-list-option>
+    </mat-selection-list>
+    <p>Options selected: {{ todo.selectedOptions.selected.length }}</p>
+  </mat-tab>
+  <mat-tab label="Add task" *ngIf="day.freeTime">
     <div class="example-small-box mat-elevation-z4">
       <form
         class="discription"
@@ -67,14 +75,6 @@
         </mat-stepper>
       </form>
     </div>
-  </mat-tab>
-  <mat-tab label="Schedule" *ngIf="day.toDos">
-    <mat-selection-list #todo>
-      <mat-list-option *ngFor="let todo of day.toDos">
-        {{ todo.from }} - {{ todo.to }} {{ todo.discription }}
-      </mat-list-option>
-    </mat-selection-list>
-    <p>Options selected: {{ todo.selectedOptions.selected.length }}</p>
   </mat-tab>
 </mat-tab-group>
 <!-- <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
