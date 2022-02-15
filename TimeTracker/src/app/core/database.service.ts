@@ -32,7 +32,7 @@ export class DatabaseService {
         if (!res.length) {
           info.freeTime.splice(
             formData.fromTimeCtrl,
-            ++formData.toTimeCtrl - formData.fromTimeCtrl + 1
+            ++formData.toTimeCtrl - formData.fromTimeCtrl + 1,
           );
 
           const initData = createInitData(
@@ -42,7 +42,7 @@ export class DatabaseService {
             info.freeTime,
             formData.fromTimeCtrl,
             formData.toTimeCtrl,
-            formData.discriptionCtrl
+            formData.discriptionCtrl,
           );
 
           this.db
@@ -55,14 +55,15 @@ export class DatabaseService {
                   `${this.user!.uid}/listOfYears/${info.year}/${info.month}/${
                     info.day
                   }`,
-                  initData
+                  initData,
                 );
             });
         } else {
           const [day, freeTime, month, toDos, year] = res;
           const from = freeTime.indexOf(formData.fromTimeCtrl);
           const to = freeTime.indexOf(formData.toTimeCtrl);
-          freeTime.splice(from, to + 1);
+          debugger;
+          freeTime.splice(from, to - from + 1);
 
           const newToDos = toDos.concat({
             from: formData.fromTimeCtrl,
@@ -86,7 +87,7 @@ export class DatabaseService {
                 .list('users')
                 .update(
                   `${this.user!.uid}/listOfYears/${year}/${month}/${day}`,
-                  data
+                  data,
                 );
             });
         }
@@ -100,7 +101,7 @@ export class DatabaseService {
   getDbByParameter(
     year: number | null = null,
     month: number | null = null,
-    day: number | null = null
+    day: number | null = null,
   ): Observable<any> {
     if (day && month && year) {
       return this.db
@@ -140,7 +141,7 @@ function createInitData(
   freeTime: number[],
   from: number,
   to: number,
-  discription: string
+  discription: string,
 ) {
   const init = {
     month,
