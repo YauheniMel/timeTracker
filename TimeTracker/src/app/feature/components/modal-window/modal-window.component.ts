@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidationErrors,
   Validators,
@@ -38,7 +37,7 @@ export class ModalWindowComponent implements OnInit {
 
   ngOnInit() {
     this.day = this.data;
-
+    debugger;
     this.formGroup = this.formBuilder.group({
       discriptionCtrl: ['', Validators.minLength(3)],
       fromTimeCtrl: ['', Validators.required],
@@ -64,16 +63,23 @@ export class ModalWindowComponent implements OnInit {
     fromName: string,
     toName: string,
   ): ValidationErrors {
-    debugger;
-
     return (formGroup: FormGroup) => {
       const controlFrom = formGroup.controls[fromName];
       const controlTo = formGroup.controls[toName];
+      this.day.freeTime!.indexOf(controlFrom.value);
 
       if (controlTo.errors) {
         return;
       }
+
+      const indexFrom = this.day.freeTime!.indexOf(controlFrom.value);
+      const indexTo = this.day.freeTime!.indexOf(controlTo.value);
+
+      const interval = this.day.freeTime!.slice(indexFrom, indexTo + 1);
+
       if (controlFrom.value > controlTo.value) {
+        controlTo.setErrors({ selectsValidator: true });
+      } else if ((controlTo.value - controlFrom.value) + 1 !== interval.length) {
         controlTo.setErrors({ selectsValidator: true });
       } else {
         controlTo.setErrors(null);
