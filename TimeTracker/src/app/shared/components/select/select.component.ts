@@ -18,7 +18,7 @@ export class SelectComponent implements OnInit {
 
   choice: null | number = null;
 
-  allTime: number[] = Array.from(Array(24).keys());
+  allTime: number[] = Array.from(Array(24).keys()); // need pass it
 
   touched = false;
 

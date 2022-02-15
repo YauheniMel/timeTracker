@@ -4,71 +4,97 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
-import { Observable } from 'rxjs';
+import { Observable, take } from 'rxjs';
 
 @Injectable()
 export class DatabaseService {
   itemsRef!: AngularFireList<any>;
 
+  user = getAuth().currentUser;
+
   constructor(private db: AngularFireDatabase) {}
 
   setUser(firstName: string, lastName: string): Promise<any> {
-    const user = getAuth().currentUser;
-
     const profile: { firstName: string; lastName: string } = {
       firstName,
       lastName,
     };
 
-    return this.db.list('users').set(user!.uid, {
+    return this.db.list('users').set(this.user!.uid, {
       profile,
     });
   }
 
   setTask(formData: any, info: any): void {
-    info.infoDay.freeTime.splice(
-      formData.fromTimeCtrl,
-      ++formData.toTimeCtrl - formData.fromTimeCtrl
-    );
-
-    const initData = createInitData(
-      info.infoMonth.year, // too match parameters
-      info.infoMonth.month,
-      info.infoDay.day,
-      info.infoDay.freeTime,
-      formData.fromTimeCtrl,
-      formData.toTimeCtrl,
-      formData.discriptionCtrl
-    );
-
-    const user = getAuth().currentUser;
-
-    this.db
-      .list(`users/${user!.uid}/listOfYears`)
-      .valueChanges()
+    this.checkDb(info.day, info.month, info.year)
+      .pipe(take(1))
       .subscribe((res) => {
         if (!res.length) {
+          info.freeTime.splice(
+            formData.fromTimeCtrl,
+            ++formData.toTimeCtrl - formData.fromTimeCtrl + 1
+          );
+
+          const initData = createInitData(
+            info.year, // too match parameters
+            info.month,
+            info.day,
+            info.freeTime,
+            formData.fromTimeCtrl,
+            formData.toTimeCtrl,
+            formData.discriptionCtrl
+          );
+
           this.db
-            .list('users')
-            .set(
-              `${user!.uid}/listOfYears/${info.infoMonth.year}/${
-                info.infoMonth.month
-              }`,
-              initData
-            );
+            .list(`users/${this.user!.uid}/listOfYears`)
+            .valueChanges()
+            .subscribe(() => {
+              this.db
+                .list('users')
+                .set(
+                  `${this.user!.uid}/listOfYears/${info.year}/${info.month}/${
+                    info.day
+                  }`,
+                  initData
+                );
+            });
         } else {
-          debugger;
+          const [day, freeTime, month, toDos, year] = res;
+          const from = freeTime.indexOf(formData.fromTimeCtrl);
+          const to = freeTime.indexOf(formData.toTimeCtrl);
+          freeTime.splice(from, to + 1);
+
+          const newToDos = toDos.concat({
+            from: formData.fromTimeCtrl,
+            to: formData.toTimeCtrl,
+            discription: formData.discriptionCtrl,
+          });
+
+          const data = {
+            month,
+            year,
+            day,
+            freeTime,
+            toDos: newToDos,
+          };
+
+          this.db
+            .list(`users/${this.user!.uid}/listOfYears`)
+            .valueChanges()
+            .subscribe(() => {
+              this.db
+                .list('users')
+                .update(
+                  `${this.user!.uid}/listOfYears/${year}/${month}/${day}`,
+                  data
+                );
+            });
         }
       });
   }
 
-  getInfoYears(): Observable<any> {
-    // need rename
-    const user = getAuth().currentUser;
-
-    return this.db // need pipe
-      .list(`users/${user!.uid}/listOfYears`)
-      .valueChanges();
+  getDbProfile(): Observable<any> {
+    return this.db.list(`users/${this.user!.uid}/profile`).valueChanges();
   }
 
   getDbByParameter(
@@ -76,29 +102,36 @@ export class DatabaseService {
     month: number | null = null,
     day: number | null = null
   ): Observable<any> {
-    const user = getAuth().currentUser;
-
-    if (!day) {
+    if (day && month && year) {
       return this.db
-        .list(`users/${user!.uid}/listOfYears/${year}/${month}`)
+        .list(`users/${this.user!.uid}/listOfYears/${year}/${month}/${day}`)
         .valueChanges();
     }
 
-    if (!month) {
+    if (!day && month && year) {
       return this.db
-        .list(`users/${user!.uid}/listOfYears/${year}`)
+        .list(`users/${this.user!.uid}/listOfYears/${year}/${month}`)
         .valueChanges();
     }
 
-    if (!year) {
-      return this.db.list(`users/${user!.uid}/profile`).valueChanges();
+    if (!day && !month && year) {
+      return this.db
+        .list(`users/${this.user!.uid}/listOfYears/${year}`)
+        .valueChanges();
     }
 
+    return this.db // need pipe
+      .list(`users/${this.user!.uid}/listOfYears`)
+      .valueChanges();
+  }
+
+  checkDb(day: number, month: number, year: number): Observable<any> {
     return this.db
-      .list(`users/${user!.uid}/listOfYears/${year}/${month}/${day}`)
+      .list(`users/${this.user!.uid}/listOfYears/${year}/${month}/${day}`)
       .valueChanges();
   }
 }
+
 // need another place/way
 function createInitData(
   year: number,

@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.setTime();
-    this.db.getDbByParameter().subscribe((response) => {
+    this.db.getDbProfile().subscribe((response) => {
       this.user = {
         firstName: response[0],
         lastName: response[1],
