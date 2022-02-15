@@ -8,9 +8,7 @@ import { CalendarService } from '../services/calendar.service';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  constructor(
-    public calendarService: CalendarService,
-  ) {}
+  constructor(public calendarService: CalendarService) {}
 
   ngOnInit(): void {
     this.calendarService.setDaysInMonth();

@@ -32,17 +32,20 @@ export class ModalWindowComponent implements OnInit {
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InfoDay,
     private database: DatabaseService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     this.day = this.data;
-    debugger;
-    this.formGroup = this.formBuilder.group({
-      discriptionCtrl: ['', Validators.minLength(3)],
-      fromTimeCtrl: ['', Validators.required],
-      toTimeCtrl: ['', Validators.required],
-    }, { validator: this.selectsValidator('fromTimeCtrl', 'toTimeCtrl') });
+
+    this.formGroup = this.formBuilder.group(
+      {
+        discriptionCtrl: ['', Validators.minLength(3)],
+        fromTimeCtrl: ['', Validators.required],
+        toTimeCtrl: ['', Validators.required],
+      },
+      { validator: this.selectsValidator('fromTimeCtrl', 'toTimeCtrl') }
+    );
   }
 
   submit(): void {
@@ -56,30 +59,28 @@ export class ModalWindowComponent implements OnInit {
       return;
     }
 
-    this.database.setTask(this.formGroup.value, this.day);
+    this.database.setTask(this.formGroup, this.day);
   }
 
-  selectsValidator(
-    fromName: string,
-    toName: string,
-  ): ValidationErrors {
+  selectsValidator(fromName: string, toName: string): ValidationErrors {
     return (formGroup: FormGroup) => {
       const controlFrom = formGroup.controls[fromName];
       const controlTo = formGroup.controls[toName];
-      this.day.freeTime!.indexOf(controlFrom.value);
 
       if (controlTo.errors) {
         return;
       }
 
-      const indexFrom = this.day.freeTime!.indexOf(controlFrom.value);
-      const indexTo = this.day.freeTime!.indexOf(controlTo.value);
+      const indexFrom = (this.day.freeTime as number[]).indexOf(
+        controlFrom.value
+      );
+      const indexTo = (this.day.freeTime as number[]).indexOf(controlTo.value);
 
       const interval = this.day.freeTime!.slice(indexFrom, indexTo + 1);
 
       if (controlFrom.value > controlTo.value) {
         controlTo.setErrors({ selectsValidator: true });
-      } else if ((controlTo.value - controlFrom.value) + 1 !== interval.length) {
+      } else if (controlTo.value - controlFrom.value + 1 !== interval.length) {
         controlTo.setErrors({ selectsValidator: true });
       } else {
         controlTo.setErrors(null);

@@ -10,7 +10,7 @@ export class DayComponent implements OnInit {
   @Input() dayOfMonth!: number;
 
   // @Input() infoDay!: InfoDay | undefined;
-  @Input() infoDay!: any | undefined;
+  @Input() infoDay!: InfoDay | undefined;
 
   @Output() getDay: EventEmitter<number> = new EventEmitter();
 

@@ -14,7 +14,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
 })
 export class SelectComponent implements OnInit {
-  @Input() freeTime!: any;
+  @Input() freeTime!: number[] | null;
 
   choice: null | number = null;
 

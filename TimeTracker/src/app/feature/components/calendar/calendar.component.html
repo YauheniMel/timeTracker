@@ -24,7 +24,10 @@
       *ngFor="let day of calendarService.daysInMonth; let i = index"
       [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
     >
-      <app-day [dayOfMonth]="day" (getDay)="calendarService.getDayInfo($event)"></app-day>
+      <app-day
+        [dayOfMonth]="day"
+        (getDay)="calendarService.getDayInfo($event)"
+      ></app-day>
     </li>
   </ul>
 </div>
