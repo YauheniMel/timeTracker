@@ -26,6 +26,8 @@
     >
       <app-day
         [dayOfMonth]="day"
+        [strokeDashIn]="styles[day - 1].styleIn"
+        [strokeDashOut]="styles[day - 1].styleOut"
         (getDay)="calendarService.getDayInfo($event)"
       ></app-day>
     </li>
