@@ -105,10 +105,8 @@ export class CalendarComponent implements OnInit {
               arrOut[time - 12] = '0,13.1';
             }
           });
-          console.log(arrOut);
           style.styleIn = `154,${arrIn.join()}`;
           style.styleOut = `188,${arrOut.join()}`;
-          // }
 
           this.styles.splice(--item.day, 1, style);
         }
