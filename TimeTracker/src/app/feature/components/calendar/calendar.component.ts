@@ -15,6 +15,10 @@ export class CalendarComponent implements OnInit {
     private database: DatabaseService
   ) {}
 
+  move!: string;
+
+  show: boolean = true;
+
   infoMonth!: InfoDay[];
 
   styles!: { day: number; styleIn: string; styleOut: string }[];
@@ -51,6 +55,8 @@ export class CalendarComponent implements OnInit {
 
   changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
+    this.move = action; // for animation
+    this.show = false;
 
     this.styles = Array.apply(
       null,
@@ -68,7 +74,7 @@ export class CalendarComponent implements OnInit {
       )
       .subscribe((res) => {
         this.infoMonth = res;
-
+        this.show = true;
         this.setStyle();
       });
   }
@@ -105,11 +111,16 @@ export class CalendarComponent implements OnInit {
               arrOut[time - 12] = '0,13.1';
             }
           });
+
           style.styleIn = `154,${arrIn.join()}`;
           style.styleOut = `188,${arrOut.join()}`;
+        } else {
+          style.styleIn = '280';
 
-          this.styles.splice(--item.day, 1, style);
+          style.styleOut = '345';
         }
+
+        this.styles.splice(--item.day, 1, style);
       });
     }
   }

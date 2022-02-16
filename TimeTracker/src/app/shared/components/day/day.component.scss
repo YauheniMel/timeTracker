@@ -2,32 +2,31 @@
 
 div {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 button {
   position: relative;
-
-  height: 60px;
   width: 60px;
+  height: 60px;
   border: none;
   font-size: 1.5rem;
 }
 
 .circle-out {
-  fill: none;
-  stroke: $secondary;
   stroke-width: 2px;
   stroke-dashoffset: 188;
+  stroke: $secondary;
+  fill: none;
 }
 
 .circle-in {
-  fill: none;
-  stroke: $primary;
   stroke-width: 2px;
   stroke-dashoffset: 154;
+  stroke: $primary;
+  fill: none;
 }
 
 svg {
