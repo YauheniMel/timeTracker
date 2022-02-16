@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { InfoDay } from './info-day.interface';
 
 @Component({
   selector: 'app-day',
@@ -9,8 +8,9 @@ import { InfoDay } from './info-day.interface';
 export class DayComponent implements OnInit {
   @Input() dayOfMonth!: number;
 
-  // @Input() infoDay!: InfoDay | undefined;
-  @Input() infoDay!: InfoDay | undefined;
+  @Input() strokeDashIn!: string;
+
+  @Input() strokeDashOut!: string;
 
   @Output() getDay: EventEmitter<number> = new EventEmitter();
 

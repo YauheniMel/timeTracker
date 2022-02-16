@@ -2,24 +2,42 @@
 
 div {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 button {
-  height: 60px;
+  position: relative;
   width: 60px;
+  height: 60px;
   border: none;
   font-size: 1.5rem;
 }
 
-// .even {
-//   color: $white;
-//   background-color: $gray;
-// }
+.circle-out {
+  stroke-width: 2px;
+  stroke-dashoffset: 188;
+  stroke: $secondary;
+  fill: none;
+}
 
-// .odd {
-//   color: $primary;
-//   background-color: $white;
-// }
+.circle-in {
+  stroke-width: 2px;
+  stroke-dashoffset: 154;
+  stroke: $primary;
+  fill: none;
+}
+
+svg {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  transform: rotate(-90deg);
+  opacity: 0.7;
+
+  &:hover {
+    transition-duration: 0.4s;
+    opacity: 1;
+  }
+}

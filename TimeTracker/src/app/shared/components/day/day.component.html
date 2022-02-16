@@ -1,5 +1,33 @@
 <div>
   <button (click)="onClick()" mat-icon-button color="primary">
     {{ dayOfMonth }}
+    <svg
+      width="100px"
+      height="100px"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <circle
+        [ngStyle]="{ 'stroke-dasharray': strokeDashIn }"
+        class="circle-in"
+        r="20"
+        cx="50"
+        cy="50"
+      />
+    </svg>
+    <svg
+      width="100px"
+      height="100px"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <circle
+        [ngStyle]="{ 'stroke-dasharray': strokeDashOut }"
+        class="circle-out"
+        r="25"
+        cx="50"
+        cy="50"
+      />
+    </svg>
   </button>
 </div>

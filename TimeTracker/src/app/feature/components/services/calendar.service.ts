@@ -4,7 +4,6 @@ import { DateTime } from 'luxon';
 import { take } from 'rxjs';
 import { DatabaseService } from 'src/app/core/database.service';
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
-import { InfoMonth } from '../calendar/info-month.interface';
 import { ModalWindowComponent } from '../modal-window/modal-window.component';
 
 @Injectable()
@@ -18,8 +17,6 @@ export class CalendarService {
   date: Date = new Date();
 
   dayInfo!: InfoDay;
-
-  infoMonth!: InfoMonth | { month: number; year: number; listOfDays: null };
 
   constructor(public dialog: MatDialog, private database: DatabaseService) {}
 
@@ -49,12 +46,6 @@ export class CalendarService {
 
     this.setDaysInMonth();
     this.setFirstDay();
-
-    this.database
-      .getDbByParameter(this.targetMonth.year, this.targetMonth.month)
-      .subscribe((res) => {
-        [this.infoMonth] = res; // need use
-      });
   }
 
   getDayInfo(day: number): void {
@@ -80,7 +71,7 @@ export class CalendarService {
 
   openDialog(infoDay: InfoDay): void {
     const data = {
-      ...infoDay,
+      ...infoDay, // can use this.
     };
 
     const dialogRef = this.dialog.open(ModalWindowComponent, {

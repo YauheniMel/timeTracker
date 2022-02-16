@@ -11,21 +11,29 @@
     </div>
   </div>
   <ul class="head">
-    <li>Sunday</li>
-    <li>Monday</li>
-    <li>Tuesday</li>
-    <li>Wednesday</li>
-    <li>Thursday</li>
-    <li>Friday</li>
-    <li>Saturday</li>
+    <li>Sun</li>
+    <li>Mon</li>
+    <li>Tues</li>
+    <li>Wed</li>
+    <li>Thurs</li>
+    <li>Fri</li>
+    <li>Sat</li>
   </ul>
-  <ul class="body">
+  <ul
+    class="body"
+    *ngIf="show"
+    [ngStyle]="{
+      animationName: move === 'plus' ? 'move-in-right' : 'move-in-left'
+    }"
+  >
     <li
       *ngFor="let day of calendarService.daysInMonth; let i = index"
       [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
     >
       <app-day
         [dayOfMonth]="day"
+        [strokeDashIn]="styles[day - 1].styleIn"
+        [strokeDashOut]="styles[day - 1].styleOut"
         (getDay)="calendarService.getDayInfo($event)"
       ></app-day>
     </li>
