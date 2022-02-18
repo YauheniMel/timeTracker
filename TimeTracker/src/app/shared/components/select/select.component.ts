@@ -18,7 +18,7 @@ export class SelectComponent implements OnInit {
 
   choice: null | number = null;
 
-  allTime: number[] = Array.from(Array(24).keys()); // need pass it
+  allTime: number[] = Array.from(Array(25).keys()); // need pass it
 
   touched = false;
 
@@ -30,9 +30,7 @@ export class SelectComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.freeTime);
-  }
+  ngOnInit(): void {}
 
   makeChoice(value: number) {
     this.markAsTouched();
