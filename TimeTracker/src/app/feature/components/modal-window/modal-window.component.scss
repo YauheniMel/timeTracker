@@ -1,23 +1,50 @@
-@import '../../../../styles/colors';
+@import "../../../../styles/colors";
 
-.discription {
+.step-time {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+}
 
-  mat-slider {
-    width: 100%;
+textarea {
+  max-height: 110px;
+}
+
+.select-section {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  margin-left: 1rem;
+
+  .select-to,
+  .select-from {
+    height: inherit;
+    padding: 0 1.4rem;
+    background-color: $white;
   }
 }
 
-.time-select {
+.list-item {
   display: flex;
   justify-content: space-between;
+  padding: 0.2rem 1rem;
 
-  label {
-    padding-bottom: 2rem;
+  .time {
+    width: 25%;
+    font-size: 1.2rem;
+  }
+
+  p {
+    width: 75%;
+    padding-left: 0.7rem;
   }
 }
 
 .action {
-  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: inherit;
+  padding: 1rem;
 }
