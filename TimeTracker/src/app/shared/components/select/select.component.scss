@@ -1,6 +1,6 @@
-@import '../../../../styles/colors';
+@import "../../../../styles/colors";
 
-$count: 24;
+$count: 25;
 
 .wrapper {
   display: flex;
@@ -57,7 +57,7 @@ select > option:checked {
 
 @for $index from 1 through 10 {
   option:nth-child(#{$index})::after {
-    content: '#{$index - 1}';
+    content: "#{$index - 1}";
     display: inline-block;
     position: relative;
     top: -4px;
@@ -73,7 +73,7 @@ select > option:checked {
 
 @for $index from 11 through $count {
   option:nth-child(#{$index})::after {
-    content: '#{$index - 1}';
+    content: "#{$index - 1}";
     position: relative;
     top: -4px;
     left: -8px;

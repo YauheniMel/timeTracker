@@ -12,7 +12,7 @@ import { InfoDay } from '../shared/components/day/info-day.interface';
 export class DatabaseService {
   itemsRef!: AngularFireList<any>;
 
-  user = getAuth().currentUser;
+  user = getAuth().currentUser; // maybe so early
 
   constructor(private db: AngularFireDatabase) {}
 
@@ -34,7 +34,7 @@ export class DatabaseService {
         if (!res.length) {
           info.freeTime!.splice(
             formData.value.fromTimeCtrl,
-            ++formData.value.toTimeCtrl - formData.value.fromTimeCtrl + 1
+            formData.value.toTimeCtrl - formData.value.fromTimeCtrl
           );
 
           const initData = createInitData(
@@ -64,8 +64,8 @@ export class DatabaseService {
           const [day, freeTime, month, toDos, year] = res;
           const from = freeTime.indexOf(formData.value.fromTimeCtrl);
           const to = freeTime.indexOf(formData.value.toTimeCtrl);
-          debugger;
-          freeTime.splice(from, to - from + 1);
+
+          freeTime.splice(from, to - from);
 
           const newToDos = toDos.concat({
             from: formData.value.fromTimeCtrl,
