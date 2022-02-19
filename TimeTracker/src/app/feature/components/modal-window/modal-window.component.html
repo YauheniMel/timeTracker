@@ -59,17 +59,24 @@
                   <app-select
                     formControlName="fromTimeCtrl"
                     [freeTime]="freeTimeFrom"
+                    [type]="'from'"
+                    (selected)="getFreeTimeTo($event)"
                   ></app-select>
-                  <mat-error *ngIf="formGroup.controls['fromTimeCtrl'].invalid">
+                  <!-- type: string -->
+                  <mat-error
+                    *ngIf="formGroup.controls['fromTimeCtrl'].untouched"
+                  >
                     <strong>Required</strong>
                   </mat-error>
                 </div>
-                <div class="select-to">
+                <div class="select-to" *ngIf="freeTimeTo">
                   <label for="">to</label>
                   <app-select
                     formControlName="toTimeCtrl"
                     [freeTime]="freeTimeTo"
+                    [type]="'to'"
                   ></app-select>
+                  <!-- type: string -->
                   <mat-error *ngIf="formGroup.controls['toTimeCtrl'].invalid">
                     <strong>Required</strong>
                   </mat-error>
@@ -81,7 +88,9 @@
                   <button type="button" mat-button matStepperPrevious>
                     Back
                   </button>
-                  <button type="submit" mat-button>Add</button>
+                  <button type="submit" mat-raised-button color="primary">
+                    Add
+                  </button>
                 </div>
               </div>
             </div>

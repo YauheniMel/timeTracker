@@ -1,35 +1,34 @@
-@import "../../../../styles/colors";
+@import '../../../../styles/colors';
 
 $count: 25;
 
 .wrapper {
   display: flex;
   position: relative;
+  z-index: 2;
   flex-direction: column;
   align-items: center;
-  width: 50px;
+  width: 70px;
 
-  mat-icon {
-    margin-left: 1px;
-    transform: scale(3, 1.5);
-  }
-
-  span {
-    position: absolute;
-    top: 19px;
-    width: 58px;
-    height: 49px;
-    opacity: 0;
-    box-shadow: inset 0 0 5px 0 $gray;
+  .mat-icon {
+    transform: scale(2, 1);
+    color: $gray;
   }
 
   select {
-    width: 50px;
+    width: inherit;
     height: 2.4rem;
+    height: 80px;
     border: none;
     border-radius: 0;
     outline: unset;
     font-size: 2rem;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+
+    button + &:hover {
+      background-color: red;
+    }
   }
 
   ::-webkit-scrollbar {
@@ -38,9 +37,14 @@ $count: 25;
   }
 
   option {
-    width: 50px;
+    width: inherit;
     height: 100%;
     text-align: center;
+    scroll-snap-align: start;
+  }
+
+  &:hover .bg {
+    background-color: $white;
   }
 }
 
@@ -50,50 +54,53 @@ $count: 25;
   opacity: 1;
 }
 
-select > option:checked {
-  background-color: transparent;
-  color: $secondary;
+option::after {
+  display: block;
+  width: inherit;
+  height: 90px;
+  background-color: white;
+  color: $primary;
+  font-size: 20px;
+  font-size: 1.7rem;
+  line-height: 80px;
 }
 
 @for $index from 1 through 10 {
   option:nth-child(#{$index})::after {
-    content: "#{$index - 1}";
-    display: inline-block;
-    position: relative;
-    top: -4px;
-    left: 0;
-    width: 50px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    background-color: white;
-    color: $primary;
-    font-size: 20px;
+    content: '#{$index - 1}';
   }
 }
 
 @for $index from 11 through $count {
   option:nth-child(#{$index})::after {
-    content: "#{$index - 1}";
-    position: relative;
-    top: -4px;
-    left: -8px;
-    padding: 20px 22px;
-    padding-top: 10px;
-    padding-bottom: 20px;
-    background-color: white;
-    color: $primary;
-    font-size: 20px;
+    content: '#{$index - 1}';
   }
 }
 
 option.selected::after {
-  color: $secondary;
+  transition-property: font-size;
+  transition-duration: 0.2s;
+  font-size: 2rem;
 }
 
 .d-none {
   display: none;
 }
 
-option:last-child::after {
-  padding-bottom: 10px;
+button {
+  width: inherit;
+  border-radius: 0;
+}
+
+option:hover .wrapper {
+  box-shadow: 0 0 10px 100px #1882a8 inset;
+}
+
+.bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 100%;
 }
