@@ -1,5 +1,5 @@
-@import "./theme.scss";
-@import "./styles/colors";
+@import './theme.scss';
+@import './styles/colors';
 
 * {
   box-sizing: border-box;
@@ -17,11 +17,11 @@ body,
 body {
   margin: 0;
   background-color: $gray;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 *::after {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {
@@ -95,7 +95,7 @@ body {
   height: 50px !important;
 }
 
-.mat-step-header[aria-disabled="true"] .mat-step-text-label {
+.mat-step-header[aria-disabled='true'] .mat-step-text-label {
   color: $gray;
 }
 
