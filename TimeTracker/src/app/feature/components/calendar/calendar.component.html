@@ -2,9 +2,9 @@
   <div class="pagination-wrap">
     <div class="pagination">
       <button mat-button color="accent" (click)="changeMonth('minus')">
-        <mat-icon>arrow_back_ios</mat-icon>
+        <mat-icon class="back">arrow_forward_ios</mat-icon>
       </button>
-      {{ calendarService.date | date: 'MMMM/YYYY' }}
+      {{ calendarService.date | date: 'MMMM YYYY' }}
       <button mat-button color="accent" (click)="changeMonth('plus')">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
@@ -26,10 +26,12 @@
       animationName: move === 'plus' ? 'move-in-right' : 'move-in-left'
     }"
   >
-    <li
-      *ngFor="let day of calendarService.daysInMonth; let i = index"
-      [ngStyle]="{ 'grid-column': i ? '' : calendarService.firstDayOfWeek }"
+    <span
+      class="neighbour-month"
+      *ngFor="let day of calendarService.daysPreviousMonth"
+      >{{ day }}</span
     >
+    <li *ngFor="let day of calendarService.daysInMonth; let i = index">
       <app-day
         [dayOfMonth]="day"
         [strokeDashIn]="styles[day - 1].styleIn"
@@ -37,5 +39,10 @@
         (getDay)="calendarService.getDayInfo($event)"
       ></app-day>
     </li>
+    <span
+      class="neighbour-month"
+      *ngFor="let day of calendarService.daysNextMonth"
+      >{{ day }}</span
+    >
   </ul>
 </div>

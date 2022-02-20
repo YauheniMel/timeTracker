@@ -18,6 +18,10 @@ export class CalendarService {
 
   dayInfo!: InfoDay;
 
+  daysPreviousMonth: number[] = [];
+
+  daysNextMonth: number[] = [];
+
   constructor(public dialog: MatDialog, private database: DatabaseService) {}
 
   setDaysInMonth(): void {
@@ -31,6 +35,37 @@ export class CalendarService {
     const { month } = this.targetMonth;
     this.firstDayOfWeek =
       new Date(this.date.getFullYear(), month - 1, 1).getDay() + 1;
+
+    const lastDayOfWeek =
+      new Date(this.date.getFullYear(), month, 0).getDay() + 1;
+
+    this.buildDaysPreviousMonth(this.firstDayOfWeek - 1);
+
+    this.buildDaysNextMonth(lastDayOfWeek);
+  }
+
+  buildDaysPreviousMonth(count: number): void {
+    this.daysPreviousMonth = [];
+
+    const countDays = this.targetMonth.minus({ month: 1 }).daysInMonth;
+
+    for (let day; count > 0; count) {
+      --count;
+      day = countDays - count;
+
+      this.daysPreviousMonth.push(day);
+    }
+  }
+
+  buildDaysNextMonth(count: number): void {
+    this.daysNextMonth = [];
+
+    for (let day = 1; count < 7; count) {
+      this.daysNextMonth.push(day);
+
+      ++count;
+      ++day;
+    }
   }
 
   changeMonth(action: string) {
