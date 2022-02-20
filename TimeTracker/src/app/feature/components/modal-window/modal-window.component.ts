@@ -49,7 +49,6 @@ export class ModalWindowComponent implements OnInit {
 
     if (this.day.freeTime) {
       this.freeTimeFrom = this.day.freeTime?.filter((item) => item < 24);
-      this.freeTimeTo = this.day.freeTime?.map((item) => item + 1);
     }
 
     this.formGroup = this.formBuilder.group(
@@ -81,7 +80,7 @@ export class ModalWindowComponent implements OnInit {
     }
 
     this.snackBar.open('The task was created successfully', 'Close', {
-      duration: 1000,
+      duration: 1000, // early
       panelClass: ['succes'],
       verticalPosition: 'top',
     });
@@ -114,5 +113,17 @@ export class ModalWindowComponent implements OnInit {
         controlTo.setErrors(null);
       }
     };
+  }
+
+  getFreeTimeTo(choice: number): void {
+    this.freeTimeTo = [];
+    this.freeTimeFrom.forEach((item) => {
+      if (item >= choice) {
+        if (item + 1 - this.freeTimeTo[this.freeTimeTo.length - 1] > 1) {
+          return;
+        }
+        this.freeTimeTo.push(item + 1);
+      }
+    });
   }
 }

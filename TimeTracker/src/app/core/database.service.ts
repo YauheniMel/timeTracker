@@ -37,7 +37,7 @@ export class DatabaseService {
           info.freeTime!.splice(
             formData.value.fromTimeCtrl,
             formData.value.toTimeCtrl - formData.value.fromTimeCtrl
-          );
+          ); // need set null if dasn't time
 
           const initData = createInitData(
             info.year, // too match parameters
@@ -67,7 +67,7 @@ export class DatabaseService {
           const from = freeTime.indexOf(formData.value.fromTimeCtrl);
           const to = freeTime.indexOf(formData.value.toTimeCtrl);
 
-          freeTime.splice(from, to - from);
+          freeTime.splice(from, to - from); // need set null if dasn't time
 
           const newToDos = toDos.concat({
             from: formData.value.fromTimeCtrl,
