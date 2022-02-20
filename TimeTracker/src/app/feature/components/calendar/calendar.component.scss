@@ -85,3 +85,12 @@ ul {
     left: 0;
   }
 }
+
+.neighbour-month {
+  display: block;
+  height: inherit;
+  color: $gray;
+  font-size: 1.2rem;
+  line-height: 60px;
+  text-align: center;
+}
