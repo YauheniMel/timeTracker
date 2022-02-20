@@ -53,12 +53,20 @@ body {
   background-color: $secondary;
 }
 
+// .mat-button-wrapper {
+//   font-size: 1.5rem;
+// }
+
 // modal window
 // try minimise !important
 .mat-dialog-container {
   width: 500px !important;
   padding: 0 !important;
   color: $primary;
+
+  .mat-tab-label-content {
+    font-size: 1rem;
+  }
 
   .cdk-focused {
     color: $primary;
@@ -111,5 +119,22 @@ body {
   .mat-form-field-appearance-fill,
   .mat-form-field-flex {
     margin-top: 0.5rem;
+  }
+}
+
+// adaptive
+@media (max-width: 700px) {
+  html {
+    font-size: 12px;
+  }
+
+  .mat-dialog-container {
+    width: 400px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 10px;
   }
 }

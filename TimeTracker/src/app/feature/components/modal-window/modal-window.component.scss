@@ -28,7 +28,7 @@ textarea {
       align-self: center;
     }
 
-    mat-error {
+    .mat-error {
       position: absolute;
       right: 1.4rem;
       bottom: 0.4rem;
@@ -71,5 +71,51 @@ textarea {
 
   button {
     margin: 0 0.2rem;
+  }
+}
+
+button {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 700px) {
+  .step-time {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 230px;
+    margin: 0 auto;
+  }
+
+  .select-section {
+    justify-content: space-between;
+    max-width: 80%;
+  }
+
+  .select-to,
+  .select-from {
+    flex-basis: 50%;
+    justify-content: flex-end;
+    padding-right: 0;
+
+    .mat-error {
+      bottom: -12px !important;
+    }
+  }
+
+  .select-from {
+    padding-left: 2rem;
+  }
+
+  .select-to {
+    padding-right: 2rem;
+  }
+
+  .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%d;
+    padding: 1rem;
   }
 }

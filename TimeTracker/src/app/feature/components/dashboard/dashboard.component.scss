@@ -17,12 +17,21 @@
   }
 }
 
+.example-app-name {
+  font-size: 1.6rem;
+}
+
 .logout-wrap {
   display: flex;
   gap: 1rem;
 
+  h3 {
+    font-size: 1.2rem;
+  }
+
   button {
     background-color: $secondary;
+    font-size: 1.2rem;
 
     &:focus-visible {
       outline: 2px solid $white;

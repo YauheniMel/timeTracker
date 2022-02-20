@@ -50,3 +50,14 @@ svg {
     opacity: 1;
   }
 }
+
+@media (max-width: 700px) {
+  button {
+    width: 40px;
+    height: 40px;
+  }
+
+  svg {
+    display: none;
+  }
+}
