@@ -78,7 +78,8 @@ body {
     padding: 0 !important;
   }
 
-  .mat-horizontal-content-container .mat-horizontal-stepper-content:first-child {
+  .mat-horizontal-content-container
+    .mat-horizontal-stepper-content:first-child {
     display: flex;
     flex-direction: column;
 
@@ -111,6 +112,4 @@ body {
   .mat-form-field-flex {
     margin-top: 0.5rem;
   }
-
 }
-

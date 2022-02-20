@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" (mouseleave)="makeChoice()">
   <button
     mat-button
     type="button"
@@ -13,7 +13,6 @@
       *ngFor="let time of allTime"
       [selected]="choice === time"
       [value]="time"
-      (mouseleave)="makeChoice()"
       [class.d-none]="!freeTime?.includes(time)"
     ></option>
   </select>

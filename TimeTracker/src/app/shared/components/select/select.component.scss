@@ -24,7 +24,6 @@ $count: 25;
     outline: unset;
     font-size: 2rem;
     scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
 
     button + &:hover {
       background-color: red;
@@ -60,8 +59,7 @@ option::after {
   height: 90px;
   background-color: white;
   color: $primary;
-  font-size: 20px;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 80px;
 }
 
@@ -78,9 +76,7 @@ option::after {
 }
 
 option.selected::after {
-  transition-property: font-size;
-  transition-duration: 0.2s;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .d-none {
@@ -90,10 +86,6 @@ option.selected::after {
 button {
   width: inherit;
   border-radius: 0;
-}
-
-option:hover .wrapper {
-  box-shadow: 0 0 10px 100px #1882a8 inset;
 }
 
 .bg {

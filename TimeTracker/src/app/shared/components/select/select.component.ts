@@ -2,12 +2,12 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   Input,
-  OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
@@ -17,11 +17,11 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: SelectComponent,
+      useExisting: forwardRef(() => SelectComponent),
     },
   ],
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent implements ControlValueAccessor {
   @Input() freeTime!: number[] | null;
 
   @Input() type!: 'from' | 'to';
@@ -36,33 +36,40 @@ export class SelectComponent implements OnInit {
 
   touched = false;
 
-  onTouched = () => {};
+  private onTouched = () => {};
 
-  onChange = (time: number) => {};
+  private onChange = (time: number) => {};
 
   constructor() {}
 
-  ngOnInit(): void {}
-
   makeChoice() {
-    // need fix choice's time
-    this.markAsTouched();
+    // need improve. Many time
     if (this.type === 'from') {
       setTimeout(() => {
-        this.choice = this.select.nativeElement.scrollTop / 80;
-        this.onChange(this.choice);
-        this.selected.emit(this.choice);
-      }, 1000);
+        this.markAsTouched();
+        this.choice = Math.round(this.select.nativeElement.scrollTop / 80);
+        this.selected.emit(this.freeTime![this.choice]);
+        this.select.nativeElement.scrollTop = this.choice! * 80;
+        this.select.nativeElement.value = this.freeTime![this.choice];
+        this.writeValue(+this.select.nativeElement.value);
+        this.choice = this.freeTime![this.choice];
+      }, 400);
     } else if (this.type === 'to') {
       setTimeout(() => {
-        this.choice = this.select.nativeElement.scrollTop / 80 + 1;
-        this.onChange(this.choice);
-      }, 1000);
+        this.choice = Math.round(
+          this.select.nativeElement.scrollTop / 80 + this.freeTime![0]
+        );
+        this.select.nativeElement.scrollTop =
+          (this.choice! - this.freeTime![0]) * 80;
+        this.select.nativeElement.value =
+          this.freeTime![this.choice - this.freeTime![0]];
+        this.writeValue(+this.select.nativeElement.value);
+      }, 400);
     }
   }
 
   writeValue(time: number) {
-    this.choice = time;
+    this.onChange(time);
   }
 
   registerOnChange(onChange: any) {
@@ -84,10 +91,8 @@ export class SelectComponent implements OnInit {
     if (!this.choice) this.choice = 0;
     if (action === 'plus') {
       this.select.nativeElement.scrollTop -= 80;
-      this.makeChoice();
     } else if (action === 'minus') {
       this.select.nativeElement.scrollTop += 80;
-      this.makeChoice();
     }
   }
 }
