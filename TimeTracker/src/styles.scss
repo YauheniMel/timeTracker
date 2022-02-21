@@ -30,11 +30,13 @@ body {
 }
 
 .warning {
+  font-size: 1.2rem;
   background-color: $white;
   color: $warn;
 }
 
 .succes {
+  font-size: 1.2rem;
   background-color: $white;
   color: $primary;
 }
@@ -53,12 +55,33 @@ body {
   background-color: $secondary;
 }
 
+button {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  height: 2.5rem;
+}
+
+.mat-badge-content {
+  top: -2px !important;
+  right: -2px !important;
+  background: $secondary;
+}
+
 // modal window
 // try minimise !important
 .mat-dialog-container {
   width: 500px !important;
   padding: 0 !important;
   color: $primary;
+
+  .mat-tab-label {
+    height: 3rem;
+  }
+
+  .mat-tab-label-content {
+    font-size: 1rem;
+  }
 
   .cdk-focused {
     color: $primary;
@@ -92,7 +115,7 @@ body {
   .mat-step-header {
     justify-content: center;
     width: 100%;
-    height: 50px !important;
+    height: 3rem !important;
   }
 
   .mat-step-header[aria-disabled='true'] .mat-step-text-label {
@@ -111,5 +134,26 @@ body {
   .mat-form-field-appearance-fill,
   .mat-form-field-flex {
     margin-top: 0.5rem;
+  }
+}
+
+// adaptive
+@media (max-width: 700px) {
+  html {
+    font-size: 12px;
+  }
+
+  .mat-dialog-container {
+    width: 400px !important;
+  }
+
+  .mat-tab-label {
+    width: 50%;
+  }
+}
+
+@media (max-width: 360px) {
+  html {
+    font-size: 10px;
   }
 }

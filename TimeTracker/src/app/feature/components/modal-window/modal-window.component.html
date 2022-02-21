@@ -62,7 +62,7 @@
                     [type]="'from'"
                     (selected)="getFreeTimeTo($event)"
                   ></app-select>
-                  <!-- type: string -->
+                  <!-- type: string!!!! -->
                   <mat-error
                     *ngIf="formGroup.controls['fromTimeCtrl'].untouched"
                   >
@@ -76,7 +76,7 @@
                     [freeTime]="freeTimeTo"
                     [type]="'to'"
                   ></app-select>
-                  <!-- type: string -->
+                  <!-- type: string!!!! -->
                   <mat-error *ngIf="formGroup.controls['toTimeCtrl'].invalid">
                     <strong>Required</strong>
                   </mat-error>

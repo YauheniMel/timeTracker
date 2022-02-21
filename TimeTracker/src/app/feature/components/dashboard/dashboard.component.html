@@ -7,7 +7,7 @@
       <h1 class="example-app-name">TimeTracker</h1>
     </div>
     <div class="logout-wrap">
-      <h3 *ngIf="user">{{ user.firstName }} {{ user.lastName }}</h3>
+      <h3 *ngIf="user">{{ user.firstName }}</h3>
       <button mat-flat-button (click)="logout()">Logout</button>
     </div>
   </mat-toolbar>
