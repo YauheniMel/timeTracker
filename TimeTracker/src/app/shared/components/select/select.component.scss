@@ -17,17 +17,12 @@ $count: 25;
 
   select {
     width: inherit;
-    height: 2.4rem;
     height: 80px;
     border: none;
     border-radius: 0;
     outline: unset;
     font-size: 2rem;
     scroll-snap-type: y mandatory;
-
-    button + &:hover {
-      background-color: red;
-    }
   }
 
   ::-webkit-scrollbar {
@@ -56,7 +51,7 @@ $count: 25;
 option::after {
   display: block;
   width: inherit;
-  height: 90px;
+  height: 80px;
   background-color: white;
   color: $primary;
   font-size: 1.5rem;

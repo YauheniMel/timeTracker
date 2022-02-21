@@ -28,8 +28,7 @@
   form {
     position: relative;
     top: 50%;
-    max-width: 60%;
-    margin: auto;
+    width: inherit;
     transform: translateY(-50%);
 
     button {
@@ -40,6 +39,8 @@
   fieldset {
     display: flex;
     flex-direction: column;
+    width: 60%;
+    margin: auto;
     border: none;
   }
 
@@ -60,6 +61,46 @@
 
     button:focus-visible {
       outline: 2px solid $secondary;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .info,
+    .form-wrap {
+      width: 100%;
+    }
+
+    .form-wrap {
+      flex-basis: 90%;
+    }
+
+    form {
+      width: inherit;
+      margin: auto;
+      padding: 0 2rem;
+    }
+
+    fieldset {
+      max-width: 300px;
+      margin: auto;
+    }
+
+    .info {
+      flex-basis: 10%;
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    fieldset {
+      width: 80%;
+      margin: auto;
     }
   }
 }

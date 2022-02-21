@@ -1,4 +1,4 @@
-<div>
+<div class="large-buttons">
   <button (click)="onClick()" mat-icon-button color="primary">
     {{ dayOfMonth }}
     <svg
@@ -29,5 +29,17 @@
         cy="50"
       />
     </svg>
+  </button>
+</div>
+<div class="small-buttons">
+  <button
+    matBadge="7"
+    matBadgeSize="small"
+    matBadgeColor="primary"
+    (click)="onClick()"
+    mat-icon-button
+    color="primary"
+  >
+    {{ dayOfMonth }}
   </button>
 </div>
