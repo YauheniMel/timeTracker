@@ -1,33 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-
-import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { NgModule } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { DayComponent } from './components/day/day.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
-  declarations: [DayComponent],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatExpansionModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatBadgeModule,
-  ],
-  exports: [DayComponent],
+  declarations: [SelectComponent, DayComponent],
+  imports: [CommonModule, MatBadgeModule, MatIconModule, MatButtonModule],
+  exports: [SelectComponent, DayComponent],
 })
 export class SharedModule {}
