@@ -41,7 +41,7 @@ export class ModalWindowComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: InfoDay,
     private database: DatabaseService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class ModalWindowComponent implements OnInit {
         fromTimeCtrl: ['', Validators.required],
         toTimeCtrl: ['', Validators.required],
       },
-      { validator: this.selectsValidator('fromTimeCtrl', 'toTimeCtrl') },
+      { validator: this.selectsValidator('fromTimeCtrl', 'toTimeCtrl') }
     );
   }
 
@@ -99,9 +99,11 @@ export class ModalWindowComponent implements OnInit {
       }
 
       const indexFrom = (this.day.freeTime as number[]).indexOf(
-        controlFrom.value,
+        controlFrom.value
       );
-      const indexTo = (this.day.freeTime as number[]).indexOf(controlTo.value - 1);
+      const indexTo = (this.day.freeTime as number[]).indexOf(
+        controlTo.value - 1
+      );
 
       const interval = this.day.freeTime!.slice(indexFrom, indexTo + 1);
 

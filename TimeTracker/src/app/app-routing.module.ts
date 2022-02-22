@@ -21,7 +21,9 @@ const routes: Routes = [
   {
     path: 'timetracker',
     loadChildren: () =>
-      import('./feature/feature.module').then((m) => m.FeatureModule),
+      import('./feature/components/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      ),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
