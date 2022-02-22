@@ -36,7 +36,7 @@ export class DatabaseService {
         if (!res.length) {
           info.freeTime!.splice(
             formData.value.fromTimeCtrl,
-            formData.value.toTimeCtrl - formData.value.fromTimeCtrl
+            formData.value.toTimeCtrl - formData.value.fromTimeCtrl,
           ); // need set null if dasn't time
 
           const initData = createInitData(
@@ -46,12 +46,13 @@ export class DatabaseService {
             info.freeTime,
             formData.value.fromTimeCtrl,
             formData.value.toTimeCtrl,
-            formData.value.discriptionCtrl
+            formData.value.discriptionCtrl,
           );
 
           this.db
             .list(`users/${user!.uid}/listOfYears`)
             .valueChanges()
+            .pipe(take(1))
             .subscribe(() => {
               this.db
                 .list('users')
@@ -59,7 +60,7 @@ export class DatabaseService {
                   `${user!.uid}/listOfYears/${info.year}/${info.month}/${
                     info.day
                   }`,
-                  initData
+                  initData,
                 );
             });
         } else {
@@ -86,12 +87,13 @@ export class DatabaseService {
           this.db
             .list(`users/${user!.uid}/listOfYears`)
             .valueChanges()
+            .pipe(take(1))
             .subscribe(() => {
               this.db
                 .list('users')
                 .update(
                   `${user!.uid}/listOfYears/${year}/${month}/${day}`,
-                  data
+                  data,
                 );
             });
         }
@@ -107,7 +109,7 @@ export class DatabaseService {
   getDbByParameter(
     year: number | null = null,
     month: number | null = null,
-    day: number | null = null
+    day: number | null = null,
   ): Observable<any> {
     const user = getAuth().currentUser;
 
@@ -151,7 +153,7 @@ function createInitData(
   freeTime: number[] | null,
   from: number,
   to: number,
-  discription: string
+  discription: string,
 ) {
   const init = {
     month,
