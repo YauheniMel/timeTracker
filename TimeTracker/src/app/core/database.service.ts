@@ -66,10 +66,8 @@ export class DatabaseService {
         } else {
           const [day, freeTime, month, toDos, year] = res;
           const from = freeTime.indexOf(formData.value.fromTimeCtrl);
-          const to = freeTime.indexOf(formData.value.toTimeCtrl);
-
-          freeTime.splice(from, to - from); // need set null if dasn't time
-
+          const to = freeTime.indexOf(formData.value.toTimeCtrl - 1);
+          freeTime.splice(from, to - from + 1); // need set null if dasn't time
           const newToDos = toDos.concat({
             from: formData.value.fromTimeCtrl,
             to: formData.value.toTimeCtrl,
