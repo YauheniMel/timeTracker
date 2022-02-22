@@ -45,7 +45,7 @@ export class AuthService {
           });
         }); // need check only errors
       })
-      .then(() => this.router.navigate(['']))
+      .then(() => this.router.navigate(['timetracker']))
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
           panelClass: ['warning'],

@@ -14,16 +14,13 @@ interface User {
 export class DashboardComponent implements OnInit {
   user!: User;
 
-  time!: Date;
-
   constructor(
     private dashboardService: DashboardService,
     private db: DatabaseService
   ) {}
 
   ngOnInit(): void {
-    this.setTime();
-    this.db.getDbByParameter().subscribe((response) => {
+    this.db.getDbProfile().subscribe((response) => {
       this.user = {
         firstName: response[0],
         lastName: response[1],
@@ -33,11 +30,5 @@ export class DashboardComponent implements OnInit {
 
   logout(): void {
     this.dashboardService.logout();
-  }
-
-  setTime() {
-    setInterval(() => {
-      this.time = new Date();
-    }, 1000);
   }
 }

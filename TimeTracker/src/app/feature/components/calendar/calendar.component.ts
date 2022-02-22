@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { debugErrorMap } from 'firebase/auth';
 import { DatabaseService } from 'src/app/core/database.service';
-
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 
 import { CalendarService } from '../services/calendar.service';
-import { InfoMonth } from './info-month.interface';
 
 @Component({
   selector: 'app-calendar',
@@ -13,31 +10,39 @@ import { InfoMonth } from './info-month.interface';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit {
-  infoMonth!: InfoMonth | { month: number; year: number; listOfDays: null };
-
-  dayInfo!: InfoDay;
-
   constructor(
-    private database: DatabaseService,
-    public calendarService: CalendarService
+    public calendarService: CalendarService,
+    private database: DatabaseService
   ) {}
+
+  move!: string;
+
+  show: boolean = true;
+
+  infoMonth!: InfoDay[];
+
+  toDosInfo: Array<{ day: number; toDosCount: number | null }> = [];
+
+  styles!: { day: number; styleIn: string; styleOut: string }[];
+
+  styleCircleIn =
+    '154,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0';
+
+  styleCircleOut =
+    '188,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0';
 
   ngOnInit(): void {
     this.calendarService.setDaysInMonth();
     this.calendarService.setFirstDay();
 
-    this.database
-      .getDbByParameter(
-        this.calendarService.targetMonth.year,
-        this.calendarService.targetMonth.month
-      )
-      .subscribe((res) => {
-        [this.infoMonth] = res;
-      });
-  }
-
-  changeMonth(action: string): void {
-    this.calendarService.changeMonth(action);
+    this.styles = Array.apply(
+      null,
+      Array(this.calendarService.daysInMonth.length)
+    ).map((_, index) => ({
+      day: ++index,
+      styleIn: this.styleCircleIn,
+      styleOut: this.styleCircleOut,
+    }));
 
     this.database
       .getDbByParameter(
@@ -46,40 +51,101 @@ export class CalendarComponent implements OnInit {
       )
       .subscribe((res) => {
         this.infoMonth = res;
+        this.setStyle();
+        this.countToDos();
       });
   }
 
-  getDayInfo(day: number): void {
+  changeMonth(action: string): void {
+    this.calendarService.changeMonth(action);
+    this.move = action; // for animation
+    this.show = false;
+
+    this.styles = Array.apply(
+      null,
+      Array(this.calendarService.daysInMonth.length)
+    ).map((_, index) => ({
+      day: ++index,
+      styleIn: this.styleCircleIn,
+      styleOut: this.styleCircleOut,
+    }));
+
     this.database
       .getDbByParameter(
         this.calendarService.targetMonth.year,
-        this.calendarService.targetMonth.month,
-        day
+        this.calendarService.targetMonth.month
       )
       .subscribe((res) => {
-        if (!res.length) {
-          this.dayInfo = this.getInitDayInfo(day);
-        } else {
-          this.dayInfo = {
-            day: res[0],
-            freeTime: res[1],
-            month: res[2],
-            year: res[4],
-            toDos: res[3],
-          };
-        }
-
-        this.calendarService.openDialog(this.dayInfo);
+        this.infoMonth = res;
+        this.show = true;
+        this.setStyle();
+        this.countToDos();
       });
   }
 
-  getInitDayInfo(day: number) {
-    return {
-      day,
-      freeTime: Array.from(Array(24).keys()),
-      month: this.infoMonth.month,
-      year: this.infoMonth.year,
-      toDos: null,
-    };
+  setStyle() {
+    if (this.infoMonth.length) {
+      this.infoMonth.forEach((item) => {
+        const style = {
+          day: item.day,
+          styleIn: '',
+          styleOut: '',
+        };
+
+        if (item.freeTime) {
+          const arrIn: RegExpMatchArray = this.styleCircleIn.match(
+            /10.5,0/g
+          ) as RegExpMatchArray;
+          const arrOut: RegExpMatchArray = this.styleCircleOut.match(
+            /13.1,0/g
+          ) as RegExpMatchArray;
+
+          const allTime = Array.from(Array(24).keys());
+          const busyTime = allTime.reduce((acc, elem) => {
+            if (!item.freeTime!.includes(elem)) {
+              (acc as number[]).push(elem);
+            }
+            return acc;
+          }, []);
+
+          busyTime.forEach((time) => {
+            if (time < 12) {
+              arrIn[time] = '0,10.5';
+            } else {
+              arrOut[time - 12] = '0,13.1';
+            }
+          });
+
+          style.styleIn = `154,${arrIn.join()}`;
+          style.styleOut = `188,${arrOut.join()}`;
+        } else {
+          style.styleIn = '280';
+
+          style.styleOut = '345';
+        }
+
+        this.styles.splice(--item.day, 1, style);
+      });
+    }
+  }
+
+  countToDos() {
+    this.toDosInfo = [];
+    const daysInMonth = this.calendarService.daysInMonth.length;
+
+    for (let i = 0; i < daysInMonth; i += 1) {
+      const [toDo] = this.infoMonth.filter((item) => item.day === i);
+      if (toDo) {
+        this.toDosInfo.push({
+          day: toDo.day + 1,
+          toDosCount: toDo.toDos!.length,
+        });
+      } else {
+        this.toDosInfo.push({
+          day: i + 1,
+          toDosCount: null,
+        });
+      }
+    }
   }
 }

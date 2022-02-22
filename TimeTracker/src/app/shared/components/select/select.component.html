@@ -1,14 +1,13 @@
-<div class="wrapper">
-  <mat-icon>keyboard_arrow_up</mat-icon>
-  <span></span>
-  <select
-    (change)="makeChoice(+select.value)"
-    id="example"
-    class="appearance"
-    #select
-    size="2"
-    required
+<div class="wrapper" (mouseleave)="makeChoice()" (touchend)="makeChoice()">
+  <button
+    mat-button
+    type="button"
+    color="primary"
+    (click)="changeSelect('plus')"
   >
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
+  <select id="example" class="appearance" #select size="2" required>
     <option
       [ngClass]="choice === time ? 'selected' : ''"
       *ngFor="let time of allTime"
@@ -17,5 +16,13 @@
       [class.d-none]="!freeTime?.includes(time)"
     ></option>
   </select>
-  <mat-icon>keyboard_arrow_down</mat-icon>
+  <button
+    mat-button
+    type="button"
+    color="primary"
+    (click)="changeSelect('minus')"
+  >
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+  <div class="bg"></div>
 </div>

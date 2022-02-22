@@ -2,24 +2,74 @@
 
 div {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
 button {
-  height: 60px;
+  position: relative;
+  z-index: 2;
   width: 60px;
+  height: 60px;
   border: none;
   font-size: 1.5rem;
+
+  &:hover {
+    transition-property: box-shadow;
+    transition-duration: 0.4s;
+    box-shadow: inset 0 0 7px 1px $gray;
+  }
 }
 
-// .even {
-//   color: $white;
-//   background-color: $gray;
-// }
+.circle-out {
+  stroke-width: 2px;
+  stroke-dashoffset: 188;
+  stroke: $secondary;
+  fill: none;
+}
 
-// .odd {
-//   color: $primary;
-//   background-color: $white;
-// }
+.circle-in {
+  stroke-width: 2px;
+  stroke-dashoffset: 154;
+  stroke: $primary;
+  fill: none;
+}
+
+svg {
+  position: absolute;
+  z-index: -1;
+  top: -20px;
+  left: -20px;
+  transform: rotate(-90deg);
+  opacity: 0.7;
+  pointer-events: none;
+
+  &:hover {
+    transition-duration: 0.4s;
+    opacity: 1;
+  }
+}
+
+.small-buttons {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .large-buttons {
+    display: none;
+  }
+
+  .small-buttons {
+    display: block;
+  }
+
+  svg {
+    display: none;
+  }
+}

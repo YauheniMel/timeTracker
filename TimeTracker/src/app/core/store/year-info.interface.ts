@@ -5,7 +5,7 @@ export interface YearInfo {
     year: number;
     listOfDays: {
       day: number;
-      freeTime: number[] | [];
+      freeTime: number[] | null;
       toDos:
         | {
             from: number;
