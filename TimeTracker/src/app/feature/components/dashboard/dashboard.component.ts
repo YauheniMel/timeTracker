@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { DatabaseService } from 'src/app/core/database.service';
-import { DashboardService } from '../services/dashboard.service';
 
 interface User {
   firstName: string;
@@ -15,8 +15,8 @@ export class DashboardComponent implements OnInit {
   user!: User;
 
   constructor(
-    private dashboardService: DashboardService,
-    private db: DatabaseService
+    private db: DatabaseService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +29,6 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
-    this.dashboardService.logout();
+    this.authService.logout();
   }
 }

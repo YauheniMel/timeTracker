@@ -24,10 +24,12 @@ export class AuthService {
     private angularFireAuth: AngularFireAuth,
     private router: Router,
     private db: AngularFirestore,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
   ) {}
 
-  registration({ email, password, firstName, lastName }: RegisterData): void {
+  registration({
+    email, password, firstName, lastName,
+  }: RegisterData): void {
     this.angularFireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -82,5 +84,12 @@ export class AuthService {
         lastName,
       });
     }
+  }
+
+  logout(): void {
+    this.angularFireAuth
+      .signOut()
+      .then(() => this.router.navigate(['']))
+      .catch((err) => alert(err.message));
   }
 }
