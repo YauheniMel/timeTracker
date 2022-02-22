@@ -14,6 +14,8 @@ export class DayComponent implements OnInit {
 
   @Output() getDay: EventEmitter<number> = new EventEmitter();
 
+  @Input() toDos!: { day: number; toDosCount: number | null };
+
   constructor() {}
 
   ngOnInit(): void {}

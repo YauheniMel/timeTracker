@@ -33,6 +33,7 @@
     >
     <li *ngFor="let day of calendarService.daysInMonth; let i = index">
       <app-day
+        [toDos]="toDosInfo[i]"
         [dayOfMonth]="day"
         [strokeDashIn]="styles[day - 1].styleIn"
         [strokeDashOut]="styles[day - 1].styleOut"

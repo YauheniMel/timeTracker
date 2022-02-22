@@ -33,7 +33,7 @@
 </div>
 <div class="small-buttons">
   <button
-    matBadge="7"
+    [matBadge]="toDos?.toDosCount"
     matBadgeSize="small"
     matBadgeColor="primary"
     (click)="onClick()"

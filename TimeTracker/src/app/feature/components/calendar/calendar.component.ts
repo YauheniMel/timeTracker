@@ -21,6 +21,8 @@ export class CalendarComponent implements OnInit {
 
   infoMonth!: InfoDay[];
 
+  toDosInfo: Array<{ day: number; toDosCount: number | null }> = [];
+
   styles!: { day: number; styleIn: string; styleOut: string }[];
 
   styleCircleIn =
@@ -50,6 +52,7 @@ export class CalendarComponent implements OnInit {
       .subscribe((res) => {
         this.infoMonth = res;
         this.setStyle();
+        this.countToDos();
       });
   }
 
@@ -76,6 +79,7 @@ export class CalendarComponent implements OnInit {
         this.infoMonth = res;
         this.show = true;
         this.setStyle();
+        this.countToDos();
       });
   }
 
@@ -122,6 +126,26 @@ export class CalendarComponent implements OnInit {
 
         this.styles.splice(--item.day, 1, style);
       });
+    }
+  }
+
+  countToDos() {
+    this.toDosInfo = [];
+    const daysInMonth = this.calendarService.daysInMonth.length;
+
+    for (let i = 0; i < daysInMonth; i += 1) {
+      const [toDo] = this.infoMonth.filter((item) => item.day === i);
+      if (toDo) {
+        this.toDosInfo.push({
+          day: toDo.day + 1,
+          toDosCount: toDo.toDos!.length,
+        });
+      } else {
+        this.toDosInfo.push({
+          day: i + 1,
+          toDosCount: null,
+        });
+      }
     }
   }
 }
