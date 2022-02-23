@@ -46,6 +46,7 @@ export class SelectComponent implements ControlValueAccessor {
     // need improve. Many time
     if (this.type === 'from') {
       setTimeout(() => {
+        // maybe can use promise/observable
         this.markAsTouched();
         this.choice = Math.round(this.select.nativeElement.scrollTop / 80);
         this.selected.emit(this.freeTime![this.choice]);
@@ -56,6 +57,7 @@ export class SelectComponent implements ControlValueAccessor {
       }, 400);
     } else if (this.type === 'to') {
       setTimeout(() => {
+        // maybe can use promise/observable
         this.choice = Math.round(
           this.select.nativeElement.scrollTop / 80 + this.freeTime![0]
         );

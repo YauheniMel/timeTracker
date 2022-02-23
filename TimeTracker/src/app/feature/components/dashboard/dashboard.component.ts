@@ -1,34 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { DatabaseService } from 'src/app/core/database.service';
-import { DashboardService } from '../services/dashboard.service';
+import { User } from './user.interface';
 
-interface User {
-  firstName: string;
-  lastName: string;
-}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   user!: User;
 
+  subscribe!: any;
+
   constructor(
-    private dashboardService: DashboardService,
-    private db: DatabaseService
+    private database: DatabaseService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
-    this.db.getDbProfile().subscribe((response) => {
-      this.user = {
-        firstName: response[0],
-        lastName: response[1],
-      };
+    this.subscribe = this.database.getDbProfile().subscribe((user) => {
+      this.user = user;
     });
   }
 
   logout(): void {
-    this.dashboardService.logout();
+    this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    this.subscribe.unsubscribe();
   }
 }

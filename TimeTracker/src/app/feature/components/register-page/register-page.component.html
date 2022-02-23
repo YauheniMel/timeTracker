@@ -86,6 +86,7 @@
             name="password"
             formControlName="password"
             placeholder="Example_123"
+            autocomplete="off"
           />
           <mat-error
             *ngIf="
@@ -113,6 +114,7 @@
             name="confirmPassword"
             formControlName="confirmPassword"
             placeholder="Example_123"
+            autocomplete="off"
           />
           <mat-error *ngIf="registerForm.controls['confirmPassword'].pristine">
             Confirm password is <strong>required</strong>
