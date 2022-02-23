@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { DatabaseService } from 'src/app/core/database.service';
+import { User } from './user.interface';
 
-interface User {
-  firstName: string;
-  lastName: string;
-}
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,17 +11,11 @@ interface User {
 export class DashboardComponent implements OnInit {
   user!: User;
 
-  constructor(
-    private db: DatabaseService,
-    private authService: AuthService,
-  ) {}
+  constructor(private database: DatabaseService, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.db.getDbProfile().subscribe((response) => {
-      this.user = {
-        firstName: response[0],
-        lastName: response[1],
-      };
+    this.database.getDbProfile().subscribe((user) => {
+      this.user = user;
     });
   }
 
