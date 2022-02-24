@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
+import { DashboardModule } from './feature/components/dashboard/dashboard.module';
+import { ModalWindowModule } from './feature/components/modal-window/modal-window.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +24,8 @@ import { MaterialModule } from './material.module';
     AngularFirestoreModule,
     CoreModule,
     MaterialModule,
+    ModalWindowModule,
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

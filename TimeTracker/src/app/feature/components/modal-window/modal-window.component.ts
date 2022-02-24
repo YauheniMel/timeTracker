@@ -101,9 +101,11 @@ export class ModalWindowComponent implements OnInit {
       const indexFrom = (this.day.freeTime as number[]).indexOf(
         controlFrom.value
       );
-      const indexTo = (this.day.freeTime as number[]).indexOf(controlTo.value);
+      const indexTo = (this.day.freeTime as number[]).indexOf(
+        controlTo.value - 1
+      );
 
-      const interval = this.day.freeTime!.slice(indexFrom, indexTo);
+      const interval = this.day.freeTime!.slice(indexFrom, indexTo + 1);
 
       if (controlFrom.value >= controlTo.value) {
         controlTo.setErrors({ selectsValidator: true });
