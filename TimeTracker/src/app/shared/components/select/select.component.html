@@ -1,4 +1,4 @@
-<div class="wrapper" (mouseleave)="makeChoice()" (touchend)="makeChoice()">
+<div class="wrapper">
   <button
     mat-button
     type="button"
@@ -14,6 +14,7 @@
       [selected]="choice === time"
       [value]="time"
       [class.d-none]="!freeTime?.includes(time)"
+      (click)="onClick(time)"
     ></option>
   </select>
   <button
