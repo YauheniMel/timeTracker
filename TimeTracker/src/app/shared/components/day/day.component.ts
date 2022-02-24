@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-day',
   templateUrl: './day.component.html',
   styleUrls: ['./day.component.scss'],
 })
-export class DayComponent implements OnInit {
+export class DayComponent {
   @Input() dayOfMonth!: number;
 
   @Input() strokeDashIn!: string;
@@ -15,10 +15,6 @@ export class DayComponent implements OnInit {
   @Output() getDay: EventEmitter<number> = new EventEmitter();
 
   @Input() toDos!: { day: number; toDosCount: number | null };
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   onClick() {
     this.getDay.emit(this.dayOfMonth);

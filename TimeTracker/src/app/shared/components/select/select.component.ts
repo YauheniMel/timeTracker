@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,6 +9,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { debounceTime, fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-select',
@@ -21,7 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, AfterViewInit {
   @Input() freeTime!: number[] | null;
 
   @Input() type!: 'from' | 'to';
@@ -32,7 +34,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   @Output() selected = new EventEmitter<number>();
 
-  allTime: number[] = Array.from(Array(25).keys()); // need pass it
+  allTime: number[] = Array.from(Array(25).keys());
 
   touched = false;
 
@@ -40,34 +42,16 @@ export class SelectComponent implements ControlValueAccessor {
 
   private onChange = (time: number) => {};
 
-  constructor() {}
+  ngAfterViewInit(): void {
+    const scroll = fromEvent(this.select.nativeElement, 'scroll');
 
-  makeChoice() {
-    // need improve. Many time
-    if (this.type === 'from') {
-      setTimeout(() => {
-        // maybe can use promise/observable
-        this.markAsTouched();
-        this.choice = Math.round(this.select.nativeElement.scrollTop / 80);
-        this.selected.emit(this.freeTime![this.choice]);
-        this.select.nativeElement.scrollTop = this.choice! * 80;
-        this.select.nativeElement.value = this.freeTime![this.choice];
-        this.writeValue(+this.select.nativeElement.value);
-        this.choice = this.freeTime![this.choice];
-      }, 400);
-    } else if (this.type === 'to') {
-      setTimeout(() => {
-        // maybe can use promise/observable
-        this.choice = Math.round(
-          this.select.nativeElement.scrollTop / 80 + this.freeTime![0]
-        );
-        this.select.nativeElement.scrollTop =
-          (this.choice! - this.freeTime![0]) * 80;
-        this.select.nativeElement.value =
-          this.freeTime![this.choice - this.freeTime![0]];
-        this.writeValue(+this.select.nativeElement.value);
-      }, 400);
-    }
+    scroll.pipe(debounceTime(100)).subscribe(() => {
+      this.markAsTouched();
+      this.choice = this.freeTime![this.select.nativeElement.scrollTop / 80];
+      if (this.type === 'from') this.selected.emit(this.choice);
+
+      this.writeValue(this.choice);
+    });
   }
 
   writeValue(time: number) {
@@ -87,6 +71,16 @@ export class SelectComponent implements ControlValueAccessor {
       this.onTouched();
       this.touched = true;
     }
+  }
+
+  onClick(value: number) {
+    this.markAsTouched();
+
+    this.choice = value;
+
+    if (this.type === 'from') this.selected.emit(value);
+
+    this.writeValue(value);
   }
 
   changeSelect(action: 'plus' | 'minus'): void {
