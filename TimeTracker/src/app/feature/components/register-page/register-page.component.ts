@@ -19,7 +19,7 @@ export class RegisterPageComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class RegisterPageComponent implements OnInit {
         password: [null, [Validators.required, Validators.minLength(6)]],
         confirmPassword: [null, Validators.required],
       },
-      { validator: this.compareValidator('password', 'confirmPassword') },
+      { validator: this.compareValidator('password', 'confirmPassword') }
     );
   }
 
@@ -55,7 +55,7 @@ export class RegisterPageComponent implements OnInit {
 
   compareValidator(
     controlName: string,
-    confirmControlName: string,
+    confirmControlName: string
   ): ValidationErrors {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];

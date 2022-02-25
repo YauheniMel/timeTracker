@@ -7,7 +7,7 @@ export interface InfoDay {
     | {
         from: number;
         to: number;
-        discription: string;
+        description: string;
       }[]
     | null;
 }

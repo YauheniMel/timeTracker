@@ -20,7 +20,7 @@ export class AuthService {
       .then(() => {
         this.snackBar.open('Registration successful', 'Close', {
           duration: 1000,
-          panelClass: ['succes'],
+          panelClass: ['successfully'],
           verticalPosition: 'top',
         });
 
@@ -47,7 +47,7 @@ export class AuthService {
       .then(() => {
         this.snackBar.open('Authorisation was successful!', 'Close', {
           duration: 1000,
-          panelClass: ['succes'],
+          panelClass: ['successfully'],
           verticalPosition: 'top',
         });
       })
