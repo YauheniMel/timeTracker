@@ -3,7 +3,6 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import {
@@ -51,21 +50,18 @@ export class ModalWindowComponent implements OnInit {
       this.freeTimeFrom = this.day.freeTime?.filter((item) => item < 24);
     }
 
-    this.formGroup = this.formBuilder.group(
-      {
-        discriptionCtrl: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(300),
-          ],
+    this.formGroup = this.formBuilder.group({
+      descriptionCtrl: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(300),
         ],
-        fromTimeCtrl: ['', Validators.required],
-        toTimeCtrl: ['', Validators.required],
-      },
-      { validator: this.selectsValidator('fromTimeCtrl', 'toTimeCtrl') }
-    );
+      ],
+      fromTimeCtrl: ['', Validators.required],
+      toTimeCtrl: ['', Validators.required],
+    });
   }
 
   submit(): void {
@@ -79,42 +75,8 @@ export class ModalWindowComponent implements OnInit {
       return;
     }
 
-    this.snackBar.open('The task was created successfully', 'Close', {
-      duration: 1000, // early
-      panelClass: ['succes'],
-      verticalPosition: 'top',
-    });
-
     this.database.setTask(this.formGroup, this.day);
     this.dialog.closeAll();
-  }
-
-  selectsValidator(fromName: string, toName: string): ValidationErrors {
-    return (formGroup: FormGroup) => {
-      const controlFrom = formGroup.controls[fromName];
-      const controlTo = formGroup.controls[toName];
-
-      if (controlTo.errors) {
-        return;
-      }
-
-      const indexFrom = (this.day.freeTime as number[]).indexOf(
-        controlFrom.value
-      );
-      const indexTo = (this.day.freeTime as number[]).indexOf(
-        controlTo.value - 1
-      );
-
-      const interval = this.day.freeTime!.slice(indexFrom, indexTo + 1);
-
-      if (controlFrom.value >= controlTo.value) {
-        controlTo.setErrors({ selectsValidator: true });
-      } else if (controlTo.value - controlFrom.value !== interval.length) {
-        controlTo.setErrors({ selectsValidator: true });
-      } else {
-        controlTo.setErrors(null);
-      }
-    };
   }
 
   getFreeTimeTo(choice: number): void {

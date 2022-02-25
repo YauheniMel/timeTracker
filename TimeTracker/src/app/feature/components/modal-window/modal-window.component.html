@@ -7,7 +7,7 @@
           <time>{{ todo.to < 10 ? '0' + todo.to : todo.to }}.00</time>
         </div>
         <p>
-          {{ todo.discription }}
+          {{ todo.description }}
         </p>
       </li>
     </ul>
@@ -21,19 +21,19 @@
         novalidate
       >
         <mat-stepper
-          [linear]="formGroup.controls['discriptionCtrl'].invalid"
+          [linear]="formGroup.controls['descriptionCtrl'].invalid"
           #stepper
         >
           <mat-step
-            [stepControl]="formGroup.controls['discriptionCtrl']"
+            [stepControl]="formGroup.controls['descriptionCtrl']"
             label="Task description"
           >
             <mat-form-field class="example-full-width" appearance="fill">
               <mat-label>New task</mat-label>
               <textarea
                 matInput
-                placeholder="Distription of task..."
-                formControlName="discriptionCtrl"
+                placeholder="Description of task..."
+                formControlName="descriptionCtrl"
                 maxlength="300"
               >
               </textarea>
