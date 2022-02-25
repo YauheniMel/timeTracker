@@ -3,16 +3,14 @@ import { getAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  catchError, first, map, Observable, of, take,
-} from 'rxjs';
+import { catchError, first, map, Observable, of, take } from 'rxjs';
 import { InfoDay } from '../shared/components/day/info-day.interface';
 
 @Injectable()
 export class DatabaseService {
   constructor(
     private database: AngularFireDatabase,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {}
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -47,7 +45,7 @@ export class DatabaseService {
       .valueChanges()
       .pipe(
         map((res) => ({ firstName: res[0], lastName: res[1] })),
-        catchError(this.handleError<any>('Get User info')),
+        catchError(this.handleError<any>('Get User info'))
       );
   }
 
@@ -69,7 +67,7 @@ export class DatabaseService {
           const { fromTimeCtrl, toTimeCtrl, discriptionCtrl } = formData.value;
 
           const freeTime = info.freeTime!.filter(
-            (item) => !(item >= fromTimeCtrl && item < toTimeCtrl),
+            (item) => !(item >= fromTimeCtrl && item < toTimeCtrl)
           );
 
           const { day, month, year } = info;
@@ -88,7 +86,7 @@ export class DatabaseService {
             }),
           };
         }),
-        catchError(this.handleError<any>('Set task')),
+        catchError(this.handleError<any>('Set task'))
       )
       .subscribe((res) => {
         this.database
@@ -102,7 +100,7 @@ export class DatabaseService {
                 `${user!.uid}/listOfYears/${info.year}/${info.month}/${
                   info.day
                 }`,
-                res,
+                res
               );
           });
       });
@@ -111,7 +109,7 @@ export class DatabaseService {
   getDbByParameter(
     year: number | null = null,
     month: number | null = null,
-    day: number | null = null,
+    day: number | null = null
   ): Observable<any> {
     const user = getAuth().currentUser;
 
