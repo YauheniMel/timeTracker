@@ -17,7 +17,7 @@ export class RegisterPageComponent implements OnInit {
   registerForm!: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
     private snackBar: MatSnackBar
   ) {}
@@ -27,7 +27,7 @@ export class RegisterPageComponent implements OnInit {
   }
 
   createForm() {
-    this.registerForm = this.fb.group(
+    this.registerForm = this.formBuilder.group(
       {
         firstName: [null, [Validators.required, Validators.minLength(3)]],
         lastName: [null, [Validators.required, Validators.minLength(3)]],
@@ -35,7 +35,7 @@ export class RegisterPageComponent implements OnInit {
         password: [null, [Validators.required, Validators.minLength(6)]],
         confirmPassword: [null, Validators.required],
       },
-      { validator: this.compairValidator('password', 'confirmPassword') }
+      { validator: this.compareValidator('password', 'confirmPassword') }
     );
   }
 
@@ -53,7 +53,7 @@ export class RegisterPageComponent implements OnInit {
     this.authService.registration(this.registerForm.value);
   }
 
-  compairValidator(
+  compareValidator(
     controlName: string,
     confirmControlName: string
   ): ValidationErrors {
@@ -64,7 +64,7 @@ export class RegisterPageComponent implements OnInit {
         return;
       }
       if (control.value !== confirmControl.value) {
-        confirmControl.setErrors({ compairValidator: true });
+        confirmControl.setErrors({ compareValidator: true });
       } else {
         confirmControl.setErrors(null);
       }

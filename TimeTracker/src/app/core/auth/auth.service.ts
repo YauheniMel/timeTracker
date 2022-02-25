@@ -20,7 +20,7 @@ export class AuthService {
       .then(() => {
         this.snackBar.open('Registration successful', 'Close', {
           duration: 1000,
-          panelClass: ['succes'],
+          panelClass: ['successfully'],
           verticalPosition: 'top',
         });
 
@@ -45,9 +45,9 @@ export class AuthService {
     this.angularFireAuth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        this.snackBar.open('Authorisation was successful!', 'Close', {
+        this.snackBar.open('Authentication successful!', 'Close', {
           duration: 1000,
-          panelClass: ['succes'],
+          panelClass: ['successfully'],
           verticalPosition: 'top',
         });
       })
@@ -64,6 +64,11 @@ export class AuthService {
     this.angularFireAuth
       .signOut()
       .then(() => this.router.navigate(['']))
-      .catch((err) => alert(err.message));
+      .catch((err) => {
+        this.snackBar.open(err.message, 'Close', {
+          panelClass: ['warning'],
+          verticalPosition: 'top',
+        });
+      });
   }
 }

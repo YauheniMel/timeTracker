@@ -20,7 +20,7 @@
             name="firstName"
             matInput
             formControlName="firstName"
-            placeholder="Ivan"
+            placeholder="Name..."
           />
           <mat-error
             *ngIf="
@@ -42,7 +42,7 @@
             name="lastName"
             matInput
             formControlName="lastName"
-            placeholder="Ivanov"
+            placeholder="Surname..."
           />
           <mat-error
             *ngIf="
@@ -85,7 +85,7 @@
             matInput
             name="password"
             formControlName="password"
-            placeholder="Example_123"
+            placeholder="swv123..."
             autocomplete="off"
           />
           <mat-error
@@ -113,7 +113,6 @@
             matInput
             name="confirmPassword"
             formControlName="confirmPassword"
-            placeholder="Example_123"
             autocomplete="off"
           />
           <mat-error *ngIf="registerForm.controls['confirmPassword'].pristine">

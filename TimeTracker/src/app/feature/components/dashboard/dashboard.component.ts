@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private database: DatabaseService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {

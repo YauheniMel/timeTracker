@@ -3,7 +3,7 @@ import { getAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, first, map, Observable, of, take } from 'rxjs';
+import { catchError, first, map, Observable, of, take, tap } from 'rxjs';
 import { InfoDay } from '../shared/components/day/info-day.interface';
 
 @Injectable()
@@ -64,7 +64,7 @@ export class DatabaseService {
       .pipe(
         first(),
         map(() => {
-          const { fromTimeCtrl, toTimeCtrl, discriptionCtrl } = formData.value;
+          const { fromTimeCtrl, toTimeCtrl, descriptionCtrl } = formData.value;
 
           const freeTime = info.freeTime!.filter(
             (item) => !(item >= fromTimeCtrl && item < toTimeCtrl)
@@ -82,9 +82,16 @@ export class DatabaseService {
             toDos: toDos!.concat({
               from: fromTimeCtrl,
               to: toTimeCtrl,
-              discription: discriptionCtrl,
+              description: descriptionCtrl,
             }),
           };
+        }),
+        tap(() => {
+          this.snackBar.open('The task was created successfully', 'Close', {
+            duration: 1000,
+            panelClass: ['successfully'],
+            verticalPosition: 'top',
+          });
         }),
         catchError(this.handleError<any>('Set task'))
       )
@@ -122,12 +129,6 @@ export class DatabaseService {
     if (!day && month && year) {
       return this.database
         .list(`users/${user!.uid}/listOfYears/${year}/${month}`)
-        .valueChanges();
-    }
-
-    if (!day && !month && year) {
-      return this.database
-        .list(`users/${user!.uid}/listOfYears/${year}`)
         .valueChanges();
     }
 

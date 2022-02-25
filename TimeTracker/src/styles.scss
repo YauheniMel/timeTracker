@@ -8,8 +8,7 @@
 }
 
 html,
-body,
-.container {
+body {
   height: 100%;
   color: $primary;
 }
@@ -35,7 +34,7 @@ body {
   color: $warn;
 }
 
-.succes {
+.successfully {
   font-size: 1.2rem;
   background-color: $white;
   color: $primary;
@@ -69,7 +68,7 @@ button {
 }
 
 // modal window
-// try minimise !important
+// try to minimize !important
 .mat-dialog-container {
   width: 500px !important;
   padding: 0 !important;
@@ -155,5 +154,9 @@ button {
 @media (max-width: 360px) {
   html {
     font-size: 10px;
+  }
+
+  .cdk-overlay-pane {
+    max-width: 96vw !important;
   }
 }

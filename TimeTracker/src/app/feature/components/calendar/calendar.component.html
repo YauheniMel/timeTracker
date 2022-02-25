@@ -27,21 +27,21 @@
     }"
   >
     <span
-      class="neighbour-month"
+      class="neighboring-month"
       *ngFor="let day of calendarService.daysPreviousMonth"
       >{{ day }}</span
     >
-    <li *ngFor="let day of calendarService.daysInMonth; let i = index">
+    <li *ngFor="let day of [].constructor(daysInMonth); let i = index">
       <app-day
         [toDos]="toDosInfo[i]"
-        [dayOfMonth]="day"
-        [strokeDashIn]="styles[day - 1].styleIn"
-        [strokeDashOut]="styles[day - 1].styleOut"
+        [dayOfMonth]="i + 1"
+        [strokeDashIn]="styles[i].styleIn"
+        [strokeDashOut]="styles[i].styleOut"
         (getDay)="calendarService.getDayInfo($event)"
       ></app-day>
     </li>
     <span
-      class="neighbour-month"
+      class="neighboring-month"
       *ngFor="let day of calendarService.daysNextMonth"
       >{{ day }}</span
     >
