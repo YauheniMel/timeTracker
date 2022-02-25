@@ -44,9 +44,8 @@ export class CalendarService {
 
     const countDays = this.targetMonth.minus({ month: 1 }).daysInMonth;
 
-    for (let day; count > 0; count) {
-      count -= 1;
-      day = countDays - count;
+    while (count--) {
+      const day = countDays - count;
 
       this.daysPreviousMonth.push(day);
     }
