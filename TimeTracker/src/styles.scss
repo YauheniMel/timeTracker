@@ -8,8 +8,7 @@
 }
 
 html,
-body,
-.container {
+body {
   height: 100%;
   color: $primary;
 }
@@ -69,7 +68,7 @@ button {
 }
 
 // modal window
-// try minimise !important
+// try to minimize !important
 .mat-dialog-container {
   width: 500px !important;
   padding: 0 !important;

@@ -34,7 +34,7 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
 
   @Output() selected = new EventEmitter<number>();
 
-  allTime: number[] = Array.from(Array(25).keys()); // 25 or 24?
+  allTime: number[] = Array.from(Array(25).keys());
 
   touched = false;
 

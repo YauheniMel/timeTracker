@@ -49,8 +49,13 @@ export class CalendarComponent implements OnInit {
   changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
 
-    this.move = action; // for animation
+    // for animation
+    this.move = action;
     this.show = false;
+    setTimeout(() => {
+      this.show = true;
+    });
+    //
 
     this.daysInMonth = this.calendarService.targetMonth.daysInMonth;
 
@@ -63,7 +68,6 @@ export class CalendarComponent implements OnInit {
       )
       .subscribe((res) => {
         this.infoMonth = res;
-        this.show = true;
         this.setStyle();
         this.countToDos();
       });

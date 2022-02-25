@@ -88,7 +88,7 @@ export class DatabaseService {
         }),
         tap(() => {
           this.snackBar.open('The task was created successfully', 'Close', {
-            duration: 1000, // early
+            duration: 1000,
             panelClass: ['successfully'],
             verticalPosition: 'top',
           });

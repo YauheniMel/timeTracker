@@ -3,9 +3,8 @@
 .wrap {
   max-width: 500px;
   margin: 0 auto;
-  padding: 0 1rem;
+  margin-top: 20px;
   overflow: hidden;
-  border: 1px solid $gray;
   box-shadow: 0 0 7px 1px $gray;
 
   .head {
@@ -66,7 +65,7 @@ ul {
   }
 }
 
-.neighbour-month {
+.neighboring-month {
   display: block;
   height: inherit;
   color: $gray;
@@ -97,11 +96,17 @@ ul {
 
 @media (max-width: 700px) {
   .wrap {
-    max-width: 400px;
+    max-width: 360px;
   }
 
-  .neighbour-month {
+  .neighboring-month {
     height: 40px;
     line-height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wrap {
+    box-shadow: none;
   }
 }
