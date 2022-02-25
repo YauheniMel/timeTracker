@@ -156,4 +156,8 @@ button {
   html {
     font-size: 10px;
   }
+
+  .cdk-overlay-pane {
+    max-width: 96vw !important;
+  }
 }
