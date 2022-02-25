@@ -9,7 +9,7 @@ export interface InfoMonth {
       | {
           from: number;
           to: number;
-          discription: string;
+          description: string;
         }[]
       | null;
   }[];

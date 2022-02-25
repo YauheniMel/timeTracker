@@ -15,6 +15,8 @@ export class CalendarComponent implements OnInit {
     private database: DatabaseService
   ) {}
 
+  daysInMonth!: number;
+
   move!: string;
 
   show: boolean = true;
@@ -23,26 +25,14 @@ export class CalendarComponent implements OnInit {
 
   toDosInfo: Array<{ day: number; toDosCount: number | null }> = [];
 
-  styles!: { day: number; styleIn: string; styleOut: string }[];
-
-  styleCircleIn =
-    '154,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0,10.5,0';
-
-  styleCircleOut =
-    '188,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0,13.1,0';
+  styles: { day: number; styleIn: string; styleOut: string }[] = [];
 
   ngOnInit(): void {
-    this.calendarService.setDaysInMonth();
+    this.daysInMonth = this.calendarService.targetMonth.daysInMonth;
+
     this.calendarService.setFirstDay();
 
-    this.styles = Array.apply(
-      null,
-      Array(this.calendarService.daysInMonth.length)
-    ).map((_, index) => ({
-      day: ++index,
-      styleIn: this.styleCircleIn,
-      styleOut: this.styleCircleOut,
-    }));
+    this.setDefaultStyle();
 
     this.database
       .getDbByParameter(
@@ -58,17 +48,18 @@ export class CalendarComponent implements OnInit {
 
   changeMonth(action: string): void {
     this.calendarService.changeMonth(action);
-    this.move = action; // for animation
-    this.show = false;
 
-    this.styles = Array.apply(
-      null,
-      Array(this.calendarService.daysInMonth.length)
-    ).map((_, index) => ({
-      day: ++index,
-      styleIn: this.styleCircleIn,
-      styleOut: this.styleCircleOut,
-    }));
+    // for animation
+    this.move = action;
+    this.show = false;
+    setTimeout(() => {
+      this.show = true;
+    });
+    //
+
+    this.daysInMonth = this.calendarService.targetMonth.daysInMonth;
+
+    this.setDefaultStyle();
 
     this.database
       .getDbByParameter(
@@ -77,75 +68,71 @@ export class CalendarComponent implements OnInit {
       )
       .subscribe((res) => {
         this.infoMonth = res;
-        this.show = true;
         this.setStyle();
         this.countToDos();
       });
   }
 
+  setDefaultStyle() {
+    this.styles = Array.apply(null, Array(this.daysInMonth)).map((_, i) => ({
+      day: ++i,
+      styleIn: `154${',10.5,0'.repeat(12)}`,
+      styleOut: `188${',13.1,0'.repeat(12)}`,
+    }));
+  }
+
   setStyle() {
     if (this.infoMonth.length) {
       this.infoMonth.forEach((item) => {
+        const allTime = Array.from(Array(24).keys());
+        const busyTime = allTime.filter(
+          (time) => !item.freeTime?.includes(time)
+        );
+
         const style = {
           day: item.day,
-          styleIn: '',
-          styleOut: '',
+          styleIn: `154${',10.5,0'.repeat(12)}`,
+          styleOut: `188${',13.1,0'.repeat(12)}`,
         };
+        let index: number;
+        this.styles.forEach((defaultStyle, i) => {
+          if (item.day === defaultStyle.day) {
+            index = i;
+          }
+        });
 
-        if (item.freeTime) {
-          const arrIn: RegExpMatchArray = this.styleCircleIn.match(
-            /10.5,0/g
-          ) as RegExpMatchArray;
-          const arrOut: RegExpMatchArray = this.styleCircleOut.match(
-            /13.1,0/g
-          ) as RegExpMatchArray;
+        const arrIn = style.styleIn.match(/10.5,0/g) as RegExpMatchArray;
+        const arrOut = style.styleOut.match(/13.1,0/g) as RegExpMatchArray;
 
-          const allTime = Array.from(Array(24).keys());
-          const busyTime = allTime.reduce((acc, elem) => {
-            if (!item.freeTime!.includes(elem)) {
-              (acc as number[]).push(elem);
-            }
-            return acc;
-          }, []);
-
+        if (style.day === item.day) {
           busyTime.forEach((time) => {
             if (time < 12) {
-              arrIn[time] = '0,10.5';
+              arrIn![time] = '0,10.5';
             } else {
-              arrOut[time - 12] = '0,13.1';
+              arrOut![time - 12] = '0,13.1';
             }
           });
-
-          style.styleIn = `154,${arrIn.join()}`;
-          style.styleOut = `188,${arrOut.join()}`;
-        } else {
-          style.styleIn = '280';
-
-          style.styleOut = '345';
         }
 
-        this.styles.splice(--item.day, 1, style);
+        style.styleIn = `154,${arrIn.join()}`;
+        style.styleOut = `188,${arrOut.join()}`;
+
+        this.styles[index!] = style;
       });
     }
   }
 
   countToDos() {
     this.toDosInfo = [];
-    const daysInMonth = this.calendarService.daysInMonth.length;
 
-    for (let i = 0; i < daysInMonth; i += 1) {
+    for (let i = 1; i <= this.daysInMonth; i += 1) {
       const [toDo] = this.infoMonth.filter((item) => item.day === i);
-      if (toDo) {
-        this.toDosInfo.push({
-          day: toDo.day + 1,
-          toDosCount: toDo.toDos!.length,
-        });
-      } else {
-        this.toDosInfo.push({
-          day: i + 1,
-          toDosCount: null,
-        });
-      }
+
+      this.toDosInfo.push(
+        toDo
+          ? { day: toDo.day, toDosCount: toDo.toDos!.length }
+          : { day: i, toDosCount: null }
+      );
     }
   }
 }
