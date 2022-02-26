@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { DatabaseService } from 'src/app/core/database.service';
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
-import { ModalWindowComponent } from '../modal-window/modal-window.component';
+import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
 
 @Injectable()
 export class CalendarService {

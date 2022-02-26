@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
 import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 
-import { CalendarService } from '../services/calendar.service';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: 'app-calendar',

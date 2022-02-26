@@ -8,7 +8,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { DashboardComponent } from './dashboard.component';
 import { CalendarComponent } from '../calendar/calendar.component';
-import { CalendarService } from '../services/calendar.service';
+import { CalendarService } from '../../services/calendar.service';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
