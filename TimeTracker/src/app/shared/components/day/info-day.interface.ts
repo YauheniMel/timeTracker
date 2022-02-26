@@ -2,7 +2,7 @@ export interface InfoDay {
   day: number;
   month: number;
   year: number;
-  freeTime: number[] | null;
+  freeTime: number[];
   toDos:
     | {
         from: number;

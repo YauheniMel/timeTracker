@@ -4,7 +4,7 @@ export interface InfoMonth {
   year: number;
   listOfDays: {
     day: number;
-    freeTime: number[] | null;
+    freeTime: number[];
     toDos:
       | {
           from: number;

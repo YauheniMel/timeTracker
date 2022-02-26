@@ -80,7 +80,17 @@ export class CalendarService {
         if (!res.length) {
           this.dayInfo = this.getInitDayInfo(day);
         } else {
-          const [, freeTime, month, toDos, year] = res;
+          let freeTime; // eslint: to one line
+          let month;
+          let toDos;
+          let year;
+          if (Array.isArray(res[1])) {
+            [, freeTime, month, toDos, year] = res;
+          } else {
+            freeTime = [];
+            [, month, toDos, year] = res;
+          }
+
           this.dayInfo = {
             day,
             freeTime,

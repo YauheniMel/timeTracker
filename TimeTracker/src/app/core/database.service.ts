@@ -66,7 +66,7 @@ export class DatabaseService {
         map(() => {
           const { fromTimeCtrl, toTimeCtrl, descriptionCtrl } = formData.value;
 
-          const freeTime = info.freeTime!.filter(
+          const freeTime = info.freeTime.filter(
             (item) => !(item >= fromTimeCtrl && item < toTimeCtrl)
           );
 
