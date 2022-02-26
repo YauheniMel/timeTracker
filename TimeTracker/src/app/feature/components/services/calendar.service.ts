@@ -113,7 +113,7 @@ export class CalendarService {
   getInitDayInfo(day: number) {
     return {
       day,
-      freeTime: Array.from(Array(25).keys()),
+      freeTime: Array.from(Array(24).keys()),
       month: this.targetMonth.month,
       year: this.targetMonth.year,
       toDos: null,

@@ -81,13 +81,16 @@ export class ModalWindowComponent implements OnInit {
 
   getFreeTimeTo(choice: number): void {
     this.freeTimeTo = [];
-    this.freeTimeFrom.forEach((item) => {
-      if (item >= choice) {
-        if (item + 1 - this.freeTimeTo[this.freeTimeTo.length - 1] > 1) {
-          return;
+
+    for (let i = 0; i < this.freeTimeFrom.length; i += 1) {
+      if (this.freeTimeFrom[i] >= choice) {
+        if (this.freeTimeFrom[i + 1] - this.freeTimeFrom[i] !== 1) {
+          this.freeTimeTo.push(this.freeTimeFrom[i] + 1);
+
+          break;
         }
-        this.freeTimeTo.push(item + 1);
+        this.freeTimeTo.push(this.freeTimeFrom[i] + 1);
       }
-    });
+    }
   }
 }

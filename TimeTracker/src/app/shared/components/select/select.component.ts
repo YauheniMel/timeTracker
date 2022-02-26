@@ -24,7 +24,7 @@ import { debounceTime, fromEvent } from 'rxjs';
   ],
 })
 export class SelectComponent implements ControlValueAccessor, AfterViewInit {
-  @Input() freeTime!: number[] | null;
+  @Input() freeTime!: number[];
 
   @Input() type!: 'from' | 'to';
 
@@ -33,8 +33,6 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('select') select!: ElementRef;
 
   @Output() selected = new EventEmitter<number>();
-
-  allTime: number[] = Array.from(Array(25).keys());
 
   touched = false;
 
@@ -47,7 +45,7 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
 
     scroll.pipe(debounceTime(100)).subscribe(() => {
       this.markAsTouched();
-      this.choice = this.freeTime![this.select.nativeElement.scrollTop / 80];
+      this.choice = this.freeTime[this.select.nativeElement.scrollTop / 80];
       if (this.type === 'from') this.selected.emit(this.choice);
 
       this.writeValue(this.choice);

@@ -12,7 +12,7 @@
       </li>
     </ul>
   </mat-tab>
-  <mat-tab label="Add task" *ngIf="day.freeTime">
+  <mat-tab label="Add task" *ngIf="day.freeTime!.length">
     <div class="example-small-box mat-elevation-z4">
       <form
         (ngSubmit)="submit()"

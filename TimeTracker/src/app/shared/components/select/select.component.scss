@@ -49,6 +49,7 @@ $count: 25;
 }
 
 option::after {
+  content: attr(data-content);
   display: block;
   width: inherit;
   height: 80px;
@@ -58,25 +59,9 @@ option::after {
   line-height: 80px;
 }
 
-@for $index from 1 through 10 {
-  option:nth-child(#{$index})::after {
-    content: '#{$index - 1}';
-  }
-}
-
-@for $index from 11 through $count {
-  option:nth-child(#{$index})::after {
-    content: '#{$index - 1}';
-  }
-}
-
 option.selected::after {
   transition: 0.2s;
   font-size: 1.9rem;
-}
-
-.d-none {
-  display: none;
 }
 
 button {
