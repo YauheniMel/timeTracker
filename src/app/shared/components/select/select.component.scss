@@ -1,0 +1,79 @@
+@import "../../../../styles/colors";
+
+$count: 25;
+
+.wrapper {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+
+  .mat-icon {
+    transform: scale(2, 1);
+    color: $gray;
+  }
+
+  select {
+    width: inherit;
+    height: 80px;
+    border: none;
+    border-radius: 0;
+    outline: unset;
+    font-size: 2rem;
+    scroll-snap-type: y mandatory;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  option {
+    width: inherit;
+    height: 100%;
+    text-align: center;
+    scroll-snap-align: start;
+  }
+
+  .bg {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    width: 70px;
+    height: 100%;
+  }
+
+  &:hover .bg {
+    background-color: $white;
+  }
+}
+
+.wrapper:hover span {
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  opacity: 1;
+}
+
+option::after {
+  content: attr(data-content);
+  display: block;
+  width: inherit;
+  height: 80px;
+  background-color: white;
+  color: $primary;
+  font-size: 1.5rem;
+  line-height: 80px;
+}
+
+option.selected::after {
+  transition: 0.2s;
+  font-size: 1.9rem;
+}
+
+button {
+  width: inherit;
+  border-radius: 0;
+}
