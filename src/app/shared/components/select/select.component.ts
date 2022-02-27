@@ -6,7 +6,7 @@ import {
   forwardRef,
   Input,
   Output,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, fromEvent } from 'rxjs';
@@ -19,9 +19,9 @@ import { debounceTime, fromEvent } from 'rxjs';
     {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
-      useExisting: forwardRef(() => SelectComponent),
-    },
-  ],
+      useExisting: forwardRef(() => SelectComponent)
+    }
+  ]
 })
 export class SelectComponent implements ControlValueAccessor, AfterViewInit {
   @Input() freeTime!: number[];

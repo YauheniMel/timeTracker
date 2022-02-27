@@ -1,5 +1,5 @@
-@import './theme.scss';
-@import './styles/colors';
+@import "./theme";
+@import "./styles/colors";
 
 * {
   box-sizing: border-box;
@@ -16,11 +16,11 @@ body {
 body {
   margin: 0;
   background-color: $gray;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 *::after {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .container {
@@ -29,15 +29,15 @@ body {
 }
 
 .warning {
-  font-size: 1.2rem;
   background-color: $white;
   color: $warn;
+  font-size: 1.2rem;
 }
 
 .successfully {
-  font-size: 1.2rem;
   background-color: $white;
   color: $primary;
+  font-size: 1.2rem;
 }
 
 ::-webkit-scrollbar {
@@ -100,8 +100,7 @@ button {
     padding: 0 !important;
   }
 
-  .mat-horizontal-content-container
-    .mat-horizontal-stepper-content:first-child {
+  .mat-horizontal-content-container .mat-horizontal-stepper-content:first-child {
     display: flex;
     flex-direction: column;
 
@@ -117,7 +116,7 @@ button {
     height: 3rem !important;
   }
 
-  .mat-step-header[aria-disabled='true'] .mat-step-text-label {
+  .mat-step-header[aria-disabled="true"] .mat-step-text-label {
     color: $gray;
   }
 

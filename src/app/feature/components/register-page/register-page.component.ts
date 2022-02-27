@@ -3,7 +3,7 @@ import {
   FormBuilder,
   FormGroup,
   ValidationErrors,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../core/auth/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss'],
+  styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
   registerForm!: FormGroup;
@@ -33,7 +33,7 @@ export class RegisterPageComponent implements OnInit {
         lastName: [null, [Validators.required, Validators.minLength(3)]],
         email: [null, [Validators.required, Validators.email]],
         password: [null, [Validators.required, Validators.minLength(6)]],
-        confirmPassword: [null, Validators.required],
+        confirmPassword: [null, Validators.required]
       },
       { validator: this.compareValidator('password', 'confirmPassword') }
     );
@@ -44,7 +44,7 @@ export class RegisterPageComponent implements OnInit {
       this.snackBar.open('Form is not valid!', 'Close', {
         duration: 1000,
         panelClass: ['warning'],
-        verticalPosition: 'top',
+        verticalPosition: 'top'
       });
 
       return;

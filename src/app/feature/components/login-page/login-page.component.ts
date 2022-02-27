@@ -6,7 +6,7 @@ import { AuthService } from '../../../core/auth/auth.service';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
   authForm!: FormGroup;
@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   ngOnInit(): void {
     this.authForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
+      password: [null, [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
       this.snackBar.open('Form is not valid!', 'Close', {
         duration: 1000,
         panelClass: ['warning'],
-        verticalPosition: 'top',
+        verticalPosition: 'top'
       });
 
       return;

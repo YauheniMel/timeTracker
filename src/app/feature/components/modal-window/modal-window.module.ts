@@ -20,7 +20,7 @@ import { ModalWindowComponent } from './modal-window.component';
     MatStepperModule,
     SharedModule,
     MatInputModule,
-    MatButtonModule,
-  ],
+    MatButtonModule
+  ]
 })
 export class ModalWindowModule {}

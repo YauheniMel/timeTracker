@@ -19,8 +19,8 @@ import { LoginPageComponent } from '../../feature/components/login-page/login-pa
     MatInputModule,
     MatButtonModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService]
 })
 export class AuthModule {}

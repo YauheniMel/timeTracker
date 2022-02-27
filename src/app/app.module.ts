@@ -25,9 +25,9 @@ import { ModalWindowModule } from './feature/components/modal-window/modal-windo
     CoreModule,
     MaterialModule,
     ModalWindowModule,
-    DashboardModule,
+    DashboardModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -9,6 +9,6 @@ import { SelectComponent } from './components/select/select.component';
 @NgModule({
   declarations: [SelectComponent, DayComponent],
   imports: [CommonModule, MatBadgeModule, MatIconModule, MatButtonModule],
-  exports: [SelectComponent, DayComponent],
+  exports: [SelectComponent, DayComponent]
 })
 export class SharedModule {}

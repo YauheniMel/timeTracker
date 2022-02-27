@@ -1,6 +1,5 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
       "files": ["*.ts"],
@@ -31,7 +30,11 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "no-plusplus": "off",
+        "comma-dangle": ["error", "never"],
+        "@typescript-eslint/comma-dangle": "off",
+        "object-curly-newline": "off"
       }
     },
     {

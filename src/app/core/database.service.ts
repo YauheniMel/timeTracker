@@ -18,7 +18,7 @@ export class DatabaseService {
       this.snackBar.open(`${operation} failed: ${error.message}`, 'Close', {
         duration: 1000,
         panelClass: ['warning'],
-        verticalPosition: 'top',
+        verticalPosition: 'top'
       });
 
       return of(result as T);
@@ -30,12 +30,10 @@ export class DatabaseService {
 
     const profile: { firstName: string; lastName: string } = {
       firstName,
-      lastName,
+      lastName
     };
 
-    return this.database.list('users').set(user!.uid, {
-      profile,
-    });
+    return this.database.list('users').set(user!.uid, { profile });
   }
 
   getDbProfile(): Observable<any> {
@@ -82,15 +80,15 @@ export class DatabaseService {
             toDos: toDos!.concat({
               from: fromTimeCtrl,
               to: toTimeCtrl,
-              description: descriptionCtrl,
-            }),
+              description: descriptionCtrl
+            })
           };
         }),
         tap(() => {
           this.snackBar.open('The task was created successfully', 'Close', {
             duration: 1000,
             panelClass: ['successfully'],
-            verticalPosition: 'top',
+            verticalPosition: 'top'
           });
         }),
         catchError(this.handleError<any>('Set task'))

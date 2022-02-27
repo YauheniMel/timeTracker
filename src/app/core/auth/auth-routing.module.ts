@@ -5,11 +5,8 @@ import { RegisterPageComponent } from '../../feature/components/register-page/re
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent },
-  { path: 'register', component: RegisterPageComponent },
+  { path: 'register', component: RegisterPageComponent }
 ];
 
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-})
+@NgModule({ imports: [RouterModule.forChild(routes)], exports: [RouterModule] })
 export class AuthRoutingModule {}

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   redirectLoggedInTo,
-  redirectUnauthorizedTo,
+  redirectUnauthorizedTo
 } from '@angular/fire/auth-guard';
 import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 
@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./core/auth/auth.module').then((m) => m.AuthModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome },
+    data: { authGuardPipe: redirectLoggedInToHome }
   },
   {
     path: 'timetracker',
@@ -25,17 +25,14 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: '**',
     redirectTo: '',
-    pathMatch: 'full',
-  },
+    pathMatch: 'full'
+  }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
+@NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
 export class AppRoutingModule {}

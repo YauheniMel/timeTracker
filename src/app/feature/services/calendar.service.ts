@@ -44,7 +44,8 @@ export class CalendarService {
 
     const countDays = this.targetMonth.minus({ month: 1 }).daysInMonth;
 
-    while (count--) {
+    let daysNum = count;
+    while (daysNum--) {
       const day = countDays - count;
 
       this.daysPreviousMonth.push(day);
@@ -54,7 +55,9 @@ export class CalendarService {
   buildDaysNextMonth(count: number): void {
     this.daysNextMonth = [];
     let day = 1;
-    while (7 - count++) {
+    let daysNum = count;
+
+    while (7 - daysNum++) {
       this.daysNextMonth.push(day++);
     }
   }
@@ -96,7 +99,7 @@ export class CalendarService {
             freeTime,
             month,
             year,
-            toDos,
+            toDos
           };
         }
 
@@ -105,13 +108,9 @@ export class CalendarService {
   }
 
   openDialog(infoDay: InfoDay): void {
-    const data = {
-      ...infoDay,
-    };
+    const data = { ...infoDay };
 
-    const dialogRef = this.dialog.open(ModalWindowComponent, {
-      data,
-    });
+    const dialogRef = this.dialog.open(ModalWindowComponent, { data });
 
     dialogRef.afterClosed().subscribe(() => {
       this.dialog.ngOnDestroy();
@@ -126,7 +125,7 @@ export class CalendarService {
       freeTime: Array.from(Array(24).keys()),
       month: this.targetMonth.month,
       year: this.targetMonth.year,
-      toDos: null,
+      toDos: null
     };
   }
 }

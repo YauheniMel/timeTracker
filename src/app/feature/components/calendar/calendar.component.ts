@@ -7,7 +7,7 @@ import { CalendarService } from '../../services/calendar.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
   constructor(
@@ -77,7 +77,7 @@ export class CalendarComponent implements OnInit {
     this.styles = Array.apply(null, Array(this.daysInMonth)).map((_, i) => ({
       day: ++i,
       styleIn: `154${',10.5,0'.repeat(12)}`,
-      styleOut: `188${',13.1,0'.repeat(12)}`,
+      styleOut: `188${',13.1,0'.repeat(12)}`
     }));
   }
 
@@ -92,7 +92,7 @@ export class CalendarComponent implements OnInit {
         const style = {
           day: item.day,
           styleIn: `154${',10.5,0'.repeat(12)}`,
-          styleOut: `188${',13.1,0'.repeat(12)}`,
+          styleOut: `188${',13.1,0'.repeat(12)}`
         };
         let index: number;
         this.styles.forEach((defaultStyle, i) => {
@@ -125,7 +125,7 @@ export class CalendarComponent implements OnInit {
   countToDos() {
     this.toDosInfo = [];
 
-    for (let i = 1; i <= this.daysInMonth; i += 1) {
+    for (let i = 1; i <= this.daysInMonth; i++) {
       const [toDo] = this.infoMonth.filter((item) => item.day === i);
 
       this.toDosInfo.push(

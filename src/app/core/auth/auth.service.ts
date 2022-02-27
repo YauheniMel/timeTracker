@@ -21,14 +21,14 @@ export class AuthService {
         this.snackBar.open('Registration successful', 'Close', {
           duration: 1000,
           panelClass: ['successfully'],
-          verticalPosition: 'top',
+          verticalPosition: 'top'
         });
 
         this.databaseService.setUser(firstName, lastName).catch((err) => {
           this.snackBar.open(err.message, 'Close', {
             duration: 1000,
             panelClass: ['warning'],
-            verticalPosition: 'top',
+            verticalPosition: 'top'
           });
         }); // need check only errors
       })
@@ -36,7 +36,7 @@ export class AuthService {
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
           panelClass: ['warning'],
-          verticalPosition: 'top',
+          verticalPosition: 'top'
         });
       });
   }
@@ -48,14 +48,14 @@ export class AuthService {
         this.snackBar.open('Authentication successful!', 'Close', {
           duration: 1000,
           panelClass: ['successfully'],
-          verticalPosition: 'top',
+          verticalPosition: 'top'
         });
       })
       .then(() => this.router.navigate(['timetracker']))
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
           panelClass: ['warning'],
-          verticalPosition: 'top',
+          verticalPosition: 'top'
         });
       });
   }
@@ -67,7 +67,7 @@ export class AuthService {
       .catch((err) => {
         this.snackBar.open(err.message, 'Close', {
           panelClass: ['warning'],
-          verticalPosition: 'top',
+          verticalPosition: 'top'
         });
       });
   }

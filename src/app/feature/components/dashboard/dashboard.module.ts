@@ -21,8 +21,8 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     MatSidenavModule,
     MatListModule,
     MatButtonModule,
-    SharedModule,
+    SharedModule
   ],
-  providers: [CalendarService],
+  providers: [CalendarService]
 })
 export class DashboardModule {}

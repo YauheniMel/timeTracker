@@ -8,7 +8,7 @@ export const environment = {
     locationId: 'europe-central2',
     apiKey: 'AIzaSyAjboAeBlLo_HCZGfomhs2FbcbDaEEt3ME',
     authDomain: 'timetracker-3584d.firebaseapp.com',
-    messagingSenderId: '721458693646',
+    messagingSenderId: '721458693646'
   },
-  production: true,
+  production: true
 };

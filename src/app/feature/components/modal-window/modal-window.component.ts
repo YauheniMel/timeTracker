@@ -3,12 +3,12 @@ import {
   AbstractControl,
   FormBuilder,
   FormGroup,
-  Validators,
+  Validators
 } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
-  MAT_DIALOG_DATA,
+  MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatabaseService } from 'src/app/core/database.service';
@@ -17,7 +17,7 @@ import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
 @Component({
   selector: 'app-modal-window',
   templateUrl: './modal-window.component.html',
-  styleUrls: ['./modal-window.component.scss'],
+  styleUrls: ['./modal-window.component.scss']
 })
 export class ModalWindowComponent implements OnInit {
   isLinear = false;
@@ -56,11 +56,11 @@ export class ModalWindowComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(3),
-          Validators.maxLength(300),
-        ],
+          Validators.maxLength(300)
+        ]
       ],
       fromTimeCtrl: ['', Validators.required],
-      toTimeCtrl: ['', Validators.required],
+      toTimeCtrl: ['', Validators.required]
     });
   }
 
@@ -69,7 +69,7 @@ export class ModalWindowComponent implements OnInit {
       this.snackBar.open('Form is not valid!', 'Close', {
         duration: 1000,
         panelClass: ['warning'],
-        verticalPosition: 'top',
+        verticalPosition: 'top'
       });
 
       return;
@@ -82,7 +82,7 @@ export class ModalWindowComponent implements OnInit {
   getFreeTimeTo(choice: number): void {
     this.freeTimeTo = [];
 
-    for (let i = 0; i < this.freeTimeFrom.length; i += 1) {
+    for (let i = 0; i < this.freeTimeFrom.length; i++) {
       if (this.freeTimeFrom[i] >= choice) {
         if (this.freeTimeFrom[i + 1] - this.freeTimeFrom[i] !== 1) {
           this.freeTimeTo.push(this.freeTimeFrom[i] + 1);
