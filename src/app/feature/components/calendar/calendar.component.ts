@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 
 import { CalendarService } from '../../services/calendar.service';
 

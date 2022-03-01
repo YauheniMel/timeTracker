@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { LogoutActions } from 'src/app/core/auth/store/logout.action';
 import { DatabaseService } from 'src/app/core/database.service';
-import { User } from './user.interface';
+import { User } from '../../../shared/types/user.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,10 +14,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   subscribe!: any;
 
-  constructor(
-    private database: DatabaseService,
-    private authService: AuthService
-  ) {}
+  constructor(private database: DatabaseService, private store: Store) {}
 
   ngOnInit(): void {
     this.subscribe = this.database.getDbProfile().subscribe((user) => {
@@ -25,7 +23,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout();
+    this.store.dispatch(LogoutActions.logoutRequest());
   }
 
   ngOnDestroy(): void {

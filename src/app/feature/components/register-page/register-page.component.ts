@@ -6,7 +6,9 @@ import {
   Validators
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../../../core/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { RegisterInterface } from 'src/app/shared/types/auth.interface';
+import { RegisterActions } from 'src/app/core/auth/store/register.action';
 
 @Component({
   selector: 'app-register-page',
@@ -18,7 +20,7 @@ export class RegisterPageComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
+    private store: Store,
     private snackBar: MatSnackBar
   ) {}
 
@@ -39,20 +41,6 @@ export class RegisterPageComponent implements OnInit {
     );
   }
 
-  onSubmit(): void {
-    if (this.registerForm.invalid) {
-      this.snackBar.open('Form is not valid!', 'Close', {
-        duration: 1000,
-        panelClass: ['warning'],
-        verticalPosition: 'top'
-      });
-
-      return;
-    }
-
-    this.authService.registration(this.registerForm.value);
-  }
-
   compareValidator(
     controlName: string,
     confirmControlName: string
@@ -69,5 +57,26 @@ export class RegisterPageComponent implements OnInit {
         confirmControl.setErrors(null);
       }
     };
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+      this.snackBar.open('Form is not valid!', 'Close', {
+        duration: 1000,
+        panelClass: ['warning'],
+        verticalPosition: 'top'
+      });
+
+      return;
+    }
+
+    const payload: RegisterInterface = {
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
+      password: this.registerForm.value.password,
+      email: this.registerForm.value.email
+    };
+
+    this.store.dispatch(RegisterActions.registerRequest({ payload }));
   }
 }

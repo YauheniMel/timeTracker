@@ -12,7 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 
 @Component({
   selector: 'app-modal-window',

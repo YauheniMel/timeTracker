@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DateTime } from 'luxon';
 import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
 
 @Injectable()

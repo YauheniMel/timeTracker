@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from '../../../core/auth/auth.service';
+import { Store } from '@ngrx/store';
+import { LoginActions } from 'src/app/core/auth/store/login.action';
 
 @Component({
   selector: 'app-login-page',
@@ -13,7 +14,7 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private store: Store,
     private snackBar: MatSnackBar
   ) {}
 
@@ -39,6 +40,11 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    this.authService.login(this.authForm.value);
+    const payload = {
+      email: this.authForm.value.email,
+      password: this.authForm.value.password
+    };
+
+    this.store.dispatch(LoginActions.loginRequest({ payload }));
   }
 }

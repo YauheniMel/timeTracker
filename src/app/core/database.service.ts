@@ -4,7 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, first, map, Observable, of, take, tap } from 'rxjs';
-import { InfoDay } from '../shared/components/day/info-day.interface';
+import { InfoDay } from '../shared/types/info-day.interface';
 
 @Injectable()
 export class DatabaseService {
@@ -25,26 +25,9 @@ export class DatabaseService {
     };
   }
 
-  setUser(firstName: string, lastName: string): Promise<void> {
-    const user = getAuth().currentUser;
-
-    const profile: { firstName: string; lastName: string } = {
-      firstName,
-      lastName
-    };
-
-    return this.database.list('users').set(user!.uid, { profile });
-  }
-
   getDbProfile(): Observable<any> {
     const user = getAuth().currentUser;
-    return this.database
-      .list(`users/${user!.uid}/profile`)
-      .valueChanges()
-      .pipe(
-        map((res) => ({ firstName: res[0], lastName: res[1] })),
-        catchError(this.handleError<any>('Get User info'))
-      );
+    return this.database.list(`users/${user!.uid}/profile`).valueChanges();
   }
 
   checkDb(day: number, month: number, year: number): Observable<any> {

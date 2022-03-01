@@ -7,33 +7,24 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { LoginActions } from './login.action';
+import { LogoutActions } from './logout.action';
 
 @Injectable()
-export class LoginEffect {
-  login$: Observable<Action> = createEffect(() =>
+export class LogoutEffect {
+  logout$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LoginActions.loginRequest),
-      switchMap(({ payload }) =>
-        this.authService.login(payload).pipe(
-          map(() => LoginActions.loginSuccess({ isAuth: true })),
-          tap(() => {
-            this.snackBar.open('Authentication successful!', 'Close', {
-              duration: 1000,
-              panelClass: ['successfully'],
-              verticalPosition: 'top'
-            });
-
-            this.router.navigate(['timetracker']);
-          }),
+      ofType(LogoutActions.logoutRequest),
+      switchMap(() =>
+        this.authService.logout().pipe(
+          map(() => LogoutActions.logoutSuccess({ isAuth: false })),
+          tap(() => this.router.navigate([''])),
           catchError((err) => {
             this.snackBar.open(err.message, 'Close', {
               duration: 1000,
               panelClass: ['warning'],
               verticalPosition: 'top'
             });
-            return of(LoginActions.loginFailure());
+            return of(LogoutActions.logoutFailure());
           })
         )
       )
@@ -44,7 +35,6 @@ export class LoginEffect {
     private authService: AuthService,
     private actions$: Actions,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private database: AngularFireDatabase
+    private snackBar: MatSnackBar
   ) {}
 }

@@ -1,7 +1,8 @@
 import { RegisterInterface } from './auth.interface';
 
 export interface AppStateInterface {
-  profile: RegisterInterface;
+  isAuth: boolean;
+  profile?: RegisterInterface;
   infoMonth?: {
     month: number | null;
     year: number | null;
