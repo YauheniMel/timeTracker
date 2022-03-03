@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { DashboardInterface } from 'src/app/shared/types/store.interfaces';
 
-export enum ActionTypes {
+enum ActionTypes {
   GET_USER = '[Dashboard] Get user',
   GET_USER_SUCCESS = '[Dashboard] Get user success'
 }

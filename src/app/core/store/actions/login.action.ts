@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { LoginInterface } from 'src/app/shared/types/auth.interface';
 
-export enum ActionTypes {
+enum ActionTypes {
   LOGIN_REQUEST = '[Auth] Login Request',
   LOGIN_FAILURE = '[Auth] Login Failure',
   LOGIN_SUCCESS = '[Auth] Login Success'

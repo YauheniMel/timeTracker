@@ -1,10 +1,9 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { AppStateInterface } from 'src/app/shared/types/store.interfaces';
 import { LoginActions } from '../actions/login.action';
 import { RegisterActions } from '../actions/register.action';
 
-export const authFeatureKey = 'Auth';
+export const authFeatureKey = 'isAuth';
 
 interface AuthInterface {
   isAuth: boolean;
@@ -18,40 +17,44 @@ export const authReducers = createReducer(
   initialState,
   on(
     RegisterActions.registerRequest,
-    (state): AppStateInterface => ({
-      ...state
+    (state): AuthInterface => ({
+      ...state,
+      isAuth: state.isAuth
     })
   ),
   on(
     RegisterActions.registerSuccess,
-    (state, { isAuth }): AppStateInterface => ({
+    (state, { isAuth }): AuthInterface => ({
       ...state,
       isAuth
     })
   ),
   on(
     RegisterActions.registerFailure,
-    (state): AppStateInterface => ({
-      ...state
+    (state): AuthInterface => ({
+      ...state,
+      isAuth: state.isAuth
     })
   ),
   on(
     LoginActions.loginRequest,
-    (state): AppStateInterface => ({
-      ...state
+    (state): AuthInterface => ({
+      ...state,
+      isAuth: state.isAuth
     })
   ),
   on(
     LoginActions.loginSuccess,
-    (state, { isAuth }): AppStateInterface => ({
+    (state, { isAuth }): AuthInterface => ({
       ...state,
       isAuth
     })
   ),
   on(
     LoginActions.loginFailure,
-    (state): AppStateInterface => ({
-      ...state
+    (state): AuthInterface => ({
+      ...state,
+      isAuth: state.isAuth
     })
   )
 );

@@ -1,31 +1,11 @@
 import { Injectable } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, first, map, Observable, of, take, tap } from 'rxjs';
-
-import { InfoDay } from '../shared/types/info-day.interface';
+import { from, Observable } from 'rxjs';
 
 @Injectable()
 export class DatabaseService {
-  constructor(
-    private database: AngularFireDatabase,
-    private snackBar: MatSnackBar
-  ) {}
-
-  private handleError<T>(operation = 'operation', result?: T) {
-    // doesn't need
-    return (error: any): Observable<T> => {
-      this.snackBar.open(`${operation} failed: ${error.message}`, 'Close', {
-        duration: 1000,
-        panelClass: ['warning'],
-        verticalPosition: 'top'
-      });
-
-      return of(result as T);
-    };
-  }
+  constructor(private database: AngularFireDatabase) {}
 
   getDbProfile(): Observable<any> {
     const user = getAuth().currentUser;
@@ -42,60 +22,17 @@ export class DatabaseService {
       .valueChanges();
   }
 
-  setTask(formData: FormGroup, info: InfoDay): void {
+  setTask(tasks: any): Observable<any> {
     const user = getAuth().currentUser;
 
-    this.checkDb(info.year, info.month, info.day)
-      .pipe(
-        first(),
-        map(() => {
-          const { fromTimeCtrl, toTimeCtrl, descriptionCtrl } = formData.value;
-
-          const freeTime = info.freeTime.filter(
-            (item) => !(item >= fromTimeCtrl && item < toTimeCtrl)
-          );
-
-          const { day, month, year } = info;
-          let { toDos } = info;
-          if (!toDos) toDos = [];
-
-          return {
-            month,
-            year,
-            day,
-            freeTime,
-            toDos: toDos!.concat({
-              from: fromTimeCtrl,
-              to: toTimeCtrl,
-              description: descriptionCtrl
-            })
-          };
-        }),
-        tap(() => {
-          this.snackBar.open('The task was created successfully', 'Close', {
-            duration: 1000,
-            panelClass: ['successfully'],
-            verticalPosition: 'top'
-          });
-        }),
-        catchError(this.handleError<any>('Set task'))
-      )
-      .subscribe((res) => {
-        this.database
-          .list(`users/${user!.uid}/listOfYears`)
-          .valueChanges()
-          .pipe(take(1))
-          .subscribe(() => {
-            this.database
-              .list('users')
-              .update(
-                `${user!.uid}/listOfYears/${info.year}/${info.month}/${
-                  info.day
-                }`,
-                res
-              );
-          });
-      });
+    return this.fromFirebaseAuthPromise(
+      this.database
+        .list('users')
+        .update(
+          `${user!.uid}/listOfYears/${tasks.year}/${tasks.month}/${tasks.day}`,
+          tasks
+        )
+    );
   }
 
   getDatabase(
@@ -107,5 +44,9 @@ export class DatabaseService {
     return this.database
       .list(`users/${user!.uid}/listOfYears/${year}/${month}`)
       .valueChanges();
+  }
+
+  private fromFirebaseAuthPromise(promise: Promise<any>): Observable<any> {
+    return from(<Promise<any>>promise);
   }
 }

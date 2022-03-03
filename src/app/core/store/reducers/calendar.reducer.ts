@@ -31,5 +31,23 @@ export const calendarReducers = createReducer(
     (state): InfoMonth => ({
       ...state
     })
+  ),
+  on(
+    CalendarActions.taskRequest,
+    (state): InfoMonth => ({
+      ...state
+    })
+  ),
+  on(
+    CalendarActions.taskSuccess,
+    (state, { infoTask }): InfoMonth => ({
+      ...state
+    })
+  ),
+  on(
+    CalendarActions.calendarFailure,
+    (state): InfoMonth => ({
+      ...state
+    })
   )
 );

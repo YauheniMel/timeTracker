@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { DateTime } from 'luxon';
-import { Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { calendarDaySelector } from 'src/app/core/store/selectors/calendar.selector';
 import { InfoDay } from 'src/app/shared/types/info-day.interface';
@@ -16,7 +16,7 @@ export class CalendarService {
 
   date: Date = new Date();
 
-  dayInfo$!: Observable<InfoDay>;
+  subscription!: Subscription;
 
   dayInfo!: InfoDay;
 
@@ -82,23 +82,25 @@ export class CalendarService {
   }
 
   getDayInfo(day: number): void {
-    this.dayInfo$ = this.store.pipe(select(calendarDaySelector, { day }));
-    this.dayInfo$.subscribe((infoDay) => {
-      if (!infoDay) {
-        this.dayInfo = this.getInitDayInfo(day);
-      } else {
-        const { freeTime = [], month, toDos, year } = infoDay;
+    this.subscription = this.store
+      .pipe(select(calendarDaySelector, { day }))
+      .subscribe((infoDay) => {
+        if (!infoDay) {
+          this.dayInfo = this.getInitDayInfo(day);
+        } else {
+          const { freeTime = [], month, toDos, year } = infoDay;
 
-        this.dayInfo = {
-          day,
-          freeTime,
-          month,
-          year,
-          toDos
-        };
-      }
-      this.openDialog(this.dayInfo);
-    });
+          this.dayInfo = {
+            day,
+            freeTime,
+            month,
+            year,
+            toDos
+          };
+        }
+
+        this.openDialog(this.dayInfo);
+      });
   }
 
   openDialog(infoDay: InfoDay): void {
@@ -109,7 +111,7 @@ export class CalendarService {
     dialogRef.afterClosed().subscribe(() => {
       this.dialog.ngOnDestroy();
 
-      // this.dayInfo$.unsubscribe();
+      this.subscription.unsubscribe();
     });
   }
 
