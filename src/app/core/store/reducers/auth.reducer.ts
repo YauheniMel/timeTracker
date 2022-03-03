@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+
 import { AppStateInterface } from 'src/app/shared/types/store.interfaces';
 import { LoginActions } from '../actions/login.action';
 import { RegisterActions } from '../actions/register.action';

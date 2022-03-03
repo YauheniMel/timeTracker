@@ -5,9 +5,9 @@ import { Observable, of } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { RegisterActions } from '../actions/register.action';
 
 @Injectable()

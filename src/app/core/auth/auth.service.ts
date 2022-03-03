@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
 import { from, Observable } from 'rxjs';
 
 import {
@@ -11,6 +10,8 @@ import {
 @Injectable()
 export class AuthService {
   constructor(private angularFireAuth: AngularFireAuth) {}
+
+  // need add method for check isAuth
 
   registration({ email, password }: RegisterInterface): Observable<any> {
     return this.fromFirebaseAuthPromise(

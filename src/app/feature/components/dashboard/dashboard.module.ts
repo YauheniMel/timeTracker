@@ -6,9 +6,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { EffectsModule } from '@ngrx/effects';
 import { LogoutEffect } from 'src/app/core/store/effects/logout.effect';
 import { DashboardEffect } from 'src/app/core/store/effects/dashboard.effect';
 import { CalendarEffect } from 'src/app/core/store/effects/calendar.effect';

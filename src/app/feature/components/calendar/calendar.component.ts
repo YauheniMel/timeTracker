@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+
 import { CalendarActions } from 'src/app/core/store/actions/calendar.action';
 import { calendarMonthSelector } from 'src/app/core/store/selectors/calendar.selector';
 import { InfoDay } from 'src/app/shared/types/info-day.interface';
-
 import { CalendarService } from '../../services/calendar.service';
 
 @Component({
@@ -32,12 +32,7 @@ export class CalendarComponent implements OnInit {
 
     this.calendarService.setFirstDay();
 
-    const payload = {
-      month: this.calendarService.targetMonth.month,
-      year: this.calendarService.targetMonth.year
-    };
-
-    this.store.dispatch(CalendarActions.calendarRequest({ payload }));
+    this.getInfoMonth();
 
     this.initializeListOfDays();
   }
@@ -66,14 +61,18 @@ export class CalendarComponent implements OnInit {
 
     this.daysInMonth = this.calendarService.targetMonth.daysInMonth;
 
+    this.getInfoMonth();
+
+    this.initializeListOfDays();
+  }
+
+  getInfoMonth(): void {
     const payload = {
       month: this.calendarService.targetMonth.month,
       year: this.calendarService.targetMonth.year
     };
 
     this.store.dispatch(CalendarActions.calendarRequest({ payload }));
-
-    this.initializeListOfDays();
   }
 
   setDefaultStyle() {

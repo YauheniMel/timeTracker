@@ -4,6 +4,7 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, first, map, Observable, of, take, tap } from 'rxjs';
+
 import { InfoDay } from '../shared/types/info-day.interface';
 
 @Injectable()
@@ -14,6 +15,7 @@ export class DatabaseService {
   ) {}
 
   private handleError<T>(operation = 'operation', result?: T) {
+    // doesn't need
     return (error: any): Observable<T> => {
       this.snackBar.open(`${operation} failed: ${error.message}`, 'Close', {
         duration: 1000,
@@ -31,7 +33,8 @@ export class DatabaseService {
     return this.database.list(`users/${user!.uid}/profile`).valueChanges();
   }
 
-  checkDb(day: number, month: number, year: number): Observable<any> {
+  checkDb(year: number, month: number, day: number): Observable<any> {
+    // need to check into store
     const user = getAuth().currentUser;
 
     return this.database
@@ -42,7 +45,7 @@ export class DatabaseService {
   setTask(formData: FormGroup, info: InfoDay): void {
     const user = getAuth().currentUser;
 
-    this.checkDb(info.day, info.month, info.year)
+    this.checkDb(info.year, info.month, info.day)
       .pipe(
         first(),
         map(() => {
@@ -95,25 +98,14 @@ export class DatabaseService {
       });
   }
 
-  getDbByParameter(
+  getDatabase(
     year: number | null = null,
-    month: number | null = null,
-    day: number | null = null
+    month: number | null = null
   ): Observable<any> {
     const user = getAuth().currentUser;
 
-    if (day && month && year) {
-      return this.database
-        .list(`users/${user!.uid}/listOfYears/${year}/${month}/${day}`)
-        .valueChanges();
-    }
-
-    if (!day && month && year) {
-      return this.database
-        .list(`users/${user!.uid}/listOfYears/${year}/${month}`)
-        .valueChanges();
-    }
-
-    return this.database.list(`users/${user!.uid}/listOfYears`).valueChanges();
+    return this.database
+      .list(`users/${user!.uid}/listOfYears/${year}/${month}`)
+      .valueChanges();
   }
 }

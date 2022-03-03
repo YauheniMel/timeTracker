@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { InfoMonth } from 'src/app/shared/types/info-month.interface';
 
 export enum ActionTypes {

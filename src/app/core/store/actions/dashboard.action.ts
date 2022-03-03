@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { DashboardInterface } from 'src/app/shared/types/store.interfaces';
 
 export enum ActionTypes {

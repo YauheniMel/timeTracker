@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { LoginInterface } from 'src/app/shared/types/auth.interface';
 
 export enum ActionTypes {

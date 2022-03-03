@@ -14,7 +14,7 @@ export class CalendarEffect {
     this.actions$.pipe(
       ofType(CalendarActions.calendarRequest),
       switchMap(({ payload }) =>
-        this.database.getDbByParameter(payload.year, payload.month).pipe(
+        this.database.getDatabase(payload.year, payload.month).pipe(
           map((res) => {
             const infoMonth = {
               ...payload,

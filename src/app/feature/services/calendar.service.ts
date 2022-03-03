@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { DateTime } from 'luxon';
 import { Observable } from 'rxjs';
+
 import { calendarDaySelector } from 'src/app/core/store/selectors/calendar.selector';
 import { InfoDay } from 'src/app/shared/types/info-day.interface';
 import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
