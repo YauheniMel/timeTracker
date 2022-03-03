@@ -11,8 +11,9 @@ import {
   MAT_DIALOG_DATA
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { Store } from '@ngrx/store';
+import { CalendarActions } from 'src/app/core/store/actions/calendar.action';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 
 @Component({
   selector: 'app-modal-window',
@@ -38,9 +39,9 @@ export class ModalWindowComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalWindowComponent>,
     private formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: InfoDay,
-    private database: DatabaseService,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store
   ) {}
 
   ngOnInit() {
@@ -50,6 +51,10 @@ export class ModalWindowComponent implements OnInit {
       this.freeTimeFrom = this.day.freeTime.filter((item) => item < 24);
     }
 
+    this.createForm();
+  }
+
+  createForm(): void {
     this.formGroup = this.formBuilder.group({
       descriptionCtrl: [
         '',
@@ -75,7 +80,27 @@ export class ModalWindowComponent implements OnInit {
       return;
     }
 
-    this.database.setTask(this.formGroup, this.day);
+    const {
+      fromTimeCtrl: from,
+      toTimeCtrl: to,
+      descriptionCtrl: description
+    } = this.formGroup.value;
+
+    const { year, month, day, freeTime } = this.day;
+
+    const payload = {
+      year,
+      month,
+      day,
+      freeTime,
+      toDo: {
+        from,
+        to,
+        description
+      }
+    };
+
+    this.store.dispatch(CalendarActions.taskRequest({ payload }));
     this.dialog.closeAll();
   }
 

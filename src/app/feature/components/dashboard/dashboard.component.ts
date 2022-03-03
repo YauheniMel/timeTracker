@@ -1,34 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/core/auth/auth.service';
-import { DatabaseService } from 'src/app/core/database.service';
-import { User } from './user.interface';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { DashboardActions } from 'src/app/core/store/actions/dashboard.action';
+import { LoginActions } from 'src/app/core/store/actions/login.action';
+import { LogoutActions } from 'src/app/core/store/actions/logout.action';
+import { profileSelector } from 'src/app/core/store/selectors/dashboard.selector';
+import { DashboardInterface } from 'src/app/shared/types/store.interfaces';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  user!: User;
+export class DashboardComponent implements OnInit {
+  user$!: Observable<DashboardInterface>;
 
-  subscribe!: any;
-
-  constructor(
-    private database: DatabaseService,
-    private authService: AuthService
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.subscribe = this.database.getDbProfile().subscribe((user) => {
-      this.user = user;
-    });
+    this.store.dispatch(LoginActions.loginSuccess({ isAuth: true }));
+    this.store.dispatch(DashboardActions.getUser());
+
+    this.user$ = this.store.pipe(select(profileSelector));
   }
 
   logout(): void {
-    this.authService.logout();
-  }
-
-  ngOnDestroy(): void {
-    this.subscribe.unsubscribe();
+    this.store.dispatch(LogoutActions.logoutRequest());
   }
 }

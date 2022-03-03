@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { select, Store } from '@ngrx/store';
 import { DateTime } from 'luxon';
-import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { Subscription } from 'rxjs';
+
+import { calendarDaySelector } from 'src/app/core/store/selectors/calendar.selector';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
 
 @Injectable()
@@ -13,6 +16,8 @@ export class CalendarService {
 
   date: Date = new Date();
 
+  subscription!: Subscription;
+
   dayInfo!: InfoDay;
 
   daysPreviousMonth: number[] = [];
@@ -21,7 +26,7 @@ export class CalendarService {
 
   daySubscribe: any;
 
-  constructor(public dialog: MatDialog, private database: DatabaseService) {}
+  constructor(public dialog: MatDialog, private store: Store) {}
 
   setFirstDay() {
     const { month } = this.targetMonth;
@@ -77,22 +82,13 @@ export class CalendarService {
   }
 
   getDayInfo(day: number): void {
-    this.daySubscribe = this.database
-      .getDbByParameter(this.targetMonth.year, this.targetMonth.month, day)
-      .subscribe((res) => {
-        if (!res.length) {
+    this.subscription = this.store
+      .pipe(select(calendarDaySelector, { day }))
+      .subscribe((infoDay) => {
+        if (!infoDay) {
           this.dayInfo = this.getInitDayInfo(day);
         } else {
-          let freeTime; // eslint: to one line
-          let month;
-          let toDos;
-          let year;
-          if (Array.isArray(res[1])) {
-            [, freeTime, month, toDos, year] = res;
-          } else {
-            freeTime = [];
-            [, month, toDos, year] = res;
-          }
+          const { freeTime = [], month, toDos, year } = infoDay;
 
           this.dayInfo = {
             day,
@@ -115,7 +111,7 @@ export class CalendarService {
     dialogRef.afterClosed().subscribe(() => {
       this.dialog.ngOnDestroy();
 
-      this.daySubscribe.unsubscribe();
+      this.subscription.unsubscribe();
     });
   }
 

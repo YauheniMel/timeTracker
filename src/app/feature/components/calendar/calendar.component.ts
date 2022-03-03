@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseService } from 'src/app/core/database.service';
-import { InfoDay } from 'src/app/shared/components/day/info-day.interface';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
+import { CalendarActions } from 'src/app/core/store/actions/calendar.action';
+import { calendarMonthSelector } from 'src/app/core/store/selectors/calendar.selector';
+import { InfoDay } from 'src/app/shared/types/info-day.interface';
 import { CalendarService } from '../../services/calendar.service';
 
 @Component({
@@ -10,10 +13,7 @@ import { CalendarService } from '../../services/calendar.service';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-  constructor(
-    public calendarService: CalendarService,
-    private database: DatabaseService
-  ) {}
+  constructor(public calendarService: CalendarService, private store: Store) {}
 
   daysInMonth!: number;
 
@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit {
 
   show: boolean = true;
 
-  infoMonth!: InfoDay[];
+  listOfDays$!: Observable<InfoDay[]>;
 
   toDosInfo: Array<{ day: number; toDosCount: number | null }> = [];
 
@@ -32,18 +32,20 @@ export class CalendarComponent implements OnInit {
 
     this.calendarService.setFirstDay();
 
-    this.setDefaultStyle();
+    this.getInfoMonth();
 
-    this.database
-      .getDbByParameter(
-        this.calendarService.targetMonth.year,
-        this.calendarService.targetMonth.month
-      )
-      .subscribe((res) => {
-        this.infoMonth = res;
-        this.setStyle();
-        this.countToDos();
-      });
+    this.initializeListOfDays();
+  }
+
+  initializeListOfDays() {
+    this.listOfDays$ = this.store.pipe(select(calendarMonthSelector));
+
+    this.listOfDays$.subscribe((listOfDays) => {
+      this.setDefaultStyle();
+
+      this.setStyle(listOfDays);
+      this.countToDos(listOfDays);
+    });
   }
 
   changeMonth(action: string): void {
@@ -59,18 +61,18 @@ export class CalendarComponent implements OnInit {
 
     this.daysInMonth = this.calendarService.targetMonth.daysInMonth;
 
-    this.setDefaultStyle();
+    this.getInfoMonth();
 
-    this.database
-      .getDbByParameter(
-        this.calendarService.targetMonth.year,
-        this.calendarService.targetMonth.month
-      )
-      .subscribe((res) => {
-        this.infoMonth = res;
-        this.setStyle();
-        this.countToDos();
-      });
+    this.initializeListOfDays();
+  }
+
+  getInfoMonth(): void {
+    const payload = {
+      month: this.calendarService.targetMonth.month,
+      year: this.calendarService.targetMonth.year
+    };
+
+    this.store.dispatch(CalendarActions.calendarRequest({ payload }));
   }
 
   setDefaultStyle() {
@@ -81,9 +83,9 @@ export class CalendarComponent implements OnInit {
     }));
   }
 
-  setStyle() {
-    if (this.infoMonth.length) {
-      this.infoMonth.forEach((item) => {
+  setStyle(listOfDays: InfoDay[]) {
+    if (listOfDays.length) {
+      listOfDays.forEach((item) => {
         const allTime = Array.from(Array(24).keys());
         const busyTime = allTime.filter(
           (time) => !item.freeTime?.includes(time)
@@ -122,11 +124,11 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  countToDos() {
+  countToDos(listOfDays: InfoDay[]) {
     this.toDosInfo = [];
 
     for (let i = 1; i <= this.daysInMonth; i++) {
-      const [toDo] = this.infoMonth.filter((item) => item.day === i);
+      const [toDo] = listOfDays.filter((item) => item.day === i);
 
       this.toDosInfo.push(
         toDo
