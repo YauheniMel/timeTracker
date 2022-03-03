@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { RegisterActions } from './register.action';
+import { RegisterActions } from '../actions/register.action';
 
 @Injectable()
 export class RegisterEffect {

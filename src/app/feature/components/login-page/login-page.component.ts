@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { LoginActions } from 'src/app/core/auth/store/login.action';
+import { LoginActions } from 'src/app/core/store/actions/login.action';
 
 @Component({
   selector: 'app-login-page',

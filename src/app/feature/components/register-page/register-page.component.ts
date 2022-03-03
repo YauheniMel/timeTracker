@@ -7,8 +7,8 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
+import { RegisterActions } from 'src/app/core/store/actions/register.action';
 import { RegisterInterface } from 'src/app/shared/types/auth.interface';
-import { RegisterActions } from 'src/app/core/auth/store/register.action';
 
 @Component({
   selector: 'app-register-page',

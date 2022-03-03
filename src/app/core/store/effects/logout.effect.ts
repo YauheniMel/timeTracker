@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { LogoutActions } from './logout.action';
+import { LogoutActions } from '../actions/logout.action';
 
 @Injectable()
 export class LogoutEffect {

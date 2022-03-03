@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { LoginActions } from './login.action';
+import { LoginActions } from '../actions/login.action';
 
 @Injectable()
 export class LoginEffect {

@@ -49,6 +49,8 @@ export class ModalWindowComponent implements OnInit {
     if (this.day.freeTime) {
       this.freeTimeFrom = this.day.freeTime.filter((item) => item < 24);
     }
+
+    this.createForm();
   }
 
   createForm(): void {

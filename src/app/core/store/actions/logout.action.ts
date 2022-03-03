@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
 export enum ActionTypes {
-  LOGOUT_REQUEST = '[Auth] Logout Request',
-  LOGOUT_FAILURE = '[Auth] Logout Failure',
-  LOGOUT_SUCCESS = '[Auth] Logout Success'
+  LOGOUT_REQUEST = '[Dashboard] Logout Request',
+  LOGOUT_FAILURE = '[Dashboard] Logout Failure',
+  LOGOUT_SUCCESS = '[Dashboard] Logout Success'
 }
 
 export namespace LogoutActions {

@@ -27,6 +27,7 @@ export class DatabaseService {
 
   getDbProfile(): Observable<any> {
     const user = getAuth().currentUser;
+
     return this.database.list(`users/${user!.uid}/profile`).valueChanges();
   }
 
