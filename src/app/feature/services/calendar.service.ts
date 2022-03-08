@@ -115,9 +115,11 @@ export class CalendarService {
   }
 
   getInitDayInfo(day: number) {
+    const hoursInDay = 24;
+
     return {
       day,
-      freeTime: Array.from(Array(24).keys()),
+      freeTime: Array.from(Array(hoursInDay).keys()),
       month: this.targetMonth.month,
       year: this.targetMonth.year,
       toDos: null

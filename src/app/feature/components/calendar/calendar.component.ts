@@ -86,7 +86,9 @@ export class CalendarComponent implements OnInit {
   setStyle(listOfDays: InfoDay[]) {
     if (listOfDays.length) {
       listOfDays.forEach((item) => {
-        const allTime = Array.from(Array(24).keys());
+        const hoursInDay = 24;
+
+        const allTime = Array.from(Array(hoursInDay).keys());
         const busyTime = allTime.filter(
           (time) => !item.freeTime?.includes(time)
         );

@@ -42,8 +42,9 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
 
   ngAfterViewInit(): void {
     const scroll = fromEvent(this.select.nativeElement, 'scroll');
+    const delay = 100;
 
-    scroll.pipe(debounceTime(100)).subscribe(() => {
+    scroll.pipe(debounceTime(delay)).subscribe(() => {
       this.markAsTouched();
       this.choice = this.freeTime[this.select.nativeElement.scrollTop / 80];
       if (this.type === 'from') this.selected.emit(this.choice);
@@ -82,11 +83,13 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   changeSelect(action: 'increase' | 'decrease'): void {
+    const heightOptionDOMElem = 80;
+
     if (!this.choice) this.choice = 0;
     if (action === 'increase') {
-      this.select.nativeElement.scrollTop -= 80;
+      this.select.nativeElement.scrollTop -= heightOptionDOMElem;
     } else if (action === 'decrease') {
-      this.select.nativeElement.scrollTop += 80;
+      this.select.nativeElement.scrollTop += heightOptionDOMElem;
     }
   }
 }
