@@ -38,11 +38,11 @@ export class RegisterPageComponent implements OnInit {
         password: [null, [Validators.required, Validators.minLength(6)]],
         confirmPassword: [null, Validators.required]
       },
-      { validator: this.compareValidator('password', 'confirmPassword') }
+      { validator: RegisterPageComponent.compareValidator('password', 'confirmPassword') }
     );
   }
 
-  compareValidator(
+  static compareValidator(
     controlName: string,
     confirmControlName: string
   ): ValidationErrors {

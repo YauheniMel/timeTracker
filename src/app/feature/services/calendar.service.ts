@@ -80,24 +80,23 @@ export class CalendarService {
   }
 
   getDayInfo(day: number): void {
-    this.store.pipe(select(calendarDaySelector(day)))
-      .subscribe((infoDay) => {
-        if (!infoDay) {
-          this.dayInfo = this.getInitDayInfo(day);
-        } else {
-          const { freeTime = [], month, toDos, year } = infoDay;
+    this.store.pipe(select(calendarDaySelector(day))).subscribe((infoDay) => {
+      if (!infoDay) {
+        this.dayInfo = this.getInitDayInfo(day);
+      } else {
+        const { freeTime = [], month, toDos, year } = infoDay;
 
-          this.dayInfo = {
-            day,
-            freeTime,
-            month,
-            year,
-            toDos
-          };
-        }
+        this.dayInfo = {
+          day,
+          freeTime,
+          month,
+          year,
+          toDos
+        };
+      }
 
-        this.openDialog(this.dayInfo);
-      });
+      this.openDialog(this.dayInfo);
+    });
   }
 
   openDialog(infoDay: InfoDay): void {

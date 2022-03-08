@@ -12,22 +12,22 @@ export class AuthService {
   constructor(private angularFireAuth: AngularFireAuth) {}
 
   registration({ email, password }: RegisterInterface): Observable<any> {
-    return this.fromFirebaseAuthPromise(
+    return AuthService.fromFirebaseAuthPromise(
       this.angularFireAuth.createUserWithEmailAndPassword(email!, password!)
     );
   }
 
   login({ email, password }: LoginInterface): Observable<any> {
-    return this.fromFirebaseAuthPromise(
+    return AuthService.fromFirebaseAuthPromise(
       this.angularFireAuth.signInWithEmailAndPassword(email, password)
     );
   }
 
   logout(): Observable<any> {
-    return this.fromFirebaseAuthPromise(this.angularFireAuth.signOut());
+    return AuthService.fromFirebaseAuthPromise(this.angularFireAuth.signOut());
   }
 
-  private fromFirebaseAuthPromise(promise: Promise<any>): Observable<any> {
+  static fromFirebaseAuthPromise(promise: Promise<any>): Observable<any> {
     return from(<Promise<any>>promise);
   }
 }
