@@ -7,9 +7,9 @@
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint --fix",
+    "lint": "ng lint",
     "style": "stylelint **/*.{scss,css} scss --fix",
-    "format": "prettier --write \"**/*.{ts,js,json,html,md}\""
+    "format": "prettier --write \"**/*.{ts,js,json,html,md}\" && ng lint --fix"
   },
   "private": true,
   "dependencies": {
