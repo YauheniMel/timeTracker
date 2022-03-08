@@ -10,7 +10,7 @@ export const calendarMonthSelector = createSelector(
   (infoMonth: InfoMonth): InfoDay[] => infoMonth.listOfDays
 );
 
-export const calendarDaySelector = createSelector(
+export const calendarDaySelector = (day: number) => createSelector(
   calendarFeatureSelector,
-  (infoMonth: InfoMonth, props: { day: number }): InfoDay => infoMonth.listOfDays.filter((item) => item.day === props.day)[0]
+  (infoMonth: InfoMonth): InfoDay => infoMonth.listOfDays.filter((item) => item.day === day)[0]
 );
