@@ -81,11 +81,11 @@ export class SelectComponent implements ControlValueAccessor, AfterViewInit {
     this.writeValue(value);
   }
 
-  changeSelect(action: 'plus' | 'minus'): void {
+  changeSelect(action: 'increase' | 'decrease'): void {
     if (!this.choice) this.choice = 0;
-    if (action === 'plus') {
+    if (action === 'increase') {
       this.select.nativeElement.scrollTop -= 80;
-    } else if (action === 'minus') {
+    } else if (action === 'decrease') {
       this.select.nativeElement.scrollTop += 80;
     }
   }

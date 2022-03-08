@@ -67,9 +67,9 @@ export class CalendarService {
   }
 
   changeMonth(action: string) {
-    if (action === 'plus') {
+    if (action === 'increase') {
       this.targetMonth = this.targetMonth.plus({ month: 1 });
-    } else if (action === 'minus') {
+    } else if (action === 'decrease') {
       this.targetMonth = this.targetMonth.minus({ month: 1 });
     }
 
