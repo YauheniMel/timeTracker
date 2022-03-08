@@ -2,6 +2,7 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-standard-scss",
-    "stylelint-config-property-sort-order-smacss"
+    "stylelint-config-property-sort-order-smacss",
+    "stylelint-prettier/recommended"
   ]
 }
