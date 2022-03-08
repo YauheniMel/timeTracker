@@ -12,37 +12,41 @@ import { RegisterActions } from '../actions/register.action';
 
 @Injectable()
 export class RegisterEffect {
-  register$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(RegisterActions.registerRequest),
-    switchMap(({ payload }) => this.authService.registration(payload).pipe(
-      map((res) => {
-        const profile = {
-          firstName: payload.firstName,
-          lastName: payload.lastName
-        };
-        this.database.list('users').set(res.user.uid, { profile });
+  register$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RegisterActions.registerRequest),
+      switchMap(({ payload }) =>
+        this.authService.registration(payload).pipe(
+          map((res) => {
+            const profile = {
+              firstName: payload.firstName,
+              lastName: payload.lastName
+            };
+            this.database.list('users').set(res.user.uid, { profile });
 
-        return RegisterActions.registerSuccess({ isAuth: true });
-      }),
-      tap(() => {
-        this.snackBar.open('Registration successful', 'Close', {
-          duration: 1000,
-          panelClass: ['successfully'],
-          verticalPosition: 'top'
-        });
+            return RegisterActions.registerSuccess({ isAuth: true });
+          }),
+          tap(() => {
+            this.snackBar.open('Registration successful', 'Close', {
+              duration: 1000,
+              panelClass: ['successfully'],
+              verticalPosition: 'top'
+            });
 
-        this.router.navigate(['timetracker']);
-      }),
-      catchError((err) => {
-        this.snackBar.open(err.message, 'Close', {
-          duration: 1000,
-          panelClass: ['warning'],
-          verticalPosition: 'top'
-        });
-        return of(RegisterActions.registerFailure());
-      })
-    ))
-  ));
+            this.router.navigate(['timetracker']);
+          }),
+          catchError((err) => {
+            this.snackBar.open(err.message, 'Close', {
+              duration: 1000,
+              panelClass: ['warning'],
+              verticalPosition: 'top'
+            });
+            return of(RegisterActions.registerFailure());
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private authService: AuthService,

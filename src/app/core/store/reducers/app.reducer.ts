@@ -17,12 +17,14 @@ export const appReducers: ActionReducerMap<AppStateInterface> = {
   infoMonth: calendarReducers
 };
 
-const configMeta = (reducer: ActionReducer<any>): ActionReducer<any> => (state, action) => {
-  if (action.type === ActionTypes.LOGOUT_SUCCESS) {
-    return reducer(undefined, { type: INIT });
-  }
+const configMeta =
+  (reducer: ActionReducer<any>): ActionReducer<any> =>
+  (state, action) => {
+    if (action.type === ActionTypes.LOGOUT_SUCCESS) {
+      return reducer(undefined, { type: INIT });
+    }
 
-  return reducer(state, action);
-};
+    return reducer(state, action);
+  };
 
 export const metaReducers: MetaReducer<AppStateInterface>[] = [configMeta];

@@ -11,21 +11,25 @@ import { LogoutActions } from '../actions/logout.action';
 
 @Injectable()
 export class LogoutEffect {
-  logout$: Observable<Action> = createEffect(() => this.actions$.pipe(
-    ofType(LogoutActions.logoutRequest),
-    switchMap(() => this.authService.logout().pipe(
-      map(() => LogoutActions.logoutSuccess({ isAuth: false })),
-      tap(() => this.router.navigate([''])),
-      catchError((err) => {
-        this.snackBar.open(err.message, 'Close', {
-          duration: 1000,
-          panelClass: ['warning'],
-          verticalPosition: 'top'
-        });
-        return of(LogoutActions.logoutFailure());
-      })
-    ))
-  ));
+  logout$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(LogoutActions.logoutRequest),
+      switchMap(() =>
+        this.authService.logout().pipe(
+          map(() => LogoutActions.logoutSuccess({ isAuth: false })),
+          tap(() => this.router.navigate([''])),
+          catchError((err) => {
+            this.snackBar.open(err.message, 'Close', {
+              duration: 1000,
+              panelClass: ['warning'],
+              verticalPosition: 'top'
+            });
+            return of(LogoutActions.logoutFailure());
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private authService: AuthService,

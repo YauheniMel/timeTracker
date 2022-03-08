@@ -1,4 +1,4 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 @include mat.core();
 
@@ -11,8 +11,8 @@ $TimeTracker-theme: mat.define-light-theme(
     color: (
       primary: $TimeTracker-primary,
       accent: $TimeTracker-accent,
-      warn: $TimeTracker-warn,
-    ),
+      warn: $TimeTracker-warn
+    )
   )
 );
 
