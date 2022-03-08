@@ -36,8 +36,7 @@ export class CalendarService {
       1
     ).getDay();
 
-    const lastDayOfWeek =
-      new Date(this.date.getFullYear(), month, 0).getDay() + 1;
+    const lastDayOfWeek = new Date(this.date.getFullYear(), month, 0).getDay() + 1;
 
     this.buildDaysPreviousMonth(this.firstDayOfWeek);
 

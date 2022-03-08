@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Firebase
 
-This project uses *Firebase Realtime Database*.
+This project uses _Firebase Realtime Database_.
 
 ## Store
 

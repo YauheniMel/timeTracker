@@ -12,33 +12,29 @@ import { LoginActions } from '../actions/login.action';
 
 @Injectable()
 export class LoginEffect {
-  login$: Observable<Action> = createEffect(() =>
-    this.actions$.pipe(
-      ofType(LoginActions.loginRequest),
-      switchMap(({ payload }) =>
-        this.authService.login(payload).pipe(
-          map(() => LoginActions.loginSuccess({ isAuth: true })),
-          tap(() => {
-            this.snackBar.open('Authentication successful!', 'Close', {
-              duration: 1000,
-              panelClass: ['successfully'],
-              verticalPosition: 'top'
-            });
+  login$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(LoginActions.loginRequest),
+    switchMap(({ payload }) => this.authService.login(payload).pipe(
+      map(() => LoginActions.loginSuccess({ isAuth: true })),
+      tap(() => {
+        this.snackBar.open('Authentication successful!', 'Close', {
+          duration: 1000,
+          panelClass: ['successfully'],
+          verticalPosition: 'top'
+        });
 
-            this.router.navigate(['timetracker']);
-          }),
-          catchError((err) => {
-            this.snackBar.open(err.message, 'Close', {
-              duration: 1000,
-              panelClass: ['warning'],
-              verticalPosition: 'top'
-            });
-            return of(LoginActions.loginFailure());
-          })
-        )
-      )
-    )
-  );
+        this.router.navigate(['timetracker']);
+      }),
+      catchError((err) => {
+        this.snackBar.open(err.message, 'Close', {
+          duration: 1000,
+          panelClass: ['warning'],
+          verticalPosition: 'top'
+        });
+        return of(LoginActions.loginFailure());
+      })
+    ))
+  ));
 
   constructor(
     private authService: AuthService,

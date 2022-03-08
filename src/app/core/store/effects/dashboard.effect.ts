@@ -11,32 +11,28 @@ import { DashboardActions } from '../actions/dashboard.action';
 
 @Injectable()
 export class DashboardEffect {
-  dashboard$: Observable<Action> = createEffect(() =>
-    this.actions$.pipe(
-      ofType(DashboardActions.getUser),
-      switchMap(() =>
-        this.database.getDbProfile().pipe(
-          map((res) => {
-            const [firstName, lastName] = res;
+  dashboard$: Observable<Action> = createEffect(() => this.actions$.pipe(
+    ofType(DashboardActions.getUser),
+    switchMap(() => this.database.getDbProfile().pipe(
+      map((res) => {
+        const [firstName, lastName] = res;
 
-            const profile = {
-              firstName,
-              lastName
-            };
-            return DashboardActions.getUserSuccess({ profile });
-          }),
-          catchError((err) => {
-            this.snackBar.open(err.message, 'Close', {
-              duration: 1000,
-              panelClass: ['warning'],
-              verticalPosition: 'top'
-            });
-            return of(LoginActions.loginFailure()); // stranger action
-          })
-        )
-      )
-    )
-  );
+        const profile = {
+          firstName,
+          lastName
+        };
+        return DashboardActions.getUserSuccess({ profile });
+      }),
+      catchError((err) => {
+        this.snackBar.open(err.message, 'Close', {
+          duration: 1000,
+          panelClass: ['warning'],
+          verticalPosition: 'top'
+        });
+        return of(LoginActions.loginFailure()); // stranger action
+      })
+    ))
+  ));
 
   constructor(
     private actions$: Actions,
