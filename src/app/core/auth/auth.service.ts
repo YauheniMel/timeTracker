@@ -13,7 +13,7 @@ export class AuthService {
 
   registration({ email, password }: RegisterInterface): Observable<any> {
     return AuthService.fromFirebaseAuthPromise(
-      this.angularFireAuth.createUserWithEmailAndPassword(email!, password!)
+      this.angularFireAuth.createUserWithEmailAndPassword(email, password)
     );
   }
 

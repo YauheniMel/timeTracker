@@ -55,13 +55,17 @@ export class CalendarEffect {
               year,
               day,
               freeTime,
-              toDos: Array.isArray(res[3]) ? [...res[3], toDo] : [toDo]
+              toDos: (Array.isArray(res[3]) ? [...res[3], toDo] : [toDo]) as {
+                from: number;
+                to: number;
+                description: string;
+              }[]
             };
           }),
-          switchMap((infoTask) =>
-            this.database.setTask(infoTask).pipe(
+          switchMap((infoTasks) =>
+            this.database.setTask(infoTasks).pipe(
               take(1),
-              map(() => CalendarActions.taskSuccess({ infoTask })),
+              map(() => CalendarActions.taskSuccess({ infoTasks })),
               tap(() => {
                 this.snackBar.open(
                   'The task was created successfully',

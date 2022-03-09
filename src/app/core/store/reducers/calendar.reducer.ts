@@ -40,8 +40,9 @@ export const calendarReducers = createReducer(
   ),
   on(
     CalendarActions.taskSuccess,
-    (state, { infoTask }): InfoMonth => ({
-      ...state
+    (state, { infoTasks }): InfoMonth => ({
+      ...state,
+      ...infoTasks
     })
   ),
   on(

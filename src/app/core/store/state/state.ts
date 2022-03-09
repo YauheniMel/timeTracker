@@ -8,7 +8,8 @@ export const initialState: AppStateInterface = {
   },
   infoMonth: {
     month: 0,
-    year: 0
+    year: 0,
+    listOfDays: []
   }
 };
 

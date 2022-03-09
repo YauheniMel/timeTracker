@@ -21,8 +21,6 @@ export class CalendarService {
 
   daysNextMonth: number[] = [];
 
-  daySubscribe: any;
-
   constructor(public dialog: MatDialog, private store: Store) {}
 
   setFirstDay() {
