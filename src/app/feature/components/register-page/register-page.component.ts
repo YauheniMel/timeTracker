@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
-  ValidationErrors,
   Validators
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 
 import { RegisterActions } from 'src/app/core/store/actions/register.action';
+import { CustomValidators } from 'src/app/shared/custom.validators';
 import { RegisterInterface } from 'src/app/shared/types/auth.interface';
 
 @Component({
@@ -39,30 +39,12 @@ export class RegisterPageComponent implements OnInit {
         confirmPassword: [null, Validators.required]
       },
       {
-        validator: RegisterPageComponent.compareValidator(
+        validator: CustomValidators.compareValidator(
           'password',
           'confirmPassword'
         )
       }
     );
-  }
-
-  static compareValidator(
-    controlName: string,
-    confirmControlName: string
-  ): ValidationErrors {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const confirmControl = formGroup.controls[confirmControlName];
-      if (confirmControl.errors) {
-        return;
-      }
-      if (control.value !== confirmControl.value) {
-        confirmControl.setErrors({ compareValidator: true });
-      } else {
-        confirmControl.setErrors(null);
-      }
-    };
   }
 
   onSubmit(): void {
