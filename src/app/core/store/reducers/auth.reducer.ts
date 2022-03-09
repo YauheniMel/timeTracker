@@ -5,7 +5,7 @@ import { RegisterActions } from '../actions/register.action';
 
 export const authFeatureKey = 'isAuth';
 
-interface AuthInterface {
+export interface AuthInterface {
   isAuth: boolean;
 }
 
@@ -18,8 +18,7 @@ export const authReducers = createReducer(
   on(
     RegisterActions.registerRequest,
     (state): AuthInterface => ({
-      ...state,
-      isAuth: state.isAuth
+      ...state
     })
   ),
   on(
@@ -31,16 +30,15 @@ export const authReducers = createReducer(
   ),
   on(
     RegisterActions.registerFailure,
-    (state): AuthInterface => ({
+    (state, { isAuth }): AuthInterface => ({
       ...state,
-      isAuth: state.isAuth
+      isAuth
     })
   ),
   on(
     LoginActions.loginRequest,
     (state): AuthInterface => ({
-      ...state,
-      isAuth: state.isAuth
+      ...state
     })
   ),
   on(
@@ -52,9 +50,9 @@ export const authReducers = createReducer(
   ),
   on(
     LoginActions.loginFailure,
-    (state): AuthInterface => ({
+    (state, { isAuth }): AuthInterface => ({
       ...state,
-      isAuth: state.isAuth
+      isAuth
     })
   )
 );

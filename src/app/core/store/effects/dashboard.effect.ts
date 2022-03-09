@@ -31,7 +31,7 @@ export class DashboardEffect {
               panelClass: ['warning'],
               verticalPosition: 'top'
             });
-            return of(LoginActions.loginFailure()); // stranger action
+            return of(LoginActions.loginFailure({ isAuth: false })); // stranger action
           })
         )
       )

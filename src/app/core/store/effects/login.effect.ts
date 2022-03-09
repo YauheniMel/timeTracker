@@ -33,7 +33,7 @@ export class LoginEffect {
               panelClass: ['warning'],
               verticalPosition: 'top'
             });
-            return of(LoginActions.loginFailure());
+            return of(LoginActions.loginFailure({ isAuth: false }));
           })
         )
       )
