@@ -100,7 +100,8 @@ button {
     padding: 0 !important;
   }
 
-  .mat-horizontal-content-container .mat-horizontal-stepper-content:first-child {
+  .mat-horizontal-content-container
+    .mat-horizontal-stepper-content:first-child {
     display: flex;
     flex-direction: column;
 
@@ -116,13 +117,13 @@ button {
     height: 3rem !important;
   }
 
-  .mat-step-header[aria-disabled="true"] .mat-step-text-label {
-    color: $gray;
-  }
-
   .mat-step-text-label {
     color: $primary;
     font-size: 1rem;
+  }
+
+  .mat-step-header[aria-disabled="true"] .mat-step-text-label {
+    color: $gray;
   }
 
   .mat-step-header .mat-step-icon {

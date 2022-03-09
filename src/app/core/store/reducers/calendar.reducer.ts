@@ -38,12 +38,25 @@ export const calendarReducers = createReducer(
       ...state
     })
   ),
-  on(
-    CalendarActions.taskSuccess,
-    (state, { infoTask }): InfoMonth => ({
-      ...state
-    })
-  ),
+  on(CalendarActions.taskSuccess, (state, { infoTasks }): InfoMonth => {
+    const isDayExists = state.listOfDays.find(
+      (dayInfo) => dayInfo.day === infoTasks.day
+    );
+
+    const listOfDays = isDayExists
+      ? state.listOfDays.map((dayInfo) => {
+          if (dayInfo.day === infoTasks.day) {
+            return infoTasks;
+          }
+          return dayInfo;
+        })
+      : state.listOfDays.concat(infoTasks);
+
+    return {
+      ...state,
+      listOfDays
+    };
+  }),
   on(
     CalendarActions.calendarFailure,
     (state): InfoMonth => ({

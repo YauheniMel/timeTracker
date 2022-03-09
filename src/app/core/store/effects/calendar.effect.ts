@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap, take } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, first } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,6 +15,7 @@ export class CalendarEffect {
       ofType(CalendarActions.calendarRequest),
       switchMap(({ payload }) =>
         this.database.getDatabase(payload.year, payload.month).pipe(
+          first(),
           map((res) => {
             const infoMonth = {
               ...payload,
@@ -55,13 +56,17 @@ export class CalendarEffect {
               year,
               day,
               freeTime,
-              toDos: Array.isArray(res[3]) ? [...res[3], toDo] : [toDo]
+              toDos: (Array.isArray(res[3]) ? [...res[3], toDo] : [toDo]) as {
+                from: number;
+                to: number;
+                description: string;
+              }[]
             };
           }),
-          switchMap((infoTask) =>
-            this.database.setTask(infoTask).pipe(
+          switchMap((infoTasks) =>
+            this.database.setTask(infoTasks).pipe(
               take(1),
-              map(() => CalendarActions.taskSuccess({ infoTask })),
+              map(() => CalendarActions.taskSuccess({ infoTasks })),
               tap(() => {
                 this.snackBar.open(
                   'The task was created successfully',

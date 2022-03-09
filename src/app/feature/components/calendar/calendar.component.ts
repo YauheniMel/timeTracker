@@ -76,17 +76,21 @@ export class CalendarComponent implements OnInit {
   }
 
   setDefaultStyle() {
-    this.styles = Array.apply(null, Array(this.daysInMonth)).map((_, i) => ({
-      day: ++i,
-      styleIn: `154${',10.5,0'.repeat(12)}`,
-      styleOut: `188${',13.1,0'.repeat(12)}`
-    }));
+    this.styles = Array(this.daysInMonth)
+      .fill(null)
+      .map((_, idx) => ({
+        day: idx + 1,
+        styleIn: `154${',10.5,0'.repeat(12)}`,
+        styleOut: `188${',13.1,0'.repeat(12)}`
+      }));
   }
 
   setStyle(listOfDays: InfoDay[]) {
     if (listOfDays.length) {
       listOfDays.forEach((item) => {
-        const allTime = Array.from(Array(24).keys());
+        const hoursInDay = 24;
+
+        const allTime = Array.from(Array(hoursInDay).keys());
         const busyTime = allTime.filter(
           (time) => !item.freeTime?.includes(time)
         );
