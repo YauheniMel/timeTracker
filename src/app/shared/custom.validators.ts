@@ -1,7 +1,6 @@
-import { FormGroup, ValidationErrors } from "@angular/forms";
+import { FormGroup, ValidationErrors } from '@angular/forms';
 
 export class CustomValidators {
-
   static compareValidator(
     controlName: string,
     confirmControlName: string

@@ -36,7 +36,10 @@
         "comma-dangle": ["error", "never"],
         "@typescript-eslint/comma-dangle": "off",
         "object-curly-newline": "off",
-        "class-methods-use-this": ["error", { "exceptMethods": ["onTouched", "onChange"] }]
+        "class-methods-use-this": [
+          "error",
+          { "exceptMethods": ["onTouched", "onChange"] }
+        ]
       }
     },
     {
