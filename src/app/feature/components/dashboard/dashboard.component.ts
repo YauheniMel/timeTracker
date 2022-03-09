@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -16,7 +17,7 @@ import { DashboardInterface } from 'src/app/shared/types/store.interfaces';
 export class DashboardComponent implements OnInit {
   user$!: Observable<DashboardInterface>;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.store.dispatch(LoginActions.loginSuccess({ isAuth: true }));
