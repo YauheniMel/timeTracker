@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { DateTime } from 'luxon';
+import { Subscription } from 'rxjs';
 
 import { calendarDaySelector } from 'src/app/core/store/selectors/calendar.selector';
 import { InfoDay } from 'src/app/shared/types/info-day.interface';
@@ -20,6 +21,8 @@ export class CalendarService {
   daysPreviousMonth: number[] = [];
 
   daysNextMonth: number[] = [];
+
+  subscribe!: Subscription;
 
   constructor(public dialog: MatDialog, private store: Store) {}
 
@@ -79,7 +82,7 @@ export class CalendarService {
   }
 
   getDayInfo(day: number): void {
-    this.store.pipe(select(calendarDaySelector(day))).subscribe((infoDay) => {
+    this.subscribe =  this.store.pipe(select(calendarDaySelector(day))).subscribe((infoDay) => {
       if (!infoDay) {
         this.dayInfo = this.getInitDayInfo(day);
       } else {
@@ -104,6 +107,7 @@ export class CalendarService {
     const dialogRef = this.dialog.open(ModalWindowComponent, { data });
 
     dialogRef.afterClosed().subscribe(() => {
+      this.subscribe.unsubscribe();
       this.dialog.ngOnDestroy();
     });
   }

@@ -42,7 +42,12 @@ export const calendarReducers = createReducer(
     CalendarActions.taskSuccess,
     (state, { infoTasks }): InfoMonth => ({
       ...state,
-      ...infoTasks
+      listOfDays: state.listOfDays.map((dayInfo) => {
+        if(dayInfo.day === infoTasks.day) {
+          return infoTasks;
+        }
+        return dayInfo;
+      })
     })
   ),
   on(
