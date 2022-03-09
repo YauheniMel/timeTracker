@@ -3,7 +3,7 @@ import { InfoMonth } from './info-month.interface';
 import { User } from './user.interface';
 
 export interface AppStateInterface {
-  isAuth: AuthInterface;
+  Auth: AuthInterface;
   profile: User;
   infoMonth: InfoMonth;
 }

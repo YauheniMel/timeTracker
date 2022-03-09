@@ -43,9 +43,7 @@ export const calendarReducers = createReducer(
     (state, { infoTasks }): InfoMonth => ({
       ...state,
       listOfDays: state.listOfDays.map((dayInfo) => {
-        if(dayInfo.day === infoTasks.day) {
-          return infoTasks;
-        }
+        if (dayInfo.day === infoTasks.day) return infoTasks;
         return dayInfo;
       })
     })

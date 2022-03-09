@@ -12,7 +12,7 @@ import { calendarReducers } from './calendar.reducer';
 import { dashboardReducers } from './dashboard.reducer';
 
 export const appReducers: ActionReducerMap<AppStateInterface> = {
-  isAuth: authReducers,
+  Auth: authReducers,
   profile: dashboardReducers,
   infoMonth: calendarReducers
 };

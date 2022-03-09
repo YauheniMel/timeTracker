@@ -3,7 +3,7 @@ import { createReducer, on } from '@ngrx/store';
 import { LoginActions } from '../actions/login.action';
 import { RegisterActions } from '../actions/register.action';
 
-export const authFeatureKey = 'isAuth';
+export const authFeatureKey = 'Auth';
 
 export interface AuthInterface {
   isAuth: boolean;

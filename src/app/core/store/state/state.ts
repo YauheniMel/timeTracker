@@ -1,7 +1,9 @@
 import { AppStateInterface } from 'src/app/shared/types/store.interfaces';
 
 export const initialState: AppStateInterface = {
-  isAuth: false,
+  Auth: {
+    isAuth: false
+  },
   profile: {
     firstName: '',
     lastName: ''
