@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, tap, take } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { Observable, of, first } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,6 +15,7 @@ export class CalendarEffect {
       ofType(CalendarActions.calendarRequest),
       switchMap(({ payload }) =>
         this.database.getDatabase(payload.year, payload.month).pipe(
+          first(),
           map((res) => {
             const infoMonth = {
               ...payload,
