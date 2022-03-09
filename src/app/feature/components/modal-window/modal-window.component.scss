@@ -24,8 +24,8 @@ textarea {
   .select-to,
   .select-from {
     display: flex;
+    justify-content: center;
     position: relative;
-    flex-basis: 1;
     height: inherit;
     padding-right: 1.4rem;
 
@@ -101,16 +101,19 @@ button {
   .select-section {
     justify-content: flex-start;
     width: 100%;
+    margin-left: 0;
   }
 
   .select-to,
   .select-from {
-    flex: 50%;
+    width: 50%;
     padding-left: 1rem;
 
     .mat-error {
-      bottom: 0;
-      left: -1rem;
+      left: 0;
+      bottom: 0.4rem;
+      width: 70px;
+      text-align: center;
     }
   }
 
