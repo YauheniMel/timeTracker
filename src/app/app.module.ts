@@ -14,7 +14,6 @@ import { environment } from '../environments/environment';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { metaReducers, appReducers } from './core/store/reducers/app.reducer';
-import { DashboardModule } from './feature/components/dashboard/dashboard.module';
 import { ModalWindowModule } from './feature/components/modal-window/modal-window.module';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { ModalWindowModule } from './feature/components/modal-window/modal-windo
     CoreModule,
     MaterialModule,
     ModalWindowModule,
-    DashboardModule,
     StoreModule.forRoot(appReducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
