@@ -19,5 +19,8 @@ export namespace RegisterActions {
     props<{ isAuth: boolean }>()
   );
 
-  export const registerFailure = createAction(ActionTypes.REGISTER_FAILURE);
+  export const registerFailure = createAction(
+    ActionTypes.REGISTER_FAILURE,
+    props<{ isAuth: boolean }>()
+  );
 }

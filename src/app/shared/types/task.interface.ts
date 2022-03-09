@@ -9,3 +9,15 @@ export interface TaskInterface {
     description: string;
   };
 }
+
+export interface TasksInterface {
+  year: number;
+  month: number;
+  day: number;
+  freeTime: number[];
+  toDos: {
+    from: number;
+    to: number;
+    description: string;
+  }[];
+}

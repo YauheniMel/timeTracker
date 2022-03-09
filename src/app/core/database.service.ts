@@ -25,7 +25,7 @@ export class DatabaseService {
   setTask(tasks: any): Observable<any> {
     const user = getAuth().currentUser;
 
-    return this.fromFirebaseAuthPromise(
+    return DatabaseService.fromFirebaseAuthPromise(
       this.database
         .list('users')
         .update(
@@ -46,7 +46,7 @@ export class DatabaseService {
       .valueChanges();
   }
 
-  private fromFirebaseAuthPromise(promise: Promise<any>): Observable<any> {
+  static fromFirebaseAuthPromise(promise: Promise<any>): Observable<any> {
     return from(<Promise<any>>promise);
   }
 }

@@ -16,15 +16,13 @@ export class CalendarService {
 
   date: Date = new Date();
 
-  subscription!: Subscription;
-
   dayInfo!: InfoDay;
 
   daysPreviousMonth: number[] = [];
 
   daysNextMonth: number[] = [];
 
-  daySubscribe: any;
+  subscribe!: Subscription;
 
   constructor(public dialog: MatDialog, private store: Store) {}
 
@@ -62,15 +60,17 @@ export class CalendarService {
     let day = 1;
     let daysNum = count;
 
-    while (7 - daysNum++) {
+    const daysInWeek = 7;
+
+    while (daysInWeek - daysNum++) {
       this.daysNextMonth.push(day++);
     }
   }
 
   changeMonth(action: string) {
-    if (action === 'plus') {
+    if (action === 'increase') {
       this.targetMonth = this.targetMonth.plus({ month: 1 });
-    } else if (action === 'minus') {
+    } else if (action === 'decrease') {
       this.targetMonth = this.targetMonth.minus({ month: 1 });
     }
 
@@ -82,8 +82,8 @@ export class CalendarService {
   }
 
   getDayInfo(day: number): void {
-    this.subscription = this.store
-      .pipe(select(calendarDaySelector, { day }))
+    this.subscribe = this.store
+      .pipe(select(calendarDaySelector(day)))
       .subscribe((infoDay) => {
         if (!infoDay) {
           this.dayInfo = this.getInitDayInfo(day);
@@ -109,16 +109,17 @@ export class CalendarService {
     const dialogRef = this.dialog.open(ModalWindowComponent, { data });
 
     dialogRef.afterClosed().subscribe(() => {
+      this.subscribe.unsubscribe();
       this.dialog.ngOnDestroy();
-
-      this.subscription.unsubscribe();
     });
   }
 
   getInitDayInfo(day: number) {
+    const hoursInDay = 24;
+
     return {
       day,
-      freeTime: Array.from(Array(24).keys()),
+      freeTime: Array.from(Array(hoursInDay).keys()),
       month: this.targetMonth.month,
       year: this.targetMonth.year,
       toDos: null

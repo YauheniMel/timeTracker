@@ -11,7 +11,8 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "airbnb-base",
-        "airbnb-typescript/base"
+        "airbnb-typescript/base",
+        "prettier"
       ],
       "rules": {
         "import/prefer-default-export": "off",
@@ -34,7 +35,11 @@
         "no-plusplus": "off",
         "comma-dangle": ["error", "never"],
         "@typescript-eslint/comma-dangle": "off",
-        "object-curly-newline": "off"
+        "object-curly-newline": "off",
+        "class-methods-use-this": [
+          "error",
+          { "exceptMethods": ["onTouched", "onChange"] }
+        ]
       }
     },
     {

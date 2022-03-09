@@ -41,7 +41,7 @@ export class RegisterEffect {
               panelClass: ['warning'],
               verticalPosition: 'top'
             });
-            return of(RegisterActions.registerFailure());
+            return of(RegisterActions.registerFailure({ isAuth: false }));
           })
         )
       )

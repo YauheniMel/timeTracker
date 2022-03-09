@@ -1,7 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 
 import { InfoMonth } from 'src/app/shared/types/info-month.interface';
-import { TaskInterface } from 'src/app/shared/types/task.interface';
+import {
+  TaskInterface,
+  TasksInterface
+} from 'src/app/shared/types/task.interface';
 
 enum ActionTypes {
   GET_MONTH_REQUEST = '[Calendar] Get month Request',
@@ -32,7 +35,7 @@ export namespace CalendarActions {
 
   export const taskSuccess = createAction(
     ActionTypes.SET_TASK_SUCCESS,
-    props<{ infoTask: any }>()
+    props<{ infoTasks: TasksInterface }>()
   );
 
   export const taskFailure = createAction(ActionTypes.SET_TASK_FAILURE);

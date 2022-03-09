@@ -1,11 +1,11 @@
 <div class="wrap">
   <div class="pagination-wrap">
     <div class="pagination">
-      <button mat-button color="accent" (click)="changeMonth('minus')">
+      <button mat-button color="accent" (click)="changeMonth('decrease')">
         <mat-icon class="back">arrow_forward_ios</mat-icon>
       </button>
       {{ calendarService.date | date: 'MMMM YYYY' }}
-      <button mat-button color="accent" (click)="changeMonth('plus')">
+      <button mat-button color="accent" (click)="changeMonth('increase')">
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
     </div>
@@ -23,7 +23,7 @@
     class="body"
     *ngIf="show"
     [ngStyle]="{
-      animationName: move === 'plus' ? 'move-in-right' : 'move-in-left'
+      animationName: move === 'increase' ? 'move-in-right' : 'move-in-left'
     }"
   >
     <span

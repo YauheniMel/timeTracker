@@ -19,5 +19,8 @@ export namespace LoginActions {
     props<{ isAuth: boolean }>()
   );
 
-  export const loginFailure = createAction(ActionTypes.LOGIN_FAILURE);
+  export const loginFailure = createAction(
+    ActionTypes.LOGIN_FAILURE,
+    props<{ isAuth: boolean }>()
+  );
 }
