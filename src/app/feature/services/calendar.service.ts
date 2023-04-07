@@ -49,7 +49,7 @@ export class CalendarService {
 
     let daysNum = count;
     while (daysNum--) {
-      const day = countDays - count;
+      const day = countDays - daysNum;
 
       this.daysPreviousMonth.push(day);
     }

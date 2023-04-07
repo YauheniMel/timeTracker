@@ -13,6 +13,10 @@ import { CalendarService } from '../../services/calendar.service';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
+  strokeDashInStyle = `154${',10.5,0'.repeat(12)}`;
+
+  strokeDashOutStyle = `188${',13.1,0'.repeat(12)}`;
+
   constructor(public calendarService: CalendarService, private store: Store) {}
 
   daysInMonth!: number;
@@ -80,8 +84,8 @@ export class CalendarComponent implements OnInit {
       .fill(null)
       .map((_, idx) => ({
         day: idx + 1,
-        styleIn: `154${',10.5,0'.repeat(12)}`,
-        styleOut: `188${',13.1,0'.repeat(12)}`
+        styleIn: this.strokeDashInStyle,
+        styleOut: this.strokeDashOutStyle
       }));
   }
 
@@ -97,8 +101,8 @@ export class CalendarComponent implements OnInit {
 
         const style = {
           day: item.day,
-          styleIn: `154${',10.5,0'.repeat(12)}`,
-          styleOut: `188${',13.1,0'.repeat(12)}`
+          styleIn: this.strokeDashInStyle,
+          styleOut: this.strokeDashOutStyle
         };
         let index: number;
         this.styles.forEach((defaultStyle, i) => {
